@@ -3,7 +3,7 @@ server:
 
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
-  type-aliases-package: com.crm.pojo
+  type-aliases-package: com.demo.pojo
 spring:
   datasource:
     username: jd
