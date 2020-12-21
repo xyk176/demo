@@ -14,6 +14,8 @@ public class SpPicture {
     private List<SpPicturetocom> picturetocoms;
     private SpPicturesort pis;
     private List<SpPicturetocom> coms;
+    private Integer pisid;
+    private List<SpPicturetopro> picturetopros;
 
     @Id
     @Column(name = "picid")
@@ -96,5 +98,24 @@ public class SpPicture {
 
     public void setComs(List<SpPicturetocom> coms) {
         this.coms = coms;
+    }
+
+    @Basic
+    @Column(name = "pisid")
+    public Integer getPisid() {
+        return pisid;
+    }
+
+    public void setPisid(Integer pisid) {
+        this.pisid = pisid;
+    }
+
+    @OneToMany(mappedBy = "picture")
+    public List<SpPicturetopro> getPicturetopros() {
+        return picturetopros;
+    }
+
+    public void setPicturetopros(List<SpPicturetopro> picturetopros) {
+        this.picturetopros = picturetopros;
     }
 }
