@@ -6,6 +6,45 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+/* element-ui导入 */
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI)
+
+/* utilsTwo引用 */
+import axios from './utils/utilsTwo.js'
+Vue.prototype.$axios = axios;
+
+/* font-awesome导入 */
+import 'font-awesome/css/font-awesome.min.css'
+
+/* moment导入 */
+import moment from 'moment'
+Vue.use(require('vue-moment'));
+Vue.prototype.moment = moment
+
+
+Vue.filter('dateYMDHMSFormat1', function(dateStr, pattern = 'YYYY年MM月DD日') {
+  if(!dateStr) return '';
+  return moment(dateStr).format(pattern);
+})
+
+Vue.filter('dateYMDHMSFormat2', function(dateStr, pattern = 'YYYY年MM月DD日 HH时mm分ss秒') {
+  if(!dateStr) return '';
+  return moment(dateStr).format(pattern);
+})
+
+Vue.filter('dateYMDHMSFormat3', function(dateStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
+  if(!dateStr) return '';
+  return moment(dateStr).format(pattern);
+})
+
+Vue.filter('dateYMDHMSFormat4', function(dateStr, pattern = 'YYYY年MM月DD日 HH:mm') {
+  if(!dateStr) return '';
+  return moment(dateStr).format(pattern);
+})
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
