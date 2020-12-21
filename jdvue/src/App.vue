@@ -25,6 +25,20 @@
                 <i class="el-icon-menu"></i>
                 <span>库存</span>
               </template>
+              <el-menu-item-group title="进销存">
+                <el-menu-item index="2-1">库存</el-menu-item>
+                <el-menu-item index="2-2">出入库明细</el-menu-item>
+                <el-menu-item index="2-3">入库单</el-menu-item>
+                <el-menu-item index="2-4">出库单</el-menu-item>
+                <el-menu-item index="2-5">库存盘点</el-menu-item>
+                <el-menu-item index="2-6">库存控制</el-menu-item>
+              </el-menu-item-group>
+              <el-menu-item-group title="库存查询">
+                <el-menu-item index="2-7">库存查询</el-menu-item>
+              </el-menu-item-group>
+              <el-menu-item-group title="设置">
+                <el-menu-item index="2-7">供应商管理</el-menu-item>
+              </el-menu-item-group>
             </el-submenu>
             <el-submenu index="3">
               <template slot="title">
