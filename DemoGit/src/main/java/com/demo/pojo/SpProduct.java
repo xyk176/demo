@@ -23,6 +23,7 @@ public class SpProduct {
     private Integer cid2;
     private Integer cid;
     private List<Inventory> inventorys;
+    private List<SpPicturetopro> picturetopro;
 
     @Id
     @Column(name = "lid")
@@ -192,5 +193,14 @@ public class SpProduct {
 
     public void setInventorys(List<Inventory> inventorys) {
         this.inventorys = inventorys;
+    }
+
+    @OneToMany(mappedBy = "product")
+    public List<SpPicturetopro> getPicturetopro() {
+        return picturetopro;
+    }
+
+    public void setPicturetopro(List<SpPicturetopro> picturetopro) {
+        this.picturetopro = picturetopro;
     }
 }
