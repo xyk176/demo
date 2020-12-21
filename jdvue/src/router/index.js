@@ -5,6 +5,10 @@ import Router from 'vue-router'
 import ShangpinNavigation from '@/components/ShangpinNavigation'
 import Allorders from "../components/zqx/Allorders";
 import Alldelivergoods from "../components/zqx/Alldelivergoods";
+/* 商品列表 */
+import Sangpinindex from '@/components/shangpin/Sangpinindex'
+
+import danpinliebiao from '@/components/danpinliebiao'
 
 Vue.use(Router)
 
@@ -15,7 +19,16 @@ export default new Router({
       name: 'ShangpinNavigation',
       component: ShangpinNavigation,
       children:[
-
+          {
+            path: '/liebiao',
+            name: 'danpinliebiao',
+            component: danpinliebiao,
+           }
+        {
+          path: '/',
+          name: 'Sangpinindex',
+          component: Sangpinindex,
+        }
       ]
     },
     {

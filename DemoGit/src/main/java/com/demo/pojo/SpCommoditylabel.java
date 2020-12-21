@@ -13,17 +13,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "sp_commoditylabel", schema = "jindun", catalog = "")
 public class SpCommoditylabel {
-    private int cllid;
+    private Integer cllid;
     private String cllname;
     private List<SpCommodity> coms;
 
     @Id
     @Column(name = "cllid")
-    public int getCllid() {
+    public Integer getCllid() {
         return cllid;
     }
 
-    public void setCllid(int cllid) {
+    public void setCllid(Integer cllid) {
         this.cllid = cllid;
     }
 

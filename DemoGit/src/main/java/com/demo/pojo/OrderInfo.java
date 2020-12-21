@@ -13,26 +13,25 @@ import java.util.Objects;
 @Entity
 @Table(name = "order_info", schema = "jindun", catalog = "")
 public class OrderInfo {
-    private int oiId;
-    private int coms;
+    private Integer oiId;
+    private Integer coms;
     private BigDecimal comprice;
-    private SpCommodity com;
     private Orders order;
+    private SpCommodity com;
 
     @Id
-    @Column(name = "oi_id")
-    public int getOiId() {
+    @Column(name = "oi_id", nullable = false)
+    public Integer getOiId() {
         return oiId;
     }
 
-    public void setOiId(int oiId) {
+    public void setOiId(Integer oiId) {
         this.oiId = oiId;
     }
 
     @Basic
-    @Id
-    @Column(name = "coms")
-    public int getComs() {
+    @Column(name = "coms", nullable = true)
+    public Integer getComs() {
         return coms;
     }
 
@@ -40,13 +39,8 @@ public class OrderInfo {
         this.coms = coms;
     }
 
-    public void setComs(int coms) {
-        this.coms = coms;
-    }
-
     @Basic
-    @Id
-    @Column(name = "comprice")
+    @Column(name = "comprice", nullable = true, precision = 2)
     public BigDecimal getComprice() {
         return comprice;
     }
@@ -71,16 +65,6 @@ public class OrderInfo {
     }
 
     @ManyToOne
-    @JoinColumn(name = "comid", referencedColumnName = "comid")
-    public SpCommodity getCom() {
-        return com;
-    }
-
-    public void setCom(SpCommodity com) {
-        this.com = com;
-    }
-
-    @ManyToOne
     @JoinColumn(name = "o_id", referencedColumnName = "o_id")
     public Orders getOrder() {
         return order;
@@ -88,5 +72,15 @@ public class OrderInfo {
 
     public void setOrder(Orders order) {
         this.order = order;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "comid", referencedColumnName = "comid")
+    public SpCommodity getCom() {
+        return com;
+    }
+
+    public void setCom(SpCommodity com) {
+        this.com = com;
     }
 }

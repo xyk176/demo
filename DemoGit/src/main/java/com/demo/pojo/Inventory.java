@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 public class Inventory {
-    private int inid;
+    private Integer inid;
     private Integer inentity;
     private Integer inoccupy;
     private Integer inusable;
@@ -14,11 +14,11 @@ public class Inventory {
 
     @Id
     @Column(name = "inid")
-    public int getInid() {
+    public Integer getInid() {
         return inid;
     }
 
-    public void setInid(int inid) {
+    public void setInid(Integer inid) {
         this.inid = inid;
     }
 

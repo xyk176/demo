@@ -6,18 +6,18 @@ import java.util.Objects;
 @Entity
 @Table(name = "sp_commoditytopro", schema = "jindun", catalog = "")
 public class SpCommoditytopro {
-    private int ctpid;
+    private Integer ctpid;
     private Integer ctpnum;
     private SpProduct products;
     private SpCommodity com;
 
     @Id
     @Column(name = "ctpid")
-    public int getCtpid() {
+    public Integer getCtpid() {
         return ctpid;
     }
 
-    public void setCtpid(int ctpid) {
+    public void setCtpid(Integer ctpid) {
         this.ctpid = ctpid;
     }
 
