@@ -5,28 +5,28 @@ import java.util.Objects;
 
 @Entity
 public class Beputxq {
-    private int bexqid;
-    private int libecount;
+    private Integer bexqid;
+    private Integer libecount;
     private SpProduct product;
     private Beput beput;
 
     @Id
-    @Column(name = "bexqid", nullable = false)
-    public int getBexqid() {
+    @Column(name = "bexqid")
+    public Integer getBexqid() {
         return bexqid;
     }
 
-    public void setBexqid(int bexqid) {
+    public void setBexqid(Integer bexqid) {
         this.bexqid = bexqid;
     }
 
     @Basic
-    @Column(name = "libecount", nullable = false)
-    public int getLibecount() {
+    @Column(name = "libecount")
+    public Integer getLibecount() {
         return libecount;
     }
 
-    public void setLibecount(int libecount) {
+    public void setLibecount(Integer libecount) {
         this.libecount = libecount;
     }
 

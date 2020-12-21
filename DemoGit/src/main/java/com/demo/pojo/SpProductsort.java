@@ -1,27 +1,29 @@
 package com.demo.pojo;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "sp_productsort", schema = "jindun")
+@Table(name = "sp_productsort", schema = "jindun", catalog = "")
 public class SpProductsort {
-    private int cid2;
+    private Integer cid2;
     private String cname;
-    private SpProduct product;
+    private Integer cfid;
+    private List<SpProduct> pros;
 
     @Id
-    @Column(name = "cid2")
-    public int getCid2() {
+    @Column(name = "cid2", nullable = false)
+    public Integer getCid2() {
         return cid2;
     }
 
-    public void setCid2(int cid2) {
+    public void setCid2(Integer cid2) {
         this.cid2 = cid2;
     }
 
     @Basic
-    @Column(name = "cname")
+    @Column(name = "cname", nullable = true, length = 20)
     public String getCname() {
         return cname;
     }
@@ -39,13 +41,27 @@ public class SpProductsort {
                 Objects.equals(cname, that.cname);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "cid2", referencedColumnName = "cid2", nullable = false)
-    public SpProduct getProduct() {
-        return product;
+    @Basic
+    @Column(name = "cfid", nullable = true)
+    public Integer getCfid() {
+        return cfid;
     }
 
-    public void setProduct(SpProduct product) {
-        this.product = product;
+    public void setCfid(Integer cfid) {
+        this.cfid = cfid;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cid2, cname, cfid);
+    }
+
+    @OneToMany(mappedBy = "prs")
+    public List<SpProduct> getPros() {
+        return pros;
+    }
+
+    public void setPros(List<SpProduct> pros) {
+        this.pros = pros;
     }
 }

@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 @Entity
 public class Supplier {
-    private int suid;
+    private Integer suid;
     private String suname;
     private String suphone;
     private String susheng;
@@ -28,11 +28,11 @@ public class Supplier {
 
     @Id
     @Column(name = "suid")
-    public int getSuid() {
+    public Integer getSuid() {
         return suid;
     }
 
-    public void setSuid(int suid) {
+    public void setSuid(Integer suid) {
         this.suid = suid;
     }
 

@@ -5,36 +5,24 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "sp_picture", schema = "jindun", catalog = "")
+@Table(name = "sp_picture", schema = "jindun")
 public class SpPicture {
-    private int picid;
+    private Integer picid;
     private Integer picsort;
     private String picpath;
     private List<SpProduct> products;
-    private List<SpPicturetocom> picturetocoms;
     private SpPicturesort pis;
     private List<SpPicturetocom> coms;
-    private Integer pisid;
     private List<SpPicturetopro> picturetopros;
 
     @Id
     @Column(name = "picid")
-    public int getPicid() {
+    public Integer getPicid() {
         return picid;
     }
 
-    public void setPicid(int picid) {
+    public void setPicid(Integer picid) {
         this.picid = picid;
-    }
-
-    @Basic
-    @Column(name = "picsort")
-    public Integer getPicsort() {
-        return picsort;
-    }
-
-    public void setPicsort(Integer picsort) {
-        this.picsort = picsort;
     }
 
     @Basic
@@ -72,15 +60,6 @@ public class SpPicture {
         this.products = products;
     }
 
-    @OneToMany(mappedBy = "picture")
-    public List<SpPicturetocom> getPicturetocoms() {
-        return picturetocoms;
-    }
-
-    public void setPicturetocoms(List<SpPicturetocom> picturetocoms) {
-        this.picturetocoms = picturetocoms;
-    }
-
     @ManyToOne
     @JoinColumn(name = "pisid", referencedColumnName = "pisid")
     public SpPicturesort getPis() {
@@ -98,16 +77,6 @@ public class SpPicture {
 
     public void setComs(List<SpPicturetocom> coms) {
         this.coms = coms;
-    }
-
-    @Basic
-    @Column(name = "pisid")
-    public Integer getPisid() {
-        return pisid;
-    }
-
-    public void setPisid(Integer pisid) {
-        this.pisid = pisid;
     }
 
     @OneToMany(mappedBy = "picture")

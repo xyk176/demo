@@ -11,18 +11,18 @@ import java.util.Objects;
  */
 @Entity
 public class Shopping {
-    private int shid;
+    private Integer shid;
     private Integer stype;
     private SpCommodity com;
     private Customer customer;
 
     @Id
     @Column(name = "shid")
-    public int getShid() {
+    public Integer getShid() {
         return shid;
     }
 
-    public void setShid(int shid) {
+    public void setShid(Integer shid) {
         this.shid = shid;
     }
 
