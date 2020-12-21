@@ -13,17 +13,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "sp_picturesort", schema = "jindun", catalog = "")
 public class SpPicturesort {
-    private int pisid;
+    private Integer pisid;
     private String prcost;
     private List<SpPicture> pics;
 
     @Id
     @Column(name = "pisid")
-    public int getPisid() {
+    public Integer getPisid() {
         return pisid;
     }
 
-    public void setPisid(int pisid) {
+    public void setPisid(Integer pisid) {
         this.pisid = pisid;
     }
 

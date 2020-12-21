@@ -11,17 +11,17 @@ import java.util.Objects;
  */
 @Entity
 public class Cprandcom {
-    private int cproid;
+    private Integer cproid;
     private SpCommodityparameter cpr;
     private SpCommodity com;
 
     @Id
     @Column(name = "cproid")
-    public int getCproid() {
+    public Integer getCproid() {
         return cproid;
     }
 
-    public void setCproid(int cproid) {
+    public void setCproid(Integer cproid) {
         this.cproid = cproid;
     }
 

@@ -13,21 +13,21 @@ import java.util.Objects;
  */
 @Entity
 public class Checks {
-    private int cheid;
+    private Integer cheid;
     private Timestamp chedate;
-    private int chestate;
-    private int chebecount;
-    private int chelosecoubt;
+    private Integer chestate;
+    private Integer chebecount;
+    private Integer chelosecoubt;
     private String cheremark;
     private List<Checkxq> checkxqs;
 
     @Id
     @Column(name = "cheid")
-    public int getCheid() {
+    public Integer getCheid() {
         return cheid;
     }
 
-    public void setCheid(int cheid) {
+    public void setCheid(Integer cheid) {
         this.cheid = cheid;
     }
 
@@ -43,31 +43,31 @@ public class Checks {
 
     @Basic
     @Column(name = "chestate")
-    public int getChestate() {
+    public Integer getChestate() {
         return chestate;
     }
 
-    public void setChestate(int chestate) {
+    public void setChestate(Integer chestate) {
         this.chestate = chestate;
     }
 
     @Basic
     @Column(name = "chebecount")
-    public int getChebecount() {
+    public Integer getChebecount() {
         return chebecount;
     }
 
-    public void setChebecount(int chebecount) {
+    public void setChebecount(Integer chebecount) {
         this.chebecount = chebecount;
     }
 
     @Basic
     @Column(name = "chelosecoubt")
-    public int getChelosecoubt() {
+    public Integer getChelosecoubt() {
         return chelosecoubt;
     }
 
-    public void setChelosecoubt(int chelosecoubt) {
+    public void setChelosecoubt(Integer chelosecoubt) {
         this.chelosecoubt = chelosecoubt;
     }
 

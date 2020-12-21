@@ -15,8 +15,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "sp_commodity", schema = "jindun", catalog = "")
 public class SpCommodity {
-    private int comid;
-    private int comiszu;
+    private Integer comid;
+    private Integer comiszu;
     private String combarcode;
     private String comname;
     private BigDecimal comsameprice;
@@ -35,30 +35,30 @@ public class SpCommodity {
     private SpCommoditylabel cll;
     private SpCommoditycategory ccy;
     private List<Shopping> shopings;
-    private List<OrderInfo> oderinfos;
+    private List<OrderInfo> dorinfos;
 
     @Id
-    @Column(name = "comid")
-    public int getComid() {
+    @Column(name = "comid", nullable = false)
+    public Integer getComid() {
         return comid;
     }
 
-    public void setComid(int comid) {
+    public void setComid(Integer comid) {
         this.comid = comid;
     }
 
     @Basic
-    @Column(name = "comiszu")
-    public int getComiszu() {
+    @Column(name = "comiszu", nullable = false)
+    public Integer getComiszu() {
         return comiszu;
     }
 
-    public void setComiszu(int comiszu) {
+    public void setComiszu(Integer comiszu) {
         this.comiszu = comiszu;
     }
 
     @Basic
-    @Column(name = "combarcode")
+    @Column(name = "combarcode", nullable = false, length = 255)
     public String getCombarcode() {
         return combarcode;
     }
@@ -68,7 +68,7 @@ public class SpCommodity {
     }
 
     @Basic
-    @Column(name = "comname")
+    @Column(name = "comname", nullable = false, length = 255)
     public String getComname() {
         return comname;
     }
@@ -78,7 +78,7 @@ public class SpCommodity {
     }
 
     @Basic
-    @Column(name = "comsameprice")
+    @Column(name = "comsameprice", nullable = false, precision = 2)
     public BigDecimal getComsameprice() {
         return comsameprice;
     }
@@ -88,7 +88,7 @@ public class SpCommodity {
     }
 
     @Basic
-    @Column(name = "compricemin")
+    @Column(name = "compricemin", nullable = true, precision = 2)
     public BigDecimal getCompricemin() {
         return compricemin;
     }
@@ -98,7 +98,7 @@ public class SpCommodity {
     }
 
     @Basic
-    @Column(name = "compricemax")
+    @Column(name = "compricemax", nullable = true, precision = 2)
     public BigDecimal getCompricemax() {
         return compricemax;
     }
@@ -108,7 +108,7 @@ public class SpCommodity {
     }
 
     @Basic
-    @Column(name = "commarketprice")
+    @Column(name = "commarketprice", nullable = true, precision = 2)
     public BigDecimal getCommarketprice() {
         return commarketprice;
     }
@@ -118,7 +118,7 @@ public class SpCommodity {
     }
 
     @Basic
-    @Column(name = "comweight")
+    @Column(name = "comweight", nullable = true, precision = 2)
     public BigDecimal getComweight() {
         return comweight;
     }
@@ -128,7 +128,7 @@ public class SpCommodity {
     }
 
     @Basic
-    @Column(name = "comvolume")
+    @Column(name = "comvolume", nullable = true, precision = 2)
     public BigDecimal getComvolume() {
         return comvolume;
     }
@@ -138,7 +138,7 @@ public class SpCommodity {
     }
 
     @Basic
-    @Column(name = "comsalesvolume")
+    @Column(name = "comsalesvolume", nullable = true)
     public Integer getComsalesvolume() {
         return comsalesvolume;
     }
@@ -148,7 +148,7 @@ public class SpCommodity {
     }
 
     @Basic
-    @Column(name = "comsalesstatus")
+    @Column(name = "comsalesstatus", nullable = true)
     public Integer getComsalesstatus() {
         return comsalesstatus;
     }
@@ -158,7 +158,7 @@ public class SpCommodity {
     }
 
     @Basic
-    @Column(name = "comdata")
+    @Column(name = "comdata", nullable = false)
     public Timestamp getComdata() {
         return comdata;
     }
@@ -185,6 +185,25 @@ public class SpCommodity {
                 Objects.equals(comsalesvolume, that.comsalesvolume) &&
                 Objects.equals(comsalesstatus, that.comsalesstatus) &&
                 Objects.equals(comdata, that.comdata);
+    }
+
+    @Override
+    public String toString() {
+        return "SpCommodity{" +
+                "comid=" + comid +
+                ", comiszu=" + comiszu +
+                ", combarcode='" + combarcode + '\'' +
+                ", comname='" + comname + '\'' +
+                ", comsameprice=" + comsameprice +
+                ", compricemin=" + compricemin +
+                ", compricemax=" + compricemax +
+                ", commarketprice=" + commarketprice +
+                ", comweight=" + comweight +
+                ", comvolume=" + comvolume +
+                ", comsalesvolume=" + comsalesvolume +
+                ", comsalesstatus=" + comsalesstatus +
+                ", comdata=" + comdata +
+                '}';
     }
 
     @Override
@@ -258,11 +277,11 @@ public class SpCommodity {
     }
 
     @OneToMany(mappedBy = "com")
-    public List<OrderInfo> getOderinfos() {
-        return oderinfos;
+    public List<OrderInfo> getDorinfos() {
+        return dorinfos;
     }
 
-    public void setOderinfos(List<OrderInfo> oderinfos) {
-        this.oderinfos = oderinfos;
+    public void setDorinfos(List<OrderInfo> dorinfos) {
+        this.dorinfos = dorinfos;
     }
 }

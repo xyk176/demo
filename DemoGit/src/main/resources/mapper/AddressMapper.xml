@@ -67,4 +67,16 @@
     select adid, cid3, adprovince, adcity, adarea, addetailed, adisdelete, adisdefault
     from address
   </select>
+
+  <!--根据客户id查询收货地址-->
+  <select id="selectByCidAll" resultMap="BaseResultMap">
+    select adid,adprovince,adcity,adarea,addetailed,adisdelete,adisdefault
+    from address where cid3 = #{cid} order by adid desc
+  </select>
+
+  <!--设置默认地址-->
+  <update id="updateAdisdefault" parameterType="com.demo.pojo.Address">
+    update address set adisdefault = '是' where adid = #{adid}
+  </update>
+
 </mapper>

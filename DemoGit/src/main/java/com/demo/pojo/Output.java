@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 public class Output {
-    private int outid;
+    private Integer outid;
     private String outclass;
     private Timestamp outdate;
     private String outremark;
@@ -15,11 +15,11 @@ public class Output {
 
     @Id
     @Column(name = "outid")
-    public int getOutid() {
+    public Integer getOutid() {
         return outid;
     }
 
-    public void setOutid(int outid) {
+    public void setOutid(Integer outid) {
         this.outid = outid;
     }
 

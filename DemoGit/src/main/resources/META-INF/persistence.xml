@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
     <persistence-unit name="jd">
-
+        <class>com.demo.pojo.Address</class>
+        <class>com.demo.pojo.Beput</class>
+        <class>com.demo.pojo.Beputxq</class>
+        <class>com.demo.pojo.Checks</class>
+        <class>com.demo.pojo.Checkxq</class>
+        <class>com.demo.pojo.Cprandcom</class>
+        <class>com.demo.pojo.Cpyandcom</class>
+        <class>com.demo.pojo.Customer</class>
+        <class>com.demo.pojo.Inventory</class>
+        <class>com.demo.pojo.OrderInfo</class>
+        <class>com.demo.pojo.Orders</class>
+        <class>com.demo.pojo.Outandinput</class>
+        <class>com.demo.pojo.Output</class>
+        <class>com.demo.pojo.Shopping</class>
+        <class>com.demo.pojo.SpCommodity</class>
+        <class>com.demo.pojo.SpCommoditycategory</class>
+        <class>com.demo.pojo.SpCommoditylabel</class>
+        <class>com.demo.pojo.SpCommodityparameter</class>
+        <class>com.demo.pojo.SpCommodityproperty</class>
+        <class>com.demo.pojo.SpCommoditytopro</class>
+        <class>com.demo.pojo.SpPicture</class>
+        <class>com.demo.pojo.SpPicturesort</class>
+        <class>com.demo.pojo.SpPicturetocom</class>
+        <class>com.demo.pojo.SpProduct</class>
+        <class>com.demo.pojo.SpProductsort</class>
+        <class>com.demo.pojo.Supplier</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://47.101.141.162:3306"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+        </properties>
     </persistence-unit>
 </persistence>

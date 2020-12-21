@@ -1,8 +1,13 @@
 package com.demo.model.mdao;
 
 import com.demo.pojo.Address;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
+@Mapper
+@Repository
 public interface AddressMapper {
     /*
      * @Author xieyukun
@@ -51,4 +56,14 @@ public interface AddressMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Address record);
+
+    /*
+     * @Author 周子豪
+     * @Description 21:28
+     * @Date  2020/12/21
+     * @param [cid]
+     * @return java.util.List<com.demo.pojo.Address>
+     * 根据客户id查询收货地址
+    */
+    List<Address> selectByCidAll(Integer cid);
 }
