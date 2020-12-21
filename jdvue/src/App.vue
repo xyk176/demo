@@ -31,6 +31,14 @@
                 <i class="el-icon-tickets"></i>
                 <span>订单</span>
               </template>
+              <el-menu-item-group>
+                <router-link to="/Allorders">
+                  <el-menu-item index="3-1">所有订单</el-menu-item>
+                </router-link>
+                <router-link to="/Alldelivergoods">
+                  <el-menu-item index="3-2">发货管理</el-menu-item>
+                </router-link>
+              </el-menu-item-group>
             </el-submenu>
           </el-menu>
         </div>
