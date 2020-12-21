@@ -28,7 +28,7 @@
         <class>com.demo.pojo.SpProductsort</class>
         <class>com.demo.pojo.Supplier</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:mysql://47.101.141.162:3306/jindun"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://47.101.141.162:3306"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
         </properties>
     </persistence-unit>

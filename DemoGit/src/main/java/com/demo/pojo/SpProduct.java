@@ -5,38 +5,36 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "sp_product", schema = "jindun", catalog = "")
+@Table(name = "sp_product", schema = "jindun")
 public class SpProduct {
-    private int lid;
+    private Integer lid;
     private String lname;
     private String lguige;
     private String ldanwei;
     private Integer ltiaoma;
     private Integer lchengben;
-    private List<SpProductsort> productsorts;
-    private List<SpPicture> pictures;
+    private Integer cid;
     private List<Output> outputs;
     private List<SpCommoditytopro> commoditytopro;
     private List<Checkxq> checkxqs;
     private List<Beputxq> beputxqs;
     private List<Outandinput> outandinputs;
-    private Integer cid2;
-    private Integer cid;
     private List<Inventory> inventorys;
     private List<SpPicturetopro> picturetopro;
+    private SpProductsort prs;
 
     @Id
-    @Column(name = "lid")
-    public int getLid() {
+    @Column(name = "lid", nullable = false)
+    public Integer getLid() {
         return lid;
     }
 
-    public void setLid(int lid) {
+    public void setLid(Integer lid) {
         this.lid = lid;
     }
 
     @Basic
-    @Column(name = "lname")
+    @Column(name = "lname", nullable = true, length = 20)
     public String getLname() {
         return lname;
     }
@@ -46,7 +44,7 @@ public class SpProduct {
     }
 
     @Basic
-    @Column(name = "lguige")
+    @Column(name = "lguige", nullable = true, length = 20)
     public String getLguige() {
         return lguige;
     }
@@ -56,7 +54,7 @@ public class SpProduct {
     }
 
     @Basic
-    @Column(name = "ldanwei")
+    @Column(name = "ldanwei", nullable = true, length = 10)
     public String getLdanwei() {
         return ldanwei;
     }
@@ -66,7 +64,7 @@ public class SpProduct {
     }
 
     @Basic
-    @Column(name = "ltiaoma")
+    @Column(name = "ltiaoma", nullable = true)
     public Integer getLtiaoma() {
         return ltiaoma;
     }
@@ -76,7 +74,7 @@ public class SpProduct {
     }
 
     @Basic
-    @Column(name = "lchengben")
+    @Column(name = "lchengben", nullable = true, precision = 0)
     public Integer getLchengben() {
         return lchengben;
     }
@@ -101,24 +99,6 @@ public class SpProduct {
     @Override
     public int hashCode() {
         return Objects.hash(lid, lname, lguige, ldanwei, ltiaoma, lchengben);
-    }
-
-    @OneToMany(mappedBy = "product")
-    public List<SpProductsort> getProductsorts() {
-        return productsorts;
-    }
-
-    public void setProductsorts(List<SpProductsort> productsorts) {
-        this.productsorts = productsorts;
-    }
-
-    @ManyToMany(mappedBy = "products")
-    public List<SpPicture> getPictures() {
-        return pictures;
-    }
-
-    public void setPictures(List<SpPicture> pictures) {
-        this.pictures = pictures;
     }
 
     @OneToMany(mappedBy = "product")
@@ -167,17 +147,7 @@ public class SpProduct {
     }
 
     @Basic
-    @Column(name = "cid2")
-    public Integer getCid2() {
-        return cid2;
-    }
-
-    public void setCid2(Integer cid2) {
-        this.cid2 = cid2;
-    }
-
-    @Basic
-    @Column(name = "cid")
+    @Column(name = "cid", nullable = true)
     public Integer getCid() {
         return cid;
     }
@@ -202,5 +172,15 @@ public class SpProduct {
 
     public void setPicturetopro(List<SpPicturetopro> picturetopro) {
         this.picturetopro = picturetopro;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "cid2", referencedColumnName = "cid2")
+    public SpProductsort getPrs() {
+        return prs;
+    }
+
+    public void setPrs(SpProductsort prs) {
+        this.prs = prs;
     }
 }

@@ -13,18 +13,18 @@ import java.util.Objects;
 @Entity
 @Table(name = "sp_commodityparameter", schema = "jindun", catalog = "")
 public class SpCommodityparameter {
-    private int cprid;
+    private Integer cprid;
     private Integer cprtopid;
     private String cprname;
     private List<Cprandcom> coms;
 
     @Id
     @Column(name = "cprid")
-    public int getCprid() {
+    public Integer getCprid() {
         return cprid;
     }
 
-    public void setCprid(int cprid) {
+    public void setCprid(Integer cprid) {
         this.cprid = cprid;
     }
 

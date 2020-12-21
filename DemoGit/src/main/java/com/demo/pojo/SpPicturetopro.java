@@ -10,52 +10,30 @@ import java.util.Objects;
  * @Date 2020-12-21 16:15
  */
 @Entity
-@Table(name = "sp_picturetopro", schema = "jindun", catalog = "")
+@Table(name = "sp_picturetopro", schema = "jindun")
 public class SpPicturetopro {
-    private int ptpid;
-    private Integer lid;
-    private Integer picid;
-    private int ptpiszhu;
+    private Integer ptpid;
+    private Integer ptpiszhu;
     private SpProduct product;
     private SpPicture picture;
 
     @Id
     @Column(name = "ptpid")
-    public int getPtpid() {
+    public Integer getPtpid() {
         return ptpid;
     }
 
-    public void setPtpid(int ptpid) {
+    public void setPtpid(Integer ptpid) {
         this.ptpid = ptpid;
     }
 
     @Basic
-    @Column(name = "lid")
-    public Integer getLid() {
-        return lid;
-    }
-
-    public void setLid(Integer lid) {
-        this.lid = lid;
-    }
-
-    @Basic
-    @Column(name = "picid")
-    public Integer getPicid() {
-        return picid;
-    }
-
-    public void setPicid(Integer picid) {
-        this.picid = picid;
-    }
-
-    @Basic
     @Column(name = "ptpiszhu")
-    public int getPtpiszhu() {
+    public Integer getPtpiszhu() {
         return ptpiszhu;
     }
 
-    public void setPtpiszhu(int ptpiszhu) {
+    public void setPtpiszhu(Integer ptpiszhu) {
         this.ptpiszhu = ptpiszhu;
     }
 
@@ -65,14 +43,12 @@ public class SpPicturetopro {
         if (o == null || getClass() != o.getClass()) return false;
         SpPicturetopro that = (SpPicturetopro) o;
         return ptpid == that.ptpid &&
-                ptpiszhu == that.ptpiszhu &&
-                Objects.equals(lid, that.lid) &&
-                Objects.equals(picid, that.picid);
+                ptpiszhu == that.ptpiszhu;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ptpid, lid, picid, ptpiszhu);
+        return Objects.hash(ptpid, ptpiszhu);
     }
 
     @ManyToOne

@@ -6,19 +6,19 @@ import java.util.Objects;
 
 @Entity
 public class Outandinput {
-    private int outinid;
+    private Integer outinid;
     private String outinclass;
     private Timestamp outindate;
-    private int outincount;
+    private Integer outincount;
     private SpProduct product;
 
     @Id
     @Column(name = "outinid")
-    public int getOutinid() {
+    public Integer getOutinid() {
         return outinid;
     }
 
-    public void setOutinid(int outinid) {
+    public void setOutinid(Integer outinid) {
         this.outinid = outinid;
     }
 
