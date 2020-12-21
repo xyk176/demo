@@ -5,15 +5,15 @@
       <div class="head">
         <div class="small">
           &nbsp;&nbsp;&nbsp;
-          <span>配送方式：</span>
-          <el-select v-model="value" placeholder="请选择" style="width: 150px;margin-top: 8px" size="mini">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+          <span>下单时间：</span>
+          <el-date-picker
+            size="mini"
+            v-model="value1"
+            type="datetime"
+            placeholder="选择日期时间"
+            style="margin-top: 10px"
+          >
+          </el-date-picker>
         </div>
         <div style="margin-top: 15px;width: 99%;margin-left: 7px">
           <el-table
@@ -66,23 +66,7 @@ name: "Allorders",
       name: '王小虎',
       address: '上海市普陀区金沙江路 1516 弄'
     }],
-    options: [{
-      value: '选项1',
-      label: '黄金糕'
-    }, {
-      value: '选项2',
-      label: '双皮奶'
-    }, {
-      value: '选项3',
-      label: '蚵仔煎'
-    }, {
-      value: '选项4',
-      label: '龙须面'
-    }, {
-      value: '选项5',
-      label: '北京烤鸭'
-    }],
-    value: ''
+    value1: ''
     }
   },
   methods:{
