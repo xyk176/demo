@@ -23,6 +23,10 @@ import moment from 'moment'
 Vue.use(require('vue-moment'));
 Vue.prototype.moment = moment
 
+//日期转换
+import Dateformat from './utils/dateFormat.js'
+Vue.prototype.$Dateformat = Dateformat
+
 
 Vue.filter('dateYMDHMSFormat1', function(dateStr, pattern = 'YYYY年MM月DD日') {
   if(!dateStr) return '';

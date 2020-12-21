@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-/* 商品模块导航 */
-import ShangpinNavigation from '@/components/ShangpinNavigation'
+import ShangpinNavigation from '@/components/ShangpinNavigation'/* 商品模块导航 */
+import Shopping from '@/components/Shopping'/* 购物主页 */
 
 Vue.use(Router)
 
@@ -10,11 +10,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'ShangpinNavigation',
-      component: ShangpinNavigation,
+      name: 'Shopping',
+      component: Shopping,
       children:[
 
       ]
-    }
+    },
+    
   ]
 })
