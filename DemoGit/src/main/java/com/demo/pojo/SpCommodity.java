@@ -13,7 +13,7 @@ import java.util.Objects;
  * @Date 2020-12-21 11:52
  */
 @Entity
-@Table(name = "sp_commodity", schema = "jindun", catalog = "")
+@Table(name = "sp_commodity", schema = "jindun")
 public class SpCommodity {
     private int comid;
     private int comiszu;

@@ -12,7 +12,7 @@
     <result column="stype" jdbcType="INTEGER" property="stype" />
   </resultMap>
 
-  <resultMap id="shoppResult" type="SpCommodity">
+  <resultMap id="shoppResult" type="com.demo.pojo.SpCommodity">
     <id column="comid" property="comid"/>
     <result column="comiszu" property="comiszu"/>
     <result column="combarcode" property="combarcode"/>
