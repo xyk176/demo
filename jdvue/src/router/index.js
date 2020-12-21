@@ -41,6 +41,11 @@ export default new Router({
           name: 'Alldelivergoods',
           component: Alldelivergoods
         }
+        ,{
+          path: '/inventory',
+          name: 'inventory',
+          component: inventory
+        }
       ]
     }
   ]
