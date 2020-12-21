@@ -3,6 +3,7 @@ package com.demo.pojo;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ import java.util.Objects;
 @Entity
 public class Orders {
     private Integer oId;
-    private Timestamp oDate;
+    private Date oDate;
     private String pay;
     private BigDecimal price;
     private String orsip;
@@ -38,11 +39,11 @@ public class Orders {
 
     @Basic
     @Column(name = "o_date")
-    public Timestamp getoDate() {
+    public Date getoDate() {
         return oDate;
     }
 
-    public void setoDate(Timestamp oDate) {
+    public void setoDate(Date oDate) {
         this.oDate = oDate;
     }
 

@@ -3,8 +3,10 @@ import Router from 'vue-router'
 
 /* 商品模块导航 */
 import Navigation from '@/components/Navigation'
-import Allorders from "../components/zqx/Allorders"
-import Alldelivergoods from "../components/zqx/Alldelivergoods"
+/*订单管理*/
+import Allorders from "../components/zqx/Allorders";
+/*发货管理*/
+import Alldelivergoods from "../components/zqx/Alldelivergoods";
 /* 商品列表 */
 import Sangpinindex from '@/components/shangpin/Sangpinindex'
 
@@ -28,18 +30,18 @@ export default new Router({
           path: '/',
           name: 'Sangpinindex',
           component: Sangpinindex,
+        },
+        {
+          path: '/Allorders',
+          name: 'Allorders',
+          component: Allorders
+        },
+        {
+          path: '/Alldelivergoods',
+          name: 'Alldelivergoods',
+          component: Alldelivergoods
         }
       ]
-    },
-    {
-      path: '/Allorders',
-      name: 'Allorders',
-      component: Allorders
-    },
-    {
-      path: '/Alldelivergoods',
-      name: 'Alldelivergoods',
-      component: Alldelivergoods
     }
   ]
 })

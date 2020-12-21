@@ -2,13 +2,14 @@ package com.demo.pojo;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 public class Output {
     private Integer outid;
     private String outclass;
-    private Timestamp outdate;
+    private Date outdate;
     private String outremark;
     private SpProduct product;
     private Orders orderss;
@@ -35,11 +36,11 @@ public class Output {
 
     @Basic
     @Column(name = "outdate")
-    public Timestamp getOutdate() {
+    public Date getOutdate() {
         return outdate;
     }
 
-    public void setOutdate(Timestamp outdate) {
+    public void setOutdate(Date outdate) {
         this.outdate = outdate;
     }
 
