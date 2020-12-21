@@ -12,6 +12,8 @@ import Sangpinindex from '@/components/shangpin/Sangpinindex'
 
 import danpinliebiao from '@/components/danpinliebiao'
 
+import inventory from '@/components/xyk/inventory'
+
 Vue.use(Router)
 
 export default new Router({
@@ -40,6 +42,11 @@ export default new Router({
           path: '/Alldelivergoods',
           name: 'Alldelivergoods',
           component: Alldelivergoods
+        }
+        ,{
+          path: '/inventory',
+          name: 'inventory',
+          component: inventory
         }
       ]
     }

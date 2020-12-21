@@ -12,7 +12,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
 /* utilsTwo引用 */
-import axios from './utils/utilsTwo.js'
+import axios from './utils/utilsTwo'
 Vue.prototype.$axios = axios;
 
 /* font-awesome导入 */
