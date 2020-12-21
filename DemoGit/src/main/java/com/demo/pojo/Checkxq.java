@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 public class Checkxq {
-    private int chexqid;
+    private Integer chexqid;
     private Integer chexqcount;
     private Integer cheblcount;
     private SpProduct product;
@@ -13,11 +13,11 @@ public class Checkxq {
 
     @Id
     @Column(name = "chexqid")
-    public int getChexqid() {
+    public Integer getChexqid() {
         return chexqid;
     }
 
-    public void setChexqid(int chexqid) {
+    public void setChexqid(Integer chexqid) {
         this.chexqid = chexqid;
     }
 

@@ -12,7 +12,7 @@ import java.util.Objects;
 @Entity
 public class Address {
     private Orders order;
-    private int adid;
+    private Integer adid;
     private String adprovince;
     private String adcity;
     private String adarea;
@@ -32,11 +32,11 @@ public class Address {
 
     @Id
     @Column(name = "adid")
-    public int getAdid() {
+    public Integer getAdid() {
         return adid;
     }
 
-    public void setAdid(int adid) {
+    public void setAdid(Integer adid) {
         this.adid = adid;
     }
 
