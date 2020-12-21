@@ -13,7 +13,7 @@ import java.util.Objects;
 @Entity
 public class Customer {
     private List<Orders> orderss;
-    private int cid3;
+    private Integer cid3;
     private String cname;
     private String cphone;
     private String password;
@@ -32,11 +32,11 @@ public class Customer {
 
     @Id
     @Column(name = "cid3")
-    public int getCid3() {
+    public Integer getCid3() {
         return cid3;
     }
 
-    public void setCid3(int cid3) {
+    public void setCid3(Integer cid3) {
         this.cid3 = cid3;
     }
 

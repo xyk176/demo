@@ -3,6 +3,8 @@ import Router from 'vue-router'
 
 /* 商品模块导航 */
 import ShangpinNavigation from '@/components/ShangpinNavigation'
+/* 商品列表 */
+import Sangpinindex from '@/components/shangpin/Sangpinindex'
 
 import danpinliebiao from '@/components/danpinliebiao'
 
@@ -20,8 +22,12 @@ export default new Router({
             name: 'danpinliebiao',
             component: danpinliebiao,
            }
+        {
+          path: '/',
+          name: 'Sangpinindex',
+          component: Sangpinindex,
+        }
       ]
     }
-    
   ]
 })

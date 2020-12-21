@@ -6,29 +6,28 @@ import java.util.Objects;
 @Entity
 @Table(name = "sp_picturetocom", schema = "jindun", catalog = "")
 public class SpPicturetocom {
-    private int ptcid;
-    private int ptciszhu;
-    private SpPicture picture;
+    private Integer ptcid;
+    private Integer ptciszhu;
     private SpCommodity com;
     private SpPicture pic;
 
     @Id
     @Column(name = "ptcid")
-    public int getPtcid() {
+    public Integer getPtcid() {
         return ptcid;
     }
 
-    public void setPtcid(int ptcid) {
+    public void setPtcid(Integer ptcid) {
         this.ptcid = ptcid;
     }
 
     @Basic
     @Column(name = "ptciszhu")
-    public int getPtciszhu() {
+    public Integer getPtciszhu() {
         return ptciszhu;
     }
 
-    public void setPtciszhu(int ptciszhu) {
+    public void setPtciszhu(Integer ptciszhu) {
         this.ptciszhu = ptciszhu;
     }
 
@@ -44,16 +43,6 @@ public class SpPicturetocom {
     @Override
     public int hashCode() {
         return Objects.hash(ptcid, ptciszhu);
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "picid", referencedColumnName = "picid")
-    public SpPicture getPicture() {
-        return picture;
-    }
-
-    public void setPicture(SpPicture picture) {
-        this.picture = picture;
     }
 
     @ManyToOne

@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 @Entity
 public class Orders {
-    private int oId;
+    private Integer oId;
     private Timestamp oDate;
     private String pay;
     private BigDecimal price;
@@ -28,11 +28,11 @@ public class Orders {
 
     @Id
     @Column(name = "o_id")
-    public int getoId() {
+    public Integer getoId() {
         return oId;
     }
 
-    public void setoId(int oId) {
+    public void setoId(Integer oId) {
         this.oId = oId;
     }
 

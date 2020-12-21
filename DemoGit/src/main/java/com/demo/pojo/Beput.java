@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 @Entity
 public class Beput {
-    private int beid;
+    private Integer beid;
     private String beclass;
     private Timestamp bedate;
     private String beremark;
@@ -21,11 +21,11 @@ public class Beput {
 
     @Id
     @Column(name = "beid")
-    public int getBeid() {
+    public Integer getBeid() {
         return beid;
     }
 
-    public void setBeid(int beid) {
+    public void setBeid(Integer beid) {
         this.beid = beid;
     }
 

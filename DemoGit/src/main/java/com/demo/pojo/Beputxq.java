@@ -5,27 +5,27 @@ import java.util.Objects;
 
 @Entity
 public class Beputxq {
-    private int bexqid;
-    private int libecount;
+    private Integer bexqid;
+    private Integer libecount;
     private SpProduct product;
 
     @Id
     @Column(name = "bexqid")
-    public int getBexqid() {
+    public Integer getBexqid() {
         return bexqid;
     }
 
-    public void setBexqid(int bexqid) {
+    public void setBexqid(Integer bexqid) {
         this.bexqid = bexqid;
     }
 
     @Basic
     @Column(name = "libecount")
-    public int getLibecount() {
+    public Integer getLibecount() {
         return libecount;
     }
 
-    public void setLibecount(int libecount) {
+    public void setLibecount(Integer libecount) {
         this.libecount = libecount;
     }
 
