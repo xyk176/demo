@@ -27,6 +27,11 @@ Vue.prototype.moment = moment
 import Dateformat from './utils/dateFormat.js'
 Vue.prototype.$Dateformat = Dateformat
 
+import http from './utils/http.js';
+Vue.prototype.$http = http;
+import myhttp from './utils/myhttp.js';
+Vue.prototype.$myhttp = myhttp;
+
 
 Vue.filter('dateYMDHMSFormat1', function(dateStr, pattern = 'YYYY年MM月DD日') {
   if(!dateStr) return '';
