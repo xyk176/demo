@@ -11,6 +11,28 @@
     <result column="comid" jdbcType="INTEGER" property="comid" />
     <result column="stype" jdbcType="INTEGER" property="stype" />
   </resultMap>
+
+  <resultMap id="shoppResult" type="SpCommodity">
+    <id column="comid" property="comid"/>
+    <result column="comiszu" property="comiszu"/>
+    <result column="combarcode" property="combarcode"/>
+    <result column="comname" property="comname"/>
+    <result column="comsameprice" property="comsameprice"/>
+    <result column="compricemin" property="compricemin"/>
+    <result column="compricemax" property="compricemax"/>
+    <result column="commarketprice" property="commarketprice"/>
+    <result column="comweight" property="comweight"/>
+    <result column="comvolume" property="comvolume"/>
+    <result column="comsalesvolume" property="comsalesvolume"/>
+    <result column="comsalesstatus" property="comsalesstatus"/>
+    <result column="comdata" property="comdata"/>
+  </resultMap>
+   <!--查询所有商品分类
+   List<SpCommodity> selectAll()-->
+  <select id="s_GoodsType" resultMap="shoppResult">
+    select sc.* from sp_commoditycategory sc
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated
