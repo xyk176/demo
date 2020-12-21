@@ -21,7 +21,7 @@ export default new Router({
             path: '/liebiao',
             name: 'danpinliebiao',
             component: danpinliebiao,
-           }
+           },
         {
           path: '/',
           name: 'Sangpinindex',

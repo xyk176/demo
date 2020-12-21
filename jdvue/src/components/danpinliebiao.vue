@@ -13,6 +13,14 @@
               :value="item.value">
             </el-option>
           </el-select>
+          <div>
+            <el-button plain size="mini" style="margin-top: 18px;margin-left: 14px;">新增单品</el-button>
+            <el-button plain size="mini">导入单品</el-button>
+            <el-button plain size="mini">导入修改</el-button>
+            <el-button plain size="mini">导出单品</el-button>
+            <el-button plain size="mini">修改分类</el-button>
+            <el-button plain size="mini">删除</el-button>
+          </div>
         </div>
         <div style="margin-top: 15px;width: 99%;margin-left: 7px">
           <el-table
@@ -107,7 +115,7 @@ name: "Allorders",
   margin-left: 5px;
   margin-top: 10px;
   width: 99%;
-  height: 91%;
+  height: 191%;
   background: #F2F2F6;
   border-radius: 6px;
   border: 1px solid #E2E2E2;
