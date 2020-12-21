@@ -1,7 +1,7 @@
 <template>
   <div id="shangpinnavigation">
     <div class="body">
-
+       <router-view/>
     </div>
   </div>
 </template>

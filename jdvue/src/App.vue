@@ -26,7 +26,9 @@
                 <span>库存</span>
               </template>
               <el-menu-item-group title="进销存">
-                <el-menu-item index="2-1">库存</el-menu-item>
+                <router-link tag="span" to="inventory">
+                  <el-menu-item index="2-1">库存</el-menu-item>
+                </router-link>
                 <el-menu-item index="2-2">出入库明细</el-menu-item>
                 <el-menu-item index="2-3">入库单</el-menu-item>
                 <el-menu-item index="2-4">出库单</el-menu-item>

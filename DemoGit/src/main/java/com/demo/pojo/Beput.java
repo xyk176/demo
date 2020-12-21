@@ -19,7 +19,6 @@ public class Beput {
     private String beremark;
     private Integer yewuid;
     private Supplier supplier;
-    private Integer suid;
     private List<Beputxq> beputxqs;
 
     @Id
@@ -99,15 +98,6 @@ public class Beput {
         this.supplier = supplier;
     }
 
-    @Basic
-    @Column(name = "suid", nullable = true)
-    public Integer getSuid() {
-        return suid;
-    }
-
-    public void setSuid(Integer suid) {
-        this.suid = suid;
-    }
 
     @OneToMany(mappedBy = "beput")
     public List<Beputxq> getBeputxqs() {

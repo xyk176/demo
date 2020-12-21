@@ -4,7 +4,7 @@ import qs from 'qs';
 import {Loading,Message,Notification} from 'element-ui'
 
 //统一的跨域前缀
-axios.defaults.baseURL = 'http://localhost:8084/';
+axios.defaults.baseURL = 'http://localhost:8087/';
 axios.defaults.timeout = 5000;//5秒
 
 let loading;

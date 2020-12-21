@@ -8,8 +8,6 @@ public class Beputxq {
     private int bexqid;
     private int libecount;
     private SpProduct product;
-    private int lid;
-    private Integer beid;
     private Beput beput;
 
     @Id
@@ -56,25 +54,6 @@ public class Beputxq {
         this.product = product;
     }
 
-    @Basic
-    @Column(name = "lid", nullable = false)
-    public int getLid() {
-        return lid;
-    }
-
-    public void setLid(int lid) {
-        this.lid = lid;
-    }
-
-    @Basic
-    @Column(name = "beid", nullable = true)
-    public Integer getBeid() {
-        return beid;
-    }
-
-    public void setBeid(Integer beid) {
-        this.beid = beid;
-    }
 
     @ManyToOne
     @JoinColumn(name = "beid", referencedColumnName = "beid")
