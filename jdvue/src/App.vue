@@ -37,7 +37,7 @@
                 <el-menu-item index="2-7">库存查询</el-menu-item>
               </el-menu-item-group>
               <el-menu-item-group title="设置">
-                <el-menu-item index="2-7">供应商管理</el-menu-item>
+                <el-menu-item index="2-8">供应商管理</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="3">
