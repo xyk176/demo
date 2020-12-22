@@ -9,8 +9,10 @@ import Allorders from "../components/zqx/Allorders";
 import Alldelivergoods from "../components/zqx/Alldelivergoods";
 /* 商品列表 */
 import Sangpinindex from '@/components/shangpin/Sangpinindex'
-
+/* 单品列表 */
 import danpinliebiao from '@/components/danpinliebiao'
+/* 单品分类 */
+import danpinfenlei from '@/components/danpinfenlei'
 
 import inventory from '@/components/xyk/inventory'
 
@@ -27,27 +29,27 @@ export default new Router({
             path: '/liebiao',
             name: 'danpinliebiao',
             component: danpinliebiao,
-           },
-        {
-          path: '/',
-          name: 'Sangpinindex',
-          component: Sangpinindex,
-        },
-        {
-          path: '/Allorders',
-          name: 'Allorders',
-          component: Allorders
-        },
-        {
-          path: '/Alldelivergoods',
-          name: 'Alldelivergoods',
-          component: Alldelivergoods
-        }
-        ,{
-          path: '/inventory',
-          name: 'inventory',
-          component: inventory
-        }
+           },{
+            path: '/fenlei',
+            name: 'danpinfenlei',
+            component: danpinfenlei,
+           },{
+            path: '/',
+            name: 'Sangpinindex',
+            component: Sangpinindex,
+            },{
+            path: '/Allorders',
+            name: 'Allorders',
+            component: Allorders
+            },{
+              path: '/Alldelivergoods',
+              name: 'Alldelivergoods',
+              component: Alldelivergoods
+            },{
+              path: '/inventory',
+              name: 'inventory',
+              component: inventory
+            }
       ]
     }
   ]
