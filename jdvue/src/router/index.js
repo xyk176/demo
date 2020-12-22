@@ -107,7 +107,7 @@ export default new Router({
             path: '/fenlei',
             name: 'danpinfenlei',
             component: danpinfenlei,
-           }
+        }
       ]
     }
   ]

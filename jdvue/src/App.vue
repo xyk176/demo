@@ -3,7 +3,7 @@
     <el-container class="myc">
       <el-aside width="150px" class="daohang">
         <div class="logoimg">
-          <img src="../../static/log/log.png" width="100%" />
+          <img src="../build/logo.png" width="100%" />
         </div>
         <div class="logtitle">
           <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#22242F" text-color="#fff" active-text-color="#2589FF">
@@ -13,7 +13,6 @@
                 <span>商品</span>
               </template>
               <el-menu-item-group title="单品库">
-                <el-menu-item index="1-1">单品库列表</el-menu-item>
                 <router-link to="/liebiao" tag="span">
                 <el-menu-item index="1-1">单品库列表</el-menu-item>
                 </router-link>

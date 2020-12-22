@@ -41,15 +41,7 @@ public interface SpProductMapper {
     */
     SpProduct selectByPrimaryKey(Integer lid);
 
-    /*
-     * @Author xiahaifeng
-     * @Description selectAll
-     * @Date 19:30 2020/12/22
-     * @param []
-     * @return java.util.List<com.demo.pojo.SpProduct>
-     * 查询全部单品
-    */
-    List<SpProduct> selectAll();
+
     /**
      查询单品表及其分类
      */

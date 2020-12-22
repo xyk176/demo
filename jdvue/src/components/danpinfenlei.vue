@@ -74,7 +74,7 @@ name: "Allorders",
         this.$axios.post("/sort/all")
         .then((res)=>{
           this.options=res.data;
-          console.log(this.options)
+          console.log("所有分类",this.options)
         })
       }
       ,addBegin(e){

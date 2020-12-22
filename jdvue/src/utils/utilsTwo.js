@@ -6,7 +6,6 @@ import {Loading,Message,Notification} from 'element-ui'
 //统一的跨域前缀
 axios.defaults.baseURL = 'http://localhost:8086/';
 
-
 //请求拦截器配置（拦截器会在向后台发送请求之前执行）
 axios.interceptors.request.use((config) => {
     //其他设置，比如设置请求头token
@@ -28,9 +27,7 @@ axios.interceptors.request.use((config) => {
    1、因为Springboot后台使用了统一的响应主体，所以这个部分可以直接统一处理
 */
 axios.interceptors.response.use((res)=>{
-    stopLoading();//取消加载状态框
     const message = res.data.msg || '服务器错误，请查看后台日志信息...'; //后端返回的message
-
     if(res.status===200){
       /* 返回码为1*/
       if(res.data.code){
