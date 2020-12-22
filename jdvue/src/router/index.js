@@ -15,11 +15,25 @@ import Sangpinadd from '@/components/shangpin/Sangpinadd'
 import danpinliebiao from '@/components/danpinliebiao'
 
 import inventory from '@/components/xyk/inventory'
+/*前台登录页面*/
+import login from '@/components/zzh/login'
+/*收货地址列表*/
+import address from '@/components/zzh/address'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/address',
+      name: 'address',
+      component: address
+    },
     {
       path: '/',
       name: 'Navigation',
