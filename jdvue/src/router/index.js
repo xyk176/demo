@@ -12,7 +12,14 @@ import Sangpinindex from '@/components/shangpin/Sangpinindex'
 
 import danpinliebiao from '@/components/danpinliebiao'
 
+/* 库存 */
 import inventory from '@/components/xyk/inventory'
+import outandinput from '@/components/xyk/outandinput'
+import beput from '@/components/xyk/beput'
+import output from '@/components/xyk/output'
+import checks from '@/components/xyk/checks'
+import supplier from '@/components/xyk/supplier'
+import maxcount from '@/components/xyk/maxcount'
 
 Vue.use(Router)
 
@@ -47,6 +54,31 @@ export default new Router({
           path: '/inventory',
           name: 'inventory',
           component: inventory
+        }
+        ,{
+          path: '/outandinput',
+          name: 'outandinput',
+          component: outandinput
+        },{
+          path: '/beput',
+          name: 'beput',
+          component: beput
+        },{
+          path: '/output',
+          name: 'output',
+          component: output
+        },{
+          path: '/checks',
+          name: 'checks',
+          component: checks
+        },{
+          path: '/supplier',
+          name: 'supplier',
+          component: supplier
+        },{
+          path: '/maxcount',
+          name: 'maxcount',
+          component: maxcount
         }
       ]
     }

@@ -1,5 +1,7 @@
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.Objects;
 public class Beput {
     private int beid;
     private String beclass;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp bedate;
     private String beremark;
     private Integer yewuid;

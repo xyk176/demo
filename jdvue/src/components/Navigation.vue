@@ -27,6 +27,31 @@
                 <i class="el-icon-menu"></i>
                 <span>库存</span>
               </template>
+              <el-menu-item-group title="进销存">
+                <router-link tag="span" to="inventory">
+                  <el-menu-item index="2-1">库存</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="outandinput">
+                <el-menu-item index="2-2">出入库明细</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="beput">
+                <el-menu-item index="2-3">入库单</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="output">
+                <el-menu-item index="2-4">出库单</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="checks">
+                <el-menu-item index="2-5">库存盘点</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="maxcount">
+                <el-menu-item index="2-6">库存控制</el-menu-item>
+                </router-link>
+              </el-menu-item-group>
+              <el-menu-item-group title="设置">
+                <router-link tag="span" to="supplier">
+                <el-menu-item index="2-7">供应商管理</el-menu-item>
+                </router-link>
+              </el-menu-item-group>
             </el-submenu>
             <el-submenu index="3">
               <template slot="title">
@@ -95,7 +120,7 @@
     padding: 10px;
   }
 
-  #navigation .ismain .body{
+  #navigation .ismain>.body{
     width: 100%;
     height: 500px;
     background: #FFFFFF;
