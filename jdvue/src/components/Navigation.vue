@@ -19,7 +19,15 @@
                 <el-menu-item index="1-2">单品库分类</el-menu-item>
               </el-menu-item-group>
               <el-menu-item-group title="商品库">
-                <el-menu-item index="1-3">商品库列表3</el-menu-item>
+                <router-link to="/Sangpinindex" tag="span">
+                  <el-menu-item index="1-3">商品库列表</el-menu-item>
+                </router-link>
+                <router-link to="/Sangpinindex" tag="span">
+                  <el-menu-item index="1-4">商品标签</el-menu-item>
+                </router-link>
+                <router-link to="/Sangpinindex" tag="span">
+                  <el-menu-item index="1-5">商品属性</el-menu-item>
+                </router-link>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="2">
@@ -95,9 +103,9 @@
     padding: 10px;
   }
 
-  #navigation .ismain .body{
+  #navigation .ismain>.body{
     width: 100%;
-    height: 500px;
+    padding-bottom: 30px;
     background: #FFFFFF;
     border-radius: 6px;
     border: 1px solid #E2E2E2;

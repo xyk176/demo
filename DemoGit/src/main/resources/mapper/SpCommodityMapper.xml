@@ -17,6 +17,30 @@
     <result column="comdata" jdbcType="TIMESTAMP" property="comdata" />
   </resultMap>
 
+  <resultMap id="BaseResultMapAndImg" type="com.demo.pojo.SpCommodity">
+    <id column="comid" jdbcType="INTEGER" property="comid" />
+    <result column="comiszu" jdbcType="INTEGER" property="comiszu" />
+    <result column="combarcode" jdbcType="VARCHAR" property="combarcode" />
+    <result column="comname" jdbcType="VARCHAR" property="comname" />
+    <result column="comsameprice" jdbcType="DECIMAL" property="comsameprice" />
+    <result column="compricemin" jdbcType="DECIMAL" property="compricemin" />
+    <result column="compricemax" jdbcType="DECIMAL" property="compricemax" />
+    <result column="commarketprice" jdbcType="DECIMAL" property="commarketprice" />
+    <result column="comweight" jdbcType="DECIMAL" property="comweight" />
+    <result column="comvolume" jdbcType="DECIMAL" property="comvolume" />
+    <result column="comsalesvolume" jdbcType="INTEGER" property="comsalesvolume" />
+    <result column="comsalesstatus" jdbcType="INTEGER" property="comsalesstatus" />
+    <result column="comdata" jdbcType="TIMESTAMP" property="comdata" />
+    <collection property="pics" ofType="com.demo.pojo.SpPicturetocom">
+      <id column="ptcid" jdbcType="INTEGER" property="ptcid" />
+      <result column="ptciszhu" jdbcType="INTEGER" property="ptciszhu" />
+      <association property="pic" javaType="com.demo.pojo.SpPicture">
+        <id column="picid" jdbcType="INTEGER" property="picid" />
+        <result column="picpath" jdbcType="VARCHAR" property="picpath" />
+      </association>
+    </collection>
+  </resultMap>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated
@@ -89,5 +113,29 @@
     compricemax, commarketprice, comweight, comvolume, comsalesvolume, comsalesstatus, 
     comdata
     from sp_commodity
+  </select>
+
+  <select id="selectAllByPt" resultMap="BaseResultMapAndImg">
+    <!--
+      WARNING - @mbg.generated
+      带普通条件查询全部商品
+    -->
+    select c.comid,c.comiszu,c.combarcode, c.comname, c.comsameprice, c.compricemin,
+    c.compricemax, c.commarketprice, c.comweight, c.comvolume, c.comsalesvolume, c.comsalesstatus,
+    c.comdata,pc.ptcid, pc.ptciszhu,p.picid, p.picpath
+    from sp_commodity c
+    left join sp_picturetocom pc on c.comid = pc.comid
+    left join sp_picture p on p.picid = pc.picid
+    where pc.ptciszhu = 1
+    <if test="tiaojian!=null and tiaojian!=''and tiaojian=='comname' and canshu!=null and canshu!=''">
+      and c.${tiaojian} like concat('%',#{canshu,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="tiaojian!=null and tiaojian!=''and tiaojian=='combarcode' and canshu!=null and canshu!=''">
+      and c.${tiaojian} = #{canshu,jdbcType=VARCHAR}
+    </if>
+    <if test="tiaojian!=null and tiaojian!=''and tiaojian=='comid' and canshu!=null and canshu!=''">
+      and c.${tiaojian} = #{canshu,jdbcType=INTEGER}
+    </if>
+    order by c.comid desc
   </select>
 </mapper>

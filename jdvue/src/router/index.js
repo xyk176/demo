@@ -9,6 +9,8 @@ import Allorders from "../components/zqx/Allorders";
 import Alldelivergoods from "../components/zqx/Alldelivergoods";
 /* 商品列表 */
 import Sangpinindex from '@/components/shangpin/Sangpinindex'
+/* 商品新增 */
+import Sangpinadd from '@/components/shangpin/Sangpinadd'
 
 import danpinliebiao from '@/components/danpinliebiao'
 
@@ -23,15 +25,20 @@ export default new Router({
       name: 'Navigation',
       component: Navigation,
       children:[
-          {
-            path: '/liebiao',
-            name: 'danpinliebiao',
-            component: danpinliebiao,
-           },
         {
-          path: '/',
+          path: '/liebiao',
+          name: 'danpinliebiao',
+          component: danpinliebiao,
+         },
+        {
+          path: '/Sangpinindex',
           name: 'Sangpinindex',
           component: Sangpinindex,
+        },
+        {
+          path: '/Sangpinadd',
+          name: 'Sangpinadd',
+          component: Sangpinadd,
         },
         {
           path: '/Allorders',
