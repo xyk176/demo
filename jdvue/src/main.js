@@ -14,10 +14,6 @@ Vue.use(ElementUI)
 /* utilsTwo引用 */
 import axios from './utils/utilsTwo'
 Vue.prototype.$axios = axios;
-import qs from 'qs'
-Vue.prototype.$qs=qs;
-import VDistpicker from 'v-distpicker';
-Vue.component('v-distpicker', VDistpicker);
 
 /* font-awesome导入 */
 import 'font-awesome/css/font-awesome.min.css'

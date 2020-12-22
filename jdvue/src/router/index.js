@@ -14,11 +14,18 @@ import Sangpinadd from '@/components/shangpin/Sangpinadd'
 
 import danpinliebiao from '@/components/danpinliebiao'
 
+/* 库存 */
 import inventory from '@/components/xyk/inventory'
 /*前台登录页面*/
 import login from '@/components/zzh/login'
 /*收货地址列表*/
 import address from '@/components/zzh/address'
+import outandinput from '@/components/xyk/outandinput'
+import beput from '@/components/xyk/beput'
+import output from '@/components/xyk/output'
+import checks from '@/components/xyk/checks'
+import supplier from '@/components/xyk/supplier'
+import maxcount from '@/components/xyk/maxcount'
 
 Vue.use(Router)
 
@@ -39,11 +46,11 @@ export default new Router({
       name: 'Navigation',
       component: Navigation,
       children:[
-        {
-          path: '/liebiao',
-          name: 'danpinliebiao',
-          component: danpinliebiao,
-         },
+          {
+            path: '/liebiao',
+            name: 'danpinliebiao',
+            component: danpinliebiao,
+           },
         {
           path: '/Sangpinindex',
           name: 'Sangpinindex',
@@ -68,6 +75,31 @@ export default new Router({
           path: '/inventory',
           name: 'inventory',
           component: inventory
+        }
+        ,{
+          path: '/outandinput',
+          name: 'outandinput',
+          component: outandinput
+        },{
+          path: '/beput',
+          name: 'beput',
+          component: beput
+        },{
+          path: '/output',
+          name: 'output',
+          component: output
+        },{
+          path: '/checks',
+          name: 'checks',
+          component: checks
+        },{
+          path: '/supplier',
+          name: 'supplier',
+          component: supplier
+        },{
+          path: '/maxcount',
+          name: 'maxcount',
+          component: maxcount
         }
       ]
     }

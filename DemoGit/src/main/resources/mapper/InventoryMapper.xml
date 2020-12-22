@@ -70,9 +70,17 @@
 
   <select id="selectAndproductAll" resultMap="BaseResultMap">
     <!--
-      库存单品连表查询
+      库存单品连表查询,搜索单品名称，单品条码
     -->
     select *
-    from inventory i inner join sp_product sp on i.lid=sp.lid;
+    from inventory i inner join sp_product sp on i.lid=sp.lid
+    <where>
+        <if test="lname!=null and lname!=''">
+            and sp.lname like concat('%',#{lname},'%')
+        </if>
+        <if test="ltiaoma!=null and ltiaoma!=''">
+            and sp.ltiaoma like concat('%',#{ltiaoma},'%')
+        </if>
+    </where>
   </select>
 </mapper>

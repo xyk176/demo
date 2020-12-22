@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "sp_product", schema = "jindun")
+@Table(name = "sp_product", schema = "jindun", catalog = "")
 public class SpProduct {
     private Integer lid;
     private String lname;
@@ -14,7 +14,6 @@ public class SpProduct {
     private Integer ltiaoma;
     private Integer lchengben;
     private Integer cid;
-    private List<Output> outputs;
     private List<SpCommoditytopro> commoditytopro;
     private List<Checkxq> checkxqs;
     private List<Beputxq> beputxqs;
@@ -22,6 +21,7 @@ public class SpProduct {
     private List<Inventory> inventorys;
     private List<SpPicturetopro> picturetopro;
     private SpProductsort prs;
+    private List<Outputxq> outputxqs;
 
     @Id
     @Column(name = "lid", nullable = false)
@@ -101,15 +101,6 @@ public class SpProduct {
         return Objects.hash(lid, lname, lguige, ldanwei, ltiaoma, lchengben);
     }
 
-    @OneToMany(mappedBy = "product")
-    public List<Output> getOutputs() {
-        return outputs;
-    }
-
-    public void setOutputs(List<Output> outputs) {
-        this.outputs = outputs;
-    }
-
     @OneToMany(mappedBy = "products")
     public List<SpCommoditytopro> getCommoditytopro() {
         return commoditytopro;
@@ -182,5 +173,14 @@ public class SpProduct {
 
     public void setPrs(SpProductsort prs) {
         this.prs = prs;
+    }
+
+    @OneToMany(mappedBy = "sproduct")
+    public List<Outputxq> getOutputxqs() {
+        return outputxqs;
+    }
+
+    public void setOutputxqs(List<Outputxq> outputxqs) {
+        this.outputxqs = outputxqs;
     }
 }

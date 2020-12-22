@@ -1,5 +1,7 @@
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -8,9 +10,11 @@ import java.util.Objects;
 public class Outandinput {
     private Integer outinid;
     private String outinclass;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp outindate;
     private Integer outincount;
     private SpProduct product;
+    private Integer yewuid;
 
     @Id
     @Column(name = "outinid")
@@ -76,5 +80,15 @@ public class Outandinput {
 
     public void setProduct(SpProduct product) {
         this.product = product;
+    }
+
+    @Basic
+    @Column(name = "yewuid", nullable = true)
+    public Integer getYewuid() {
+        return yewuid;
+    }
+
+    public void setYewuid(Integer yewuid) {
+        this.yewuid = yewuid;
     }
 }

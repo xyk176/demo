@@ -6,18 +6,19 @@ import {Loading,Message,Notification} from 'element-ui'
 //统一的跨域前缀
 axios.defaults.baseURL = 'http://localhost:8086/';
 
+
 //请求拦截器配置（拦截器会在向后台发送请求之前执行）
 axios.interceptors.request.use((config) => {
-  //其他设置，比如设置请求头token
-  //这里单独对put请求方式进行了参数序列化
-  if(config.method==="post"){
-    //将put请求的参数值：用qs序列化处理了
-    config.data = qs.stringify(config.data,{arrayFormat: 'repeat'});
-    config.headers={
-      'Content-Type': 'application/x-www-form-urlencoded'
+    //其他设置，比如设置请求头token
+    //这里单独对put请求方式进行了参数序列化
+    if(config.method==="post"){
+      //将put请求的参数值：用qs序列化处理了
+      config.data = qs.stringify(config.data,{arrayFormat: 'repeat'});
+      config.headers={
+      	'Content-Type': 'application/x-www-form-urlencoded'
+      }
     }
-  }
-  return config;
+    return config;
 }, (error) => {
     console.log("axios请求错误：",error);
 		return Message.error({message: '请求出错了，请查看控制台日志!'});
@@ -49,7 +50,7 @@ axios.interceptors.response.use((res)=>{
     }
     //还可以返回res.data   那么Vue中获取后台响应的数据，不需要加data
     return res;
-  },error=>{
+},error=>{
     Notification.error({
       title:"响应失败",
       message:"请查看F12的参数提交情况",

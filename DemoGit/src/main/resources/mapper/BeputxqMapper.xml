@@ -8,8 +8,6 @@
     -->
     <id column="bexqid" jdbcType="INTEGER" property="bexqid" />
     <result column="libecount" jdbcType="INTEGER" property="libecount" />
-    <result column="lid" jdbcType="INTEGER" property="lid" />
-    <result column="beid" jdbcType="INTEGER" property="beid" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
