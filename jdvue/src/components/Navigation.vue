@@ -13,7 +13,9 @@
                 <span>商品</span>
               </template>
               <el-menu-item-group title="单品库">
-                <el-menu-item index="1-1">单品库列表</el-menu-item>
+                <router-link to="/liebiao" tag="span">
+                  <el-menu-item index="1-1">单品库列表</el-menu-item>
+                </router-link>
                 <el-menu-item index="1-2">单品库分类</el-menu-item>
               </el-menu-item-group>
               <el-menu-item-group title="商品库">

@@ -5,16 +5,10 @@
       <el-main>
         <div class="Left_div">
           <el-menu default-active="2" class="el-menu-vertical-demo" style=" max-width: 150px;">
-               <el-menu-item index="1">
+               <el-menu-item index="i.ccyid" v-for="i in goostype">
                  <div class="Goods_Div">
                    <img src="../../static/log/log.png" class="img_div"/>
-                   <span>蔬菜馆</span>
-                 </div>
-               </el-menu-item>
-               <el-menu-item index="2">
-                 <div class="Goods_Div">
-                   <img src="../../static/log/log.png" class="img_div"/>
-                   <span>蔬菜馆</span>
+                   <span>{{i.ccyname}}</span>
                  </div>
                </el-menu-item>
            </el-menu>
@@ -29,12 +23,13 @@
   export default{
     data(){
       return{
-
+        goostype:[],
       }
     },
     methods:{
       S_GoodsType(){//查询所有商品分类
         this.$myhttp.getObjs("/shopping/s_GoodsType",null,res=>{
+          this.goostype=res;
           console.log("所有商品分类--",res);
         })
       },

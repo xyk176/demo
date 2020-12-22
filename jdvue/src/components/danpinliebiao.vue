@@ -115,7 +115,7 @@ name: "Allorders",
   margin-left: 5px;
   margin-top: 10px;
   width: 99%;
-  height: 191%;
+  height: 91%;
   background: #F2F2F6;
   border-radius: 6px;
   border: 1px solid #E2E2E2;
@@ -134,7 +134,7 @@ name: "Allorders",
   margin-top: 5px;
   margin-left: 5px;
   width: 99%;
-  height: 10%;
+  height: 20%;
   background: #FFFFFF;
   border-radius: 6px;
   border: 1px solid #E2E2E2;
