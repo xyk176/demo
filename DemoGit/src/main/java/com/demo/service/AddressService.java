@@ -31,4 +31,43 @@ public class AddressService {
         return addressMapper.selectByCidAll(cid);
     }
 
+    /*
+     * @Author 周子豪
+     * @Description 9:21
+     * @Date  2020/12/22
+     * @param [adid]
+     * @return java.lang.Integer
+     * 设置默认地址
+    */
+    public Integer updateAdisdefault(Integer adid){
+        return addressMapper.updateAdisdefault(adid);
+    }
+    public Integer updateAdisdefault1(Integer cid){
+        return addressMapper.updateAdisdefault1(cid);
+    }
+
+
+    /*
+     * @Author 周子豪
+     * @Description 9:25
+     * @Date  2020/12/22
+     * @param [adid]
+     * @return java.lang.Integer
+     * 修改收货地址信息
+    */
+    public Integer updateAddress(String adprovince,String adcity,String adarea,String addetailed,Integer adid){
+        return addressMapper.updateAddress(adprovince,adcity,adarea,addetailed,adid);
+    }
+
+    /*
+     * @Author 周子豪
+     * @Description 9:30
+     * @Date  2020/12/22
+     * @param [adid]
+     * @return java.lang.Integer
+     * 删除收货地址（逻辑删除）
+    */
+    public Integer updateAdisdelete(Integer adid){
+        return addressMapper.updateAdisdelete(adid);
+    }
 }

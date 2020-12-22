@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
     <persistence-unit name="jd">
+
         <class>com.demo.pojo.Address</class>
         <class>com.demo.pojo.Beput</class>
         <class>com.demo.pojo.Beputxq</class>

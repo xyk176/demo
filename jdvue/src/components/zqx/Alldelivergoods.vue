@@ -1,10 +1,11 @@
 <template>
   <div id="shangpinnavigation">
     <div class="body">
-      <h2 style="font-size: 5px;margin-left: 20px;margin-top: 10px">单品库列表</h2>
+      <h2 style="font-size: 5px;margin-left: 20px;margin-top: 10px">发货</h2>
       <div class="head">
         <div class="small">
           &nbsp;&nbsp;&nbsp;
+          <span>配送方式：</span>
           <el-select v-model="value" placeholder="请选择" style="width: 150px;margin-top: 8px" size="mini">
             <el-option
               v-for="item in options"
@@ -13,14 +14,6 @@
               :value="item.value">
             </el-option>
           </el-select>
-          <div>
-            <el-button plain size="mini" style="margin-top: 18px;margin-left: 14px;">新增单品</el-button>
-            <el-button plain size="mini">导入单品</el-button>
-            <el-button plain size="mini">导入修改</el-button>
-            <el-button plain size="mini">导出单品</el-button>
-            <el-button plain size="mini">修改分类</el-button>
-            <el-button plain size="mini">删除</el-button>
-          </div>
         </div>
         <div style="margin-top: 15px;width: 99%;margin-left: 7px">
           <el-table
@@ -53,43 +46,43 @@
 
 <script>
 export default {
-name: "Allorders",
+  name: "Alldelivergoods",
   data(){
-  return{
-    tableData: [{
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-04',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1517 弄'
-    }, {
-      date: '2016-05-01',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1519 弄'
-    }, {
-      date: '2016-05-03',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1516 弄'
-    }],
-    options: [{
-      value: '选项1',
-      label: '黄金糕'
-    }, {
-      value: '选项2',
-      label: '双皮奶'
-    }, {
-      value: '选项3',
-      label: '蚵仔煎'
-    }, {
-      value: '选项4',
-      label: '龙须面'
-    }, {
-      value: '选项5',
-      label: '北京烤鸭'
-    }],
-    value: ''
+    return{
+      tableData: [{
+        date: '2016-05-02',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1517 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1519 弄'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1516 弄'
+      }],
+      options: [{
+        value: '选项1',
+        label: '黄金糕'
+      }, {
+        value: '选项2',
+        label: '双皮奶'
+      }, {
+        value: '选项3',
+        label: '蚵仔煎'
+      }, {
+        value: '选项4',
+        label: '龙须面'
+      }, {
+        value: '选项5',
+        label: '北京烤鸭'
+      }],
+      value: ''
     }
   },
   methods:{
@@ -134,7 +127,7 @@ name: "Allorders",
   margin-top: 5px;
   margin-left: 5px;
   width: 99%;
-  height: 20%;
+  height: 10%;
   background: #FFFFFF;
   border-radius: 6px;
   border: 1px solid #E2E2E2;

@@ -2,6 +2,7 @@ package com.demo.model.mdao;
 
 import com.demo.pojo.Address;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface AddressMapper {
     /*
      * @Author xieyukun
      * @Description ceshi
-     * @Date 15:54 2020/12/21
+     * @Date 17:02 2020/12/21
      * @param [c]
      * @return java.lang.String
     */
@@ -66,4 +67,36 @@ public interface AddressMapper {
      * 根据客户id查询收货地址
     */
     List<Address> selectByCidAll(Integer cid);
+
+    /*
+     * @Author 周子豪
+     * @Description 9:15
+     * @Date  2020/12/22
+     * @param [adid]
+     * @return java.lang.Integer
+     * 设置默认地址
+    */
+    Integer updateAdisdefault(Integer adid);
+    Integer updateAdisdefault1(Integer cid);
+
+
+    /*
+     * @Author 周子豪
+     * @Description 9:12
+     * @Date  2020/12/22
+     * @param [adid]
+     * @return java.lang.Integer
+     * 修改收货地址信息
+    */
+    Integer updateAddress(@Param("adprovince") String adprovince,@Param("adcity") String adcity,@Param("adarea") String adarea,@Param("addetailed") String addetailed,@Param("adid") Integer adid);
+
+    /*
+     * @Author 周子豪
+     * @Description 9:13
+     * @Date  2020/12/22
+     * @param [adid]
+     * @return java.lang.Integer
+     * 删除收货地址（逻辑删除）
+    */
+    Integer updateAdisdelete(Integer adid);
 }

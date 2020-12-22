@@ -2,6 +2,7 @@ package com.demo.pojo;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -12,25 +13,26 @@ import java.util.Objects;
  */
 @Entity
 public class Beput {
-    private Integer beid;
+    private int beid;
     private String beclass;
     private Timestamp bedate;
     private String beremark;
     private Integer yewuid;
     private Supplier supplier;
+    private List<Beputxq> beputxqs;
 
     @Id
-    @Column(name = "beid")
-    public Integer getBeid() {
+    @Column(name = "beid", nullable = false)
+    public int getBeid() {
         return beid;
     }
 
-    public void setBeid(Integer beid) {
+    public void setBeid(int beid) {
         this.beid = beid;
     }
 
     @Basic
-    @Column(name = "beclass")
+    @Column(name = "beclass", nullable = false, length = 255)
     public String getBeclass() {
         return beclass;
     }
@@ -40,7 +42,7 @@ public class Beput {
     }
 
     @Basic
-    @Column(name = "bedate")
+    @Column(name = "bedate", nullable = false)
     public Timestamp getBedate() {
         return bedate;
     }
@@ -50,7 +52,7 @@ public class Beput {
     }
 
     @Basic
-    @Column(name = "beremark")
+    @Column(name = "beremark", nullable = true, length = 255)
     public String getBeremark() {
         return beremark;
     }
@@ -60,7 +62,7 @@ public class Beput {
     }
 
     @Basic
-    @Column(name = "yewuid")
+    @Column(name = "yewuid", nullable = true)
     public Integer getYewuid() {
         return yewuid;
     }
@@ -94,5 +96,15 @@ public class Beput {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
+    }
+
+
+    @OneToMany(mappedBy = "beput")
+    public List<Beputxq> getBeputxqs() {
+        return beputxqs;
+    }
+
+    public void setBeputxqs(List<Beputxq> beputxqs) {
+        this.beputxqs = beputxqs;
     }
 }
