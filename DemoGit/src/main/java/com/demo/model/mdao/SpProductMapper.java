@@ -2,6 +2,7 @@ package com.demo.model.mdao;
 
 import com.demo.pojo.SpCommodity;
 import com.demo.pojo.SpProduct;
+import com.demo.pojo.vo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -49,6 +50,10 @@ public interface SpProductMapper {
      * 查询全部单品
     */
     List<SpProduct> selectAll();
+    /**
+     查询单品表及其分类
+     */
+    List<vo> selectAll();
 
     /*
      * @Author xiahaifeng

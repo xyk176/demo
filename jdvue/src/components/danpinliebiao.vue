@@ -26,21 +26,43 @@
           <el-table
             :data="tableData"
             stripe
-            style="width: 100%">
+            style="width: 100%"
+            @selection-change="handleSelectionChange">
             <el-table-column
-              prop="date"
-              label="日期"
+             type="selection"
+              width="180">
+            </el-table-column>
+            <el-table-column
+              prop="lname"
+              label="单品名称"
               width="180">
             </el-table-column>
             <el-table-column
               prop="name"
-              label="姓名"
+              label="单品图片"
               width="180">
             </el-table-column>
             <el-table-column
-              prop="address"
-              label="地址">
+              prop="ldanwei"
+              label="单品单位">
             </el-table-column>
+            <el-table-column
+              prop="cname"
+              label="单品分类">
+            </el-table-column>
+            <el-table-column
+              prop="lchengben"
+              label="单品成本">
+            </el-table-column>
+            <el-table-column label="操作">
+                  <template slot-scope="scope">
+                    <!-- <el-button
+                      size="mini"
+                      type="danger"
+                      @click="handleDelete(scope.$index, scope.row)">删除</el-button> -->
+                    <el-link icon="el-icon-edit">编辑</el-link>
+                  </template>
+                </el-table-column>
           </el-table>
         </div>
       </div>
@@ -56,23 +78,8 @@ export default {
 name: "Allorders",
   data(){
   return{
-    tableData: [{
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }, {
-      date: '2016-05-04',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1517 弄'
-    }, {
-      date: '2016-05-01',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1519 弄'
-    }, {
-      date: '2016-05-03',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1516 弄'
-    }],
+    tableData: [],
+    multipleSelection: [],
     options: [{
       value: '选项1',
       label: '黄金糕'
@@ -93,9 +100,20 @@ name: "Allorders",
     }
   },
   methods:{
+      load(){
+        this.$axios.post("/product/all")
+        .then((res)=>{
+          this.tableData=res.data;
+          console.log("单品列表",this.tableData)
+        })
+      }
 
+      ,handleSelectionChange(val) {
+        this.multipleSelection = val;
+      }
   },
-  created() {
+  mounted() {
+    this.load();
   }
 }
 </script>
@@ -106,7 +124,6 @@ name: "Allorders",
   height: 500px;
   background: #FFFFFF;
   border-radius: 6px;
-  border: 1px solid #E2E2E2;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
   float: left;
 }
@@ -118,7 +135,6 @@ name: "Allorders",
   height: 91%;
   background: #F2F2F6;
   border-radius: 6px;
-  border: 1px solid #E2E2E2;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);
 }
 .right{
@@ -126,7 +142,6 @@ name: "Allorders",
   height: 500px;
   background: #FFFFFF;
   border-radius: 6px;
-  border: 1px solid #E2E2E2;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);
   float: right;
 }
@@ -137,7 +152,6 @@ name: "Allorders",
   height: 20%;
   background: #FFFFFF;
   border-radius: 6px;
-  border: 1px solid #E2E2E2;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);
 }
 
