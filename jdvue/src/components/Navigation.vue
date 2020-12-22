@@ -42,10 +42,10 @@
                 <span>订单</span>
               </template>
               <el-menu-item-group>
-                <router-link to="/Allorders">
+                <router-link to="/Allorders" tag="span">
                   <el-menu-item index="3-1">所有订单</el-menu-item>
                 </router-link>
-                <router-link to="/Alldelivergoods">
+                <router-link to="/Alldelivergoods" tag="span">
                   <el-menu-item index="3-2">发货管理</el-menu-item>
                 </router-link>
               </el-menu-item-group>
@@ -103,9 +103,9 @@
     padding: 10px;
   }
 
-  #navigation .ismain>.body{
+  #navigation .ismain .body{
     width: 100%;
-    padding-bottom: 30px;
+    height: 500px;
     background: #FFFFFF;
     border-radius: 6px;
     border: 1px solid #E2E2E2;
