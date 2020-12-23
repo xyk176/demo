@@ -13,9 +13,11 @@ import Sangpinindex from '@/components/shangpin/Sangpinindex'
 import Sangpinadd from '@/components/shangpin/Sangpinadd'
 
 /* 单品列表 */
-import danpinliebiao from '@/components/danpinliebiao'
+import danpinliebiao from '@/components/danpin/danpinliebiao'
 /* 单品分类 */
-import danpinfenlei from '@/components/danpinfenlei'
+import danpinfenlei from '@/components/danpin/danpinfenlei'
+/* 单品新增 */
+import danpinadd from '@/components/danpin/danpinadd'
 
 /* 库存 */
 import inventory from '@/components/xyk/inventory'
@@ -107,6 +109,10 @@ export default new Router({
             path: '/fenlei',
             name: 'danpinfenlei',
             component: danpinfenlei,
+        },{
+            path: '/danpinadd',
+            name: 'danpinadd',
+            component: danpinadd,
         }
       ]
     }

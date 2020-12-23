@@ -3,6 +3,7 @@ package com.demo.services;
 import com.demo.model.mdao.SpProductMapper;
 import com.demo.pojo.SpCommodity;
 import com.demo.pojo.SpProduct;
+import com.demo.pojo.vo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
@@ -45,5 +46,12 @@ public class SpProductServicts {
     public PageInfo<SpProduct> selectAllByPt(String tiaojian, String canshu, Integer pageNum, Integer pageSize){
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<>(mapper.selectAllBuPic(tiaojian,canshu));
+    }
+
+
+    // 查询单品表及其分类
+    public PageInfo<vo> selectall(Integer pageNum, Integer pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        return new PageInfo<>(mapper.selectAll());
     }
 }

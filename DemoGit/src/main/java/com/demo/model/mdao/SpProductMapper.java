@@ -29,7 +29,7 @@ public interface SpProductMapper {
      * @return int
      * 新增
     */
-    int insert(SpProduct record);
+    int insert(@Param("p") SpProduct record);
 
     /*
      * @Author xiahaifeng
@@ -43,9 +43,11 @@ public interface SpProductMapper {
 
 
     /**
-     查询单品表及其分类
+     查询单品表及其分类，图片
      */
     List<vo> selectAll();
+
+
 
     /*
      * @Author xiahaifeng

@@ -41,6 +41,7 @@
     <result column="cid" jdbcType="INTEGER" property="cid" />
     <result column="cname" jdbcType="VARCHAR" property="cname" />
     <result column="cfid" jdbcType="INTEGER" property="cfid" />
+    <result column="picpath" jdbcType="INTEGER" property="picpath" />
   </resultMap>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -59,7 +60,7 @@
     insert into sp_product (lid, cid2, lname, 
       lguige, ldanwei, ltiaoma, 
       lchengben, cid)
-    values (#{p.lid}, #{p.cid2}, #{p.lname},#{p.lguige}, #{p.ldanwei}, #{p.ltiaoma},
+    values (#{p.lid}, #{p.prs.cid2}, #{p.lname},#{p.lguige}, #{p.ldanwei}, #{p.ltiaoma},
       #{p.lchengben}, #{p.cid})
   </insert>
 
@@ -91,9 +92,13 @@
 
   <select id="selectAll" resultMap="BaseResultMapvo">
     <!--
-      查询单品表及其分类
+      查询单品表及其分类,图片
     -->
-    select * from sp_product p LEFT JOIN sp_productsort s on p.cid2=s.cid2
+    select p.*,c.*,s.*
+    from sp_product p
+    left join sp_picturetopro pp on p.lid=pp.lid
+    left join sp_picture c on c.picid=pp.picid
+    LEFT JOIN sp_productsort s on p.cid2=s.cid2
   </select>
 
   <select id="selectAllBuPic" resultMap="BaseResultMapAndPic">

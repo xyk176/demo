@@ -17,6 +17,7 @@ public class vo {
     private Integer cid2;
     private String cname;
     private String cfid;
+    private String picpath;
 
     @Override
     public String toString() {
@@ -30,7 +31,16 @@ public class vo {
                 ", cid=" + cid +
                 ", cname='" + cname + '\'' +
                 ", cfid='" + cfid + '\'' +
+                ", picpath='" + picpath + '\'' +
                 '}';
+    }
+
+    public String getPicpath() {
+        return picpath;
+    }
+
+    public void setPicpath(String picpath) {
+        this.picpath = picpath;
     }
 
     public Integer getCid2() {
