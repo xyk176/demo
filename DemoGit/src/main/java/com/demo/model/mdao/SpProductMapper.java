@@ -1,6 +1,6 @@
 package com.demo.model.mdao;
 
-import com.demo.pojo.SpCommodity;
+import com.demo.pojo.Inventory;
 import com.demo.pojo.SpProduct;
 import com.demo.pojo.vo;
 import org.apache.ibatis.annotations.Mapper;
@@ -45,7 +45,7 @@ public interface SpProductMapper {
     /**
      查询单品表及其分类，图片
      */
-    List<vo> selectAll();
+    List<vo> selectAll(@Param("id") Integer id);
 
 
 
@@ -68,4 +68,11 @@ public interface SpProductMapper {
      * 修改
     */
     int updateByPrimaryKey(SpProduct record);
+
+    /*新增库存表*/
+    void insertkucun(@Param("i") Inventory inventory);
+
+    /*修改单品*/
+    void updateproduct(@Param("p") SpProduct product,Integer lid);
+
 }

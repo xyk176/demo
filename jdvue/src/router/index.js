@@ -18,6 +18,8 @@ import danpinliebiao from '@/components/danpin/danpinliebiao'
 import danpinfenlei from '@/components/danpin/danpinfenlei'
 /* 单品新增 */
 import danpinadd from '@/components/danpin/danpinadd'
+/* 单品修改 */
+import danpinamend from '@/components/danpin/danpinamend'
 
 /* 库存 */
 import inventory from '@/components/xyk/inventory'
@@ -113,6 +115,10 @@ export default new Router({
             path: '/danpinadd',
             name: 'danpinadd',
             component: danpinadd,
+        },{
+            path: '/danpinamend',
+            name: 'danpinamend',
+            component: danpinamend,
         }
       ]
     }

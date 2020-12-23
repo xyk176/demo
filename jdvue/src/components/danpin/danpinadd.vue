@@ -129,6 +129,7 @@
         cid2:0,//单品分类id
         lchengben:null//单品成本
       },
+      kucun:{}
      }
    },
    methods:{
@@ -155,7 +156,6 @@
           this.$router.push({path:'/liebiao'})
         })
       }
-
    },
    mounted(){
      this.comleibie_show();

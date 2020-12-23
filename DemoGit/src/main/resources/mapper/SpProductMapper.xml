@@ -53,14 +53,14 @@
     where lid = #{lid,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.demo.pojo.SpProduct">
+  <insert id="insert" parameterType="com.demo.pojo.SpProduct" keyProperty="lid" useGeneratedKeys="true">
     <!--
       新增单品
     -->
     insert into sp_product (lid, cid2, lname, 
       lguige, ldanwei, ltiaoma, 
       lchengben, cid)
-    values (#{p.lid}, #{p.prs.cid2}, #{p.lname},#{p.lguige}, #{p.ldanwei}, #{p.ltiaoma},
+    values (null, #{p.prs.cid2}, #{p.lname},#{p.lguige}, #{p.ldanwei}, #{p.ltiaoma},
       #{p.lchengben}, #{p.cid})
   </insert>
 
@@ -99,6 +99,11 @@
     left join sp_picturetopro pp on p.lid=pp.lid
     left join sp_picture c on c.picid=pp.picid
     LEFT JOIN sp_productsort s on p.cid2=s.cid2
+    <where>
+      <if test="id!=null and id!=''">
+        and s.cid2=#{id}
+      </if>
+    </where>
   </select>
 
   <select id="selectAllBuPic" resultMap="BaseResultMapAndPic">
@@ -119,4 +124,21 @@
     </if>
     order by p.lid desc
   </select>
+
+  <!--新增库存表-->
+  <insert id="insertkucun">
+    insert into inventory (inid,lid,inentity,inoccupy,inusable,maxcount) values (null,#{i.product.lid},#{i.inentity},#{i.inoccupy},#{i.inusable},#{i.maxcount})
+  </insert>
+
+  <!--修改单品-->
+  <update id="updateproduct">
+        update sp_product
+    set lname = #{p.lname},
+      lguige = #{p.lguige},
+      ldanwei = #{p.ldanwei},
+      ltiaoma = #{p.ltiaoma},
+      lchengben = #{p.lchengben},
+      cid = #{p.cid}
+    where lid = #{p.lid}
+  </update>
 </mapper>

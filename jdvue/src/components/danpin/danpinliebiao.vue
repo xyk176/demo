@@ -5,16 +5,16 @@
       <div class="head">
         <div class="small">
           &nbsp;&nbsp;&nbsp;
-          <el-select v-model="value" placeholder="请选择" style="width: 150px;margin-top: 8px" size="mini">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
+            <el-cascader
+                :options="options"
+                :props="defaultPropss"
+                @change="changea"
+                clearable
+                style="width: 150px;margin-top: 8px"
+                size="mini"></el-cascader>
             </el-option>
-          </el-select>
-          <div>
-            <router-link to="danpinadd" tag="sapn">
+          <div style="margin-bottom: 10px;">
+            <router-link to="danpinadd" tag="span">
               <el-button plain size="mini" style="margin-top: 18px;margin-left: 14px;">新增单品</el-button>
             </router-link>
 
@@ -29,8 +29,7 @@
           <el-table
             :data="tableData"
             stripe
-            style="width: 100%"
-             @selection-change="handleSelectionChange">
+            style="width: 100%">
              <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column label="单品图片">
               <template slot-scope="scope">
@@ -41,6 +40,10 @@
               prop="lname"
               label="单品名称"
               width="180">
+            </el-table-column>
+            <el-table-column
+              prop="lid"
+              width="0">
             </el-table-column>
             <el-table-column
               prop="ltiaoma"
@@ -61,12 +64,18 @@
               label="单品分类">
             </el-table-column>
             <el-table-column
+              prop="cid2"
+              label="单品分类">
+            </el-table-column>
+            <el-table-column
               prop="lchengben"
               label="单品成本">
             </el-table-column>
             <el-table-column label="操作" width="120" align="center">
               <template slot-scope="scope">
-                <el-button type="text" size="small">编辑</el-button>
+                <router-link to="danpinamend" tag="span">
+                    <el-button type="text" size="small" @click="getbianji(scope.row)">编辑</el-button>
+                </router-link>
               </template>
             </el-table-column>
 
@@ -97,37 +106,62 @@ name: "Allorders",
     currentPage4:1,
     pageSize:5,
     total:0,
-    options: [{
-      value: '选项1',
-      label: '黄金糕'
-    }, {
-      value: '选项2',
-      label: '双皮奶'
-    }, {
-      value: '选项3',
-      label: '蚵仔煎'
-    }, {
-      value: '选项4',
-      label: '龙须面'
-    }, {
-      value: '选项5',
-      label: '北京烤鸭'
-    }],
-    value: ''
+    options: [],
+    defaultPropss: {
+      children: 'sorts',
+      label: 'cname',
+      value: 'cid2',
+      checkStrictly: true
+    },
+    value: '',
+    cfid:null//分类主键
     }
   },
   methods:{
-    load(){
+    changea(e){
+      this.cfid=e[e.length-1];
+      console.log("分类id",this.cfid)
       let param={
+        id:this.cfid,
         no:this.currentPage4,
         size:this.pageSize
       }
-      this.$axios.post("http://localhost:8086/product/all",param).then((res)=>{
+      this.$axios.post("/product/all",param)
+      .then((res)=>{
         this.tableData=res.data.list;
         this.total = res.data.total;
         console.log("单品：",this.tableData)
       })
+      .catch(function(e){
+          console.log("报错了，错误信息：",e);
+      });
     }
+    ,load(){
+      let param={
+        id:this.cfid,
+        no:this.currentPage4,
+        size:this.pageSize
+      }
+      this.$axios.post("/product/all",param)
+      .then((res)=>{
+        this.tableData=res.data.list;
+        this.total = res.data.total;
+        console.log("单品：",this.tableData)
+      })
+      .catch(function(e){
+          console.log("报错了，错误信息：",e);
+      });
+    }
+    ,loadData(){
+      this.$axios.post("/sort/all")
+      .then((res)=>{
+        this.options=res.data;
+        console.log("所有分类",this.options)
+      }).catch(function(e){
+          console.log("报错了，错误信息：",e);
+      });
+    }
+
     ,handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.pageSize=val;
@@ -138,13 +172,15 @@ name: "Allorders",
       this.currentPage4=val;
       this.load();
     }
+    ,getbianji(r){
+      console.log(r);
+      this.$router.push({path:'/danpinamend',query:{params:r}})
+    }
+  },
 
-  },
-  handleSelectionChange(val) {
-    this.multipleSelection = val;
-  },
   created() {
     this.load();
+    this.loadData();
   }
 }
 </script>
@@ -183,7 +219,7 @@ name: "Allorders",
   margin-top: 5px;
   margin-left: 5px;
   width: 99%;
-  height: 20%;
+  height: 22%;
   background: #FFFFFF;
   border-radius: 6px;
   border: 1px solid #E2E2E2;
