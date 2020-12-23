@@ -11,14 +11,15 @@ import java.util.Objects;
  * @Date 2020-12-21 14:01
  */
 @Entity
-@Table(name = "sp_commoditycategory", schema = "jindun")
+@Table(name = "sp_commoditycategory", schema = "jindun", catalog = "")
 public class SpCommoditycategory {
     private Integer ccyid;
     private String ccyname;
+    private String ccytopid;
     private List<SpCommodity> coms;
 
     @Id
-    @Column(name = "ccyid")
+    @Column(name = "ccyid", nullable = false)
     public Integer getCcyid() {
         return ccyid;
     }
@@ -28,7 +29,7 @@ public class SpCommoditycategory {
     }
 
     @Basic
-    @Column(name = "ccyname")
+    @Column(name = "ccyname", nullable = false, length = 255)
     public String getCcyname() {
         return ccyname;
     }
@@ -58,5 +59,15 @@ public class SpCommoditycategory {
 
     public void setComs(List<SpCommodity> coms) {
         this.coms = coms;
+    }
+
+    @Basic
+    @Column(name = "ccytopid", nullable = false, length = 255)
+    public String getCcytopid() {
+        return ccytopid;
+    }
+
+    public void setCcytopid(String ccytopid) {
+        this.ccytopid = ccytopid;
     }
 }

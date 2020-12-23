@@ -50,7 +50,7 @@
     where comid = #{comid,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.demo.pojo.SpCommodity">
+  <insert id="insert" parameterType="com.demo.pojo.SpCommodity" useGeneratedKeys="true" keyProperty="comid">
     <!--
       WARNING - @mbg.generated
       商品新增
@@ -61,7 +61,7 @@
       commarketprice, comweight, comvolume, 
       comsalesvolume, comsalesstatus, comdata
       )
-    values (#{comid,jdbcType=INTEGER}, #{cllid,jdbcType=INTEGER}, #{ccyid,jdbcType=INTEGER}, 
+    values (#{comid,jdbcType=INTEGER}, #{cll.cllid,jdbcType=INTEGER}, #{ccy.ccyid,jdbcType=INTEGER},
       #{comiszu,jdbcType=INTEGER}, #{combarcode,jdbcType=VARCHAR}, #{comname,jdbcType=VARCHAR}, 
       #{comsameprice,jdbcType=DECIMAL}, #{compricemin,jdbcType=DECIMAL}, #{compricemax,jdbcType=DECIMAL}, 
       #{commarketprice,jdbcType=DECIMAL}, #{comweight,jdbcType=DECIMAL}, #{comvolume,jdbcType=DECIMAL}, 

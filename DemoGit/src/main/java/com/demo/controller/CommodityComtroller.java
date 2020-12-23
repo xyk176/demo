@@ -1,12 +1,7 @@
 package com.demo.controller;
 
-import com.demo.pojo.SpCommodity;
-import com.demo.pojo.SpCommoditycategory;
-import com.demo.pojo.SpPicture;
-import com.demo.pojo.SpProduct;
-import com.demo.services.SpCommodityService;
-import com.demo.services.SpCommoditycategoryService;
-import com.demo.services.SpProductServicts;
+import com.demo.pojo.*;
+import com.demo.services.*;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +18,11 @@ public class CommodityComtroller {
     SpCommoditycategoryService ccyser;
     @Autowired
     SpProductServicts proser;
+    @Autowired
+    SpPicturesortService pisser;
+    @Autowired
+    SpPictureService picser;
+
 
     /*
      * @Author xiahaifeng
@@ -65,5 +65,46 @@ public class CommodityComtroller {
         PageInfo<SpProduct> pageInfo= proser.selectAllByPt(tiaojian,canshu,pageNum,pageSize);
         return pageInfo;
     }
-    
+
+    /**
+     * @Author xiahaifeng
+     * @Description selectall_pic
+     * @Date 16:11 2020/12/23
+     * @param
+     * @return java.util.List<com.demo.pojo.SpPicture>
+     * 查询全部图片
+    */
+    @RequestMapping("/selectall_pic")
+    public List<SpPicture> selectall_pic(){
+        return picser.selectAll();
+    }
+
+    /*
+     * @Author xiahaifeng
+     * @Description selectall_picspic
+     * @Date 16:12 2020/12/23
+     * @param []
+     * @return java.util.List<com.demo.pojo.SpPicturesort>
+     * 关联图片查询全部图片分组
+    */
+    @RequestMapping("/selectall_picspic")
+    public List<SpPicturesort> selectall_picspic(){
+        return pisser.selectAllByPic();
+    }
+
+    /*
+     * @Author xiahaifeng
+     * @Description com_insert
+     * @Date 21:19 2020/12/23
+     * @param [com]
+     * @return boolean
+     * 新增商品
+    */
+    @RequestMapping("/com_insert")
+    public boolean com_insert(@RequestBody SpCommodity com){
+        return comser.insert(com);
+    }
+
+
+
 }
