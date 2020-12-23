@@ -13,13 +13,24 @@
                 <span>商品</span>
               </template>
               <el-menu-item-group title="单品库">
+                <el-menu-item index="1-1">单品库列表</el-menu-item>
                 <router-link to="/liebiao" tag="span">
                 <el-menu-item index="1-1">单品库列表</el-menu-item>
                 </router-link>
+                <router-link to="/fenlei" tag="span">
                 <el-menu-item index="1-2">单品库分类</el-menu-item>
+                </router-link>
               </el-menu-item-group>
               <el-menu-item-group title="商品库">
-                <el-menu-item index="1-3">商品库列表3</el-menu-item>
+                <router-link to="/Sangpinindex" tag="span">
+                  <el-menu-item index="1-3">商品库列表</el-menu-item>
+                </router-link>
+                <router-link to="/Sangpinindex" tag="span">
+                  <el-menu-item index="1-4">商品标签</el-menu-item>
+                </router-link>
+                <router-link to="/Sangpinindex" tag="span">
+                  <el-menu-item index="1-5">商品属性</el-menu-item>
+                </router-link>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="2">
@@ -59,10 +70,10 @@
                 <span>订单</span>
               </template>
               <el-menu-item-group>
-                <router-link to="/Allorders">
+                <router-link to="/Allorders" tag="span">
                   <el-menu-item index="3-1">所有订单</el-menu-item>
                 </router-link>
-                <router-link to="/Alldelivergoods">
+                <router-link to="/Alldelivergoods" tag="span">
                   <el-menu-item index="3-2">发货管理</el-menu-item>
                 </router-link>
               </el-menu-item-group>

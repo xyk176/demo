@@ -27,9 +27,9 @@
           <el-select style="margin-right: 15px;width: 120px;float: left;" clearable  v-model="suname" @change="sousuo" placeholder="供应商名称">
               <el-option
                 v-for="item in supplier"
-                :key="item.value"
-                :label="item.value"
-                :value="item.value"
+                :key="item.suname"
+                :label="item.suname"
+                :value="item.suname"
                 >
               </el-option>
           </el-select>
@@ -47,8 +47,8 @@
         </div>
         <div class="beput_button">
 
-          <el-button style="float: left;">采购入库</el-button>
-          <el-button style="float: left;">其他入库</el-button>
+          <el-button style="float: left;" @click=beputnew(1)>采购入库</el-button>
+          <el-button style="float: left;"@click=beputnew(2)>其他入库</el-button>
         </div>
         <div class="shangping_jiansuo">
          <el-table
@@ -61,7 +61,9 @@
             <el-table-column prop="yewuid" label="关联业务号">
             </el-table-column>
             <el-table-column  label="操作">
-              <el-button>详情</el-button>
+              <template slot-scope="scope">
+                <el-button @click="beputxq(scope.row.beid,scope.row.beclass)">详情</el-button>
+              </template>
             </el-table-column>
           </el-table>
 
@@ -135,7 +137,53 @@
         }
       },
       methods:{
+          beputnew(clas){
+            console.log(clas);
+            let claname=''
+            if(clas==1){
+              claname='采购入库'
+              this.$router.push({
+
+                            name:'beputnew',
+
+                            params: {
+                                clas:claname
+                             },
+
+                     })
+            }
+            if(clas==2){
+              claname='其他入库'
+              this.$router.push({
+
+                            name:'beputnew',
+
+                            params: {
+                                clas:claname
+                             },
+
+                     })
+            }
+          },
+          beputxq(id,clas){
+            console.log(id)
+            console.log(clas)
+            this.$router.push({
+
+                          name:'beputxq',
+
+                          params: {
+                              id:id,
+                              clas:clas
+                           },
+
+                   })
+          },
           beput(){
+            this.$axios.post("supplier/selectNewBeput")
+            .then(r=>{
+              this.supplier=r.data
+            })
             let param;
             if(this.value=='入库单号'){
                   param={

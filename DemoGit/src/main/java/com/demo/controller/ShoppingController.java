@@ -8,7 +8,9 @@ package com.demo.controller;/**
 import com.demo.config.MyResult;
 import com.demo.services.ShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author: ZhangWang
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Classname ShoppingController
  * @Date 2020-12-21 17:35
  */
+@RestController
 @RequestMapping("/shopping")
 public class ShoppingController {
     @Autowired

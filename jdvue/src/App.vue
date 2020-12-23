@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <div id="navigation">
     <el-container class="myc">
       <el-aside width="150px" class="daohang">
         <div class="logoimg">
-          <img src="../static/log/log.png" width="100%" />
+          <img src="../build/logo.png" width="100%" />
         </div>
         <div class="logtitle">
           <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#22242F" text-color="#fff" active-text-color="#2589FF">
@@ -14,12 +14,22 @@
               </template>
               <el-menu-item-group title="单品库">
                 <router-link to="/liebiao" tag="span">
-                  <el-menu-item index="1-1">单品库列表</el-menu-item>
+                <el-menu-item index="1-1">单品库列表</el-menu-item>
                 </router-link>
+                <router-link to="/fenlei" tag="span">
                 <el-menu-item index="1-2">单品库分类</el-menu-item>
+                </router-link>
               </el-menu-item-group>
               <el-menu-item-group title="商品库">
-                <el-menu-item index="1-3">商品库列表3</el-menu-item>
+                <router-link to="/Sangpinindex" tag="span">
+                  <el-menu-item index="1-3">商品库列表</el-menu-item>
+                </router-link>
+                <router-link to="/Sangpinindex" tag="span">
+                  <el-menu-item index="1-4">商品标签</el-menu-item>
+                </router-link>
+                <router-link to="/Sangpinindex" tag="span">
+                  <el-menu-item index="1-5">商品属性</el-menu-item>
+                </router-link>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="2">
@@ -31,17 +41,26 @@
                 <router-link tag="span" to="inventory">
                   <el-menu-item index="2-1">库存</el-menu-item>
                 </router-link>
+                <router-link tag="span" to="outandinput">
                 <el-menu-item index="2-2">出入库明细</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="beput">
                 <el-menu-item index="2-3">入库单</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="output">
                 <el-menu-item index="2-4">出库单</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="checks">
                 <el-menu-item index="2-5">库存盘点</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="maxcount">
                 <el-menu-item index="2-6">库存控制</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="库存查询">
-                <el-menu-item index="2-7">库存查询</el-menu-item>
+                </router-link>
               </el-menu-item-group>
               <el-menu-item-group title="设置">
-                <el-menu-item index="2-8">供应商管理</el-menu-item>
+                <router-link tag="span" to="supplier">
+                <el-menu-item index="2-7">供应商管理</el-menu-item>
+                </router-link>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="3">
@@ -49,6 +68,14 @@
                 <i class="el-icon-tickets"></i>
                 <span>订单</span>
               </template>
+              <el-menu-item-group>
+                <router-link to="/Allorders" tag="span">
+                  <el-menu-item index="3-1">所有订单</el-menu-item>
+                </router-link>
+                <router-link to="/Alldelivergoods" tag="span">
+                  <el-menu-item index="3-2">发货管理</el-menu-item>
+                </router-link>
+              </el-menu-item-group>
             </el-submenu>
           </el-menu>
         </div>
@@ -56,7 +83,9 @@
       <el-container>
         <el-header class="isheader" height="50px">智慧零售</el-header>
         <el-main class="ismain">
-          <router-view/>
+          <div class="body">
+            <router-view/>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -64,33 +93,30 @@
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
 </script>
 
 <style>
-  #app *{
+ #navigation *{
    font-size: 12px;
   }
-  #app .myc{
+  #navigation .myc{
     height: 100%;
     position: absolute;
     top: 0px;
     left: 0px;
     width: 100%;
   }
-  #app .logtitle .el-menu {
+  #navigation .logtitle .el-menu {
     background-color: #22242F;
     border-right: none;
   }
-  #app .daohang{
+  #navigation .daohang{
     background-color: #22242F;
   }
-  #app .daohang .logoimg{
+  #navigation .daohang .logoimg{
     padding: 20px 50px;
   }
-  #app .isheader{
+  #navigation .isheader{
     line-height: 50px;
     border: 1px solid #E2E2E2;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
@@ -99,8 +125,23 @@ export default {
     font-weight: bold;
     z-index: 10;
   }
-  #app .ismain{
+  #navigation .ismain{
     background: #F9F9F9;
     padding: 10px;
+  }
+
+  #navigation .ismain>.body{
+    width: 100%;
+    height: 500px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    border: 1px solid #E2E2E2;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
+  }
+  #navigation .ismain .shangpinmain{
+    background: #FFFFFF;
+    border: 1px solid #E2E2E2;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
+    border-radius: 6px;
   }
 </style>

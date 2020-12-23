@@ -1,5 +1,7 @@
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.Objects;
 @Entity
 public class Checks {
     private Integer cheid;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp chedate;
     private Integer chestate;
     private Integer chebecount;

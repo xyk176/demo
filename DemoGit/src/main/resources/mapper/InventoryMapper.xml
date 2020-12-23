@@ -16,7 +16,25 @@
       <result column="lchengben" jdbcType="DECIMAL" property="lchengben" />
     </association>
   </resultMap>
-
+  <update id="updatekucun" parameterType="com.demo.pojo.Inventory">
+    <!--
+      单品入库加库存
+    -->
+    update inventory i
+    set
+    inentity = inentity+#{inentity,jdbcType=INTEGER},
+    inusable = inusable+#{inusable,jdbcType=INTEGER}
+    where inid = (select i.inid from sp_product sp  where sp.lid=#{lid})
+  </update>
+  <update id="updatemaxcount" parameterType="com.demo.pojo.Inventory">
+    <!--
+      单品入库加库存
+    -->
+    update inventory i
+    set
+    i.maxcount=#{maxcount}
+    where inid = #{inid}
+  </update>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated
