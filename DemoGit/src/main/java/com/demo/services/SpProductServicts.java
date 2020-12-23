@@ -71,7 +71,7 @@ public class SpProductServicts {
     }
 
     /*修改单品*/
-    public void updateproduct(SpProduct product,Integer lid){
-        mapper.updateproduct(product,lid);
+    public void updateproduct(String lname,String lguige,String ldanwei,Integer ltiaoma,String lchengben,Integer lid){
+        mapper.updateproduct(lname, lguige, ldanwei, ltiaoma, lchengben, lid);
     }
 }

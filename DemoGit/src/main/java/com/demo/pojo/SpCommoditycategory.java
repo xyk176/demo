@@ -15,7 +15,16 @@ import java.util.Objects;
 public class SpCommoditycategory {
     private Integer ccyid;
     private String ccyname;
+    private String ccytopid;
     private List<SpCommodity> coms;
+
+    public String getCcytopid() {
+        return ccytopid;
+    }
+
+    public void setCcytopid(String ccytopid) {
+        this.ccytopid = ccytopid;
+    }
 
     @Id
     @Column(name = "ccyid")
