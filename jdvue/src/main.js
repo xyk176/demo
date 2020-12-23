@@ -27,6 +27,10 @@ Vue.prototype.moment = moment
 import Dateformat from './utils/dateFormat.js'
 Vue.prototype.$Dateformat = Dateformat
 
+/*收货地址*/
+import VDistpicker from 'v-distpicker';
+Vue.component('v-distpicker', VDistpicker);
+
 
 Vue.filter('dateYMDHMSFormat1', function(dateStr, pattern = 'YYYY年MM月DD日') {
   if(!dateStr) return '';

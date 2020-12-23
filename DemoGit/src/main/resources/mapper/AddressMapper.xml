@@ -70,7 +70,12 @@
   <!--根据客户id查询收货地址-->
   <select id="selectByCidAll" resultMap="BaseResultMap">
     select adid,adprovince,adcity,adarea,addetailed,adisdelete,adisdefault
-    from address where cid3 = #{cid} order by adid desc
+    from address where cid3 = #{cid} and adisdelete = '否' order by adid desc
+  </select>
+  <!--查询已删除的收货地址-->
+  <select id="selectByCidAll1" resultMap="BaseResultMap">
+    select adid,adprovince,adcity,adarea,addetailed,adisdelete,adisdefault
+    from address where cid3 = #{cid} and adisdelete = '是' order by adid desc
   </select>
 
   <!--设置默认地址-->
@@ -92,4 +97,52 @@
     update address set adisdelete = '是' where adid = #{adid}
   </update>
 
+  <!--恢复收货地址-->
+  <update id="updateAdisdelete1" parameterType="com.demo.pojo.Address">
+    update address set adisdelete = '否' where adid = #{adid}
+  </update>
+
+  <!--删除收货地址（物理删除）-->
+  <delete id="deleteAddress" parameterType="com.demo.pojo.Address">
+    delete from address where adid = #{adid}
+  </delete>
+
+  <resultMap id="orderResult" type="com.demo.pojo.Orders">
+    <id column="o_id" property="oId" />
+    <result column="o_date" property="oDate" />
+    <result column="pay" property="pay" />
+    <result column="price" property="price" />
+    <result column="orsip" property="orsip" />
+    <result column="remarks" property="remarks" />
+    <result column="ortype" property="ortype" />
+    <association property="customer" javaType="com.demo.pojo.Customer">
+      <id column="cid3" property="cid3"/>
+      <result column="cname" property="cname"/>
+      <result column="cphone" property="cphone"/>
+      <result column="password" property="password"/>
+      <result column="chead" property="chead"/>
+    </association>
+    <collection property="orderinfos" ofType="com.demo.pojo.OrderInfo">
+      <id column="oi_id" property="oiId"/>
+      <result column="coms" property="coms"/>
+      <result column="comprice" property="comprice"/>
+    </collection>
+  </resultMap>
+  <select id="selectOrders" resultMap="orderResult">
+    select * from orders o
+    inner join customer c on o.cid3 = c.cid3
+    <where>
+      <if test="ortype!='' and ortype!=null">
+        and o.ortype like concat('%',#{ortype},'%')
+      </if>
+<!--      <if test="orsip!='' and orsip!=null">-->
+<!--        and o.orsip like concat('%',#{orsip},'%')-->
+<!--      </if>-->
+<!--      <if test="pay!='' and pay!=null">-->
+<!--        and o.pay like concat('%',#{pay},'%')-->
+<!--      </if>-->
+        and o.cid3 = #{cid}
+    </where>
+    order by o.o_id  desc
+  </select>
 </mapper>
