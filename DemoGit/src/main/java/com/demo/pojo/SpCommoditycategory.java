@@ -14,7 +14,7 @@ import java.util.Objects;
 @Table(name = "sp_commoditycategory", schema = "jindun", catalog = "")
 public class SpCommoditycategory {
     private Integer ccyid;
-    private Integer ccytopid;
+    private String ccytopid;
     private String ccyname;
     private List<SpCommodity> coms;
 
@@ -30,11 +30,11 @@ public class SpCommoditycategory {
 
     @Basic
     @Column(name = "ccytopid")
-    public Integer getCcytopid() {
+    public String getCcytopid() {
         return ccytopid;
     }
 
-    public void setCcytopid(Integer ccytopid) {
+    public void setCcytopid(String ccytopid) {
         this.ccytopid = ccytopid;
     }
 

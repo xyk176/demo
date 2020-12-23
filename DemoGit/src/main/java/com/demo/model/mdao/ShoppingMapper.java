@@ -1,7 +1,6 @@
 package com.demo.model.mdao;
 
-import com.demo.pojo.Shopping;
-import com.demo.pojo.SpCommodity;
+import com.demo.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -10,9 +9,43 @@ import java.util.List;
 @Mapper
 @Repository
 public interface ShoppingMapper {
+    //根据商品ID 查询商品图片
+    List<SpPicturetocom> s_GoodsImg(Integer comid);
+
+    //根据商品ID  查询商品参数
+    List<Cprandcom> s_Goodscpr(Integer goodsID);
+
+    /*
+     * @Author xieyukun
+     * @Description sGoodsParam
+     * @Date 15:40 2020-12-23
+     * @param [cprid]
+     * @return java.util.List<com.demo.pojo.SpCommodityparameter>
+     查询商品多种参数  子查询
+    */
+    List<SpCommodityparameter> s_GoodsParam(Integer cprid);
+
+    //根据商品ID  查询商品属性
+    List<Cpyandcom> s_Goodscpy(Integer goodsID);
+
+    /*
+     * @Author xieyukun
+     * @Description s_GoodsProperty
+     * @Date 14:19 2020-12-23
+     * @param [cpyid]
+     * @return java.util.List<com.demo.pojo.SpCommodityproperty>
+     查询商品多种属性  子查询
+    */
+    List<SpCommodityproperty> s_GoodsProperty(Integer cpyid);
+
+    //根据商品ID  查看商品详情
+    List<SpCommodity> s_GoodsXiangQing(Integer goodsID);
 
     //查询所有商品分类
-    List<SpCommodity> s_GoodsType();
+    List<SpCommoditycategory> s_GoodsType();
+
+    //根据商品分类id  查询该分类的所有商品
+    List<SpCommodity> s_Goods(Integer goodsTypeID);
 
 
     /**

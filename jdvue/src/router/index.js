@@ -13,42 +13,21 @@ import Sangpinindex from '@/components/shangpin/Sangpinindex'
 import danpinliebiao from '@/components/danpinliebiao'
 
 import inventory from '@/components/xyk/inventory'
+import Shopping from '@/components/Shopping'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'Navigation',
-      component: Navigation,
+    {path: '/navigation',name: 'Navigation',component: Navigation,
       children:[
-          {
-            path: '/liebiao',
-            name: 'danpinliebiao',
-            component: danpinliebiao,
-           },
-        {
-          path: '/',
-          name: 'Sangpinindex',
-          component: Sangpinindex,
-        },
-        {
-          path: '/Allorders',
-          name: 'Allorders',
-          component: Allorders
-        },
-        {
-          path: '/Alldelivergoods',
-          name: 'Alldelivergoods',
-          component: Alldelivergoods
-        }
-        ,{
-          path: '/inventory',
-          name: 'inventory',
-          component: inventory
-        }
+        {path: '/liebiao',name: 'danpinliebiao',component: danpinliebiao,},
+        {path: '/',name: 'Sangpinindex',component: Sangpinindex,},
+        {path: '/Allorders',name: 'Allorders',component: Allorders},
+        {path: '/Alldelivergoods',name: 'Alldelivergoods',component: Alldelivergoods},
+        { path: '/inventory',name: 'inventory',component: inventory}
       ]
-    }
+    },
+    {path: '/',name: 'Shopping',component: Shopping}
   ]
 })
