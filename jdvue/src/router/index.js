@@ -34,6 +34,7 @@ import checks from '@/components/xyk/checks'
 import supplier from '@/components/xyk/supplier'
 import maxcount from '@/components/xyk/maxcount'
 
+import Shopping from '@/components/Shopping'
 Vue.use(Router)
 
 export default new Router({

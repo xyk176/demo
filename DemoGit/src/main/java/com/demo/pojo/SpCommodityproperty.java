@@ -11,12 +11,22 @@ import java.util.Objects;
  * @Date 2020-12-21 12:00
  */
 @Entity
-@Table(name = "sp_commodityproperty", schema = "jindun", catalog = "")
+@Table(name = "sp_commodityproperty", schema = "jindun")
 public class SpCommodityproperty {
     private Integer cpyid;
     private Integer cpytopid;
     private String cpyname;
     private List<Cpyandcom> coms;
+    private List<SpCommodityproperty> cpys;
+
+    @Transient
+    public List<SpCommodityproperty> getCpys() {
+        return cpys;
+    }
+
+    public void setCpys(List<SpCommodityproperty> cpys) {
+        this.cpys = cpys;
+    }
 
     @Id
     @Column(name = "cpyid")
