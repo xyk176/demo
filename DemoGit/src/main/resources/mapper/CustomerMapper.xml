@@ -59,4 +59,13 @@
     select cid3, cname, cphone, `password`, chead
     from customer
   </select>
+
+  <select id="selectByCid" resultMap="BaseResultMap">
+    select * from customer where cid3 = #{cid}
+  </select>
+
+  <!--登录-->
+  <select id="dengLu" resultMap="BaseResultMap">
+    select * from customer where cname = #{cname} and password = #{password}
+  </select>
 </mapper>

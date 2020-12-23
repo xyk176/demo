@@ -37,6 +37,10 @@ import checks from '@/components/xyk/checks'
 import supplier from '@/components/xyk/supplier'
 import suppliernew from '@/components/xyk/suppliernew'
 import maxcount from '@/components/xyk/maxcount'
+import addressDelete from '@/components/zzh/addressDelete'
+import personalCenter from '@/components/zzh/personalCenter'
+import orders from '@/components/zzh/orders'
+import user from '@/components/zzh/user'
 
 import Shopping from '@/components/Shopping'
 Vue.use(Router)
@@ -49,9 +53,31 @@ export default new Router({
       component: login
     },
     {
-      path: '/address',
-      name: 'address',
-      component: address
+      path: '/personalCenter',
+      name: 'personalCenter',
+      component: personalCenter,
+      children:[
+        {
+          path: '/address',
+          name: 'address',
+          component: address
+        },
+        {
+          path: '/addressDelete',
+          name: 'addressDelete',
+          component: addressDelete
+        },
+        {
+          path: '/orders',
+          name: 'orders',
+          component: orders
+        },
+        {
+          path: '/user',
+          name: 'user',
+          component: user
+        }
+      ]
     },
     {
       path: '/',
