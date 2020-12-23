@@ -1,5 +1,7 @@
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
