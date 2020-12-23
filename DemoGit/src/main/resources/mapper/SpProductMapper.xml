@@ -66,7 +66,6 @@
 
   <update id="updateByPrimaryKey" parameterType="com.demo.pojo.SpProduct">
     <!--
-
       WARNING - @mbg.generated
       修改
     -->
