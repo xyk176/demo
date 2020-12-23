@@ -50,7 +50,10 @@
             <el-table-column prop="yewuid" label="关联业务号">
             </el-table-column>
             <el-table-column  label="操作">
-              <el-button>详情</el-button>
+
+                <template slot-scope="scope">
+                  <el-button @click="outputxq(scope.row.outid,scope.row.outclass)">详情</el-button>
+                </template>
             </el-table-column>
           </el-table>
 
@@ -123,6 +126,20 @@
         }
       },
       methods:{
+          outputxq(id,clas){
+            console.log(id)
+            console.log(clas)
+            this.$router.push({
+
+                          name:'outputxq',
+
+                          params: {
+                              id:id,
+                              clas:clas
+                           },
+
+                   })
+          },
           output(){
             let param;
             if(this.value=='出库单号'){

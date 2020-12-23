@@ -29,9 +29,13 @@ import login from '@/components/zzh/login'
 import address from '@/components/zzh/address'
 import outandinput from '@/components/xyk/outandinput'
 import beput from '@/components/xyk/beput'
+import beputxq from '@/components/xyk/beputxq'
+import beputnew from '@/components/xyk/beputnew'
 import output from '@/components/xyk/output'
+import outputxq from '@/components/xyk/outputxq'
 import checks from '@/components/xyk/checks'
 import supplier from '@/components/xyk/supplier'
+import suppliernew from '@/components/xyk/suppliernew'
 import maxcount from '@/components/xyk/maxcount'
 
 import Shopping from '@/components/Shopping'
@@ -93,9 +97,21 @@ export default new Router({
           name: 'beput',
           component: beput
         },{
+          path: '/beputxq',
+          name: 'beputxq',
+          component: beputxq
+        },{
+          path: '/beputnew',
+          name: 'beputnew',
+          component: beputnew
+        },{
           path: '/output',
           name: 'output',
           component: output
+        },{
+          path: '/outputxq',
+          name: 'outputxq',
+          component: outputxq
         },{
           path: '/checks',
           name: 'checks',
@@ -104,6 +120,10 @@ export default new Router({
           path: '/supplier',
           name: 'supplier',
           component: supplier
+        },{
+          path: '/suppliernew',
+          name: 'suppliernew',
+          component: suppliernew
         },{
           path: '/maxcount',
           name: 'maxcount',

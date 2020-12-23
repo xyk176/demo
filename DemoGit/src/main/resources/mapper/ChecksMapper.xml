@@ -12,7 +12,39 @@
     <result column="chebecount" jdbcType="INTEGER" property="chebecount" />
     <result column="chelosecoubt" jdbcType="INTEGER" property="chelosecoubt" />
     <result column="cheremark" jdbcType="VARCHAR" property="cheremark" />
+
+    <collection property="checkxqs" ofType="Checkxq">
+      <id column="chexqid" jdbcType="INTEGER" property="chexqid" />
+      <result column="chexqcount" jdbcType="INTEGER" property="chexqcount" />
+      <result column="cheblcount" jdbcType="INTEGER" property="cheblcount" />
+      <association property="product" javaType="com.demo.pojo.SpProduct">
+        <id column="lid" jdbcType="INTEGER" property="lid" />
+        <result column="lname" jdbcType="VARCHAR" property="lname" />
+        <result column="lguige" jdbcType="VARCHAR" property="lguige" />
+        <result column="ldanwei" jdbcType="VARCHAR" property="ldanwei" />
+        <result column="ltiaoma" jdbcType="INTEGER" property="ltiaoma" />
+        <result column="lchengben" jdbcType="DECIMAL" property="lchengben" />
+      </association>
+    </collection>
   </resultMap>
+  <select id="selectAndproduct" resultMap="BaseResultMap">
+    select * from checks c inner join checkxq cx on c.cheid=cx.cheid
+    inner join sp_product sp on cx.lid=sp.lid
+    <where>
+      <if test="cheid!=null and cheid !=''">
+        and c.cheid=#{cheid}
+      </if>
+      <if test="lname!=null and lname!=''">
+        and sp.lname like concat('%',#{lname},'%')
+      </if>
+      <if test="ltiaoma!=null and ltiaoma!=''">
+        and sp.ltiaoma like concat('%',#{ltiaoma},'%')
+      </if>
+      <if test="date1!=null and date1!=''">
+        and c.chedate between #{date1} and #{date2}
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated

@@ -38,7 +38,9 @@
           <el-table-column prop="inusable" label="可用库存"></el-table-column>
           <el-table-column prop="product.lchengben" label="成本"></el-table-column>
           <el-table-column label="操作">
-            <el-button >查看出入库明细</el-button>
+              <template slot-scope="scope">
+                <el-button @click="outandin(scope.row.product.lname)">查看出入库明细</el-button>
+              </template>
           </el-table-column>
         </el-table>
 
@@ -71,6 +73,13 @@
         }
       },
       methods:{
+          outandin(lname){
+            console.log(lname);
+            this.$router.push({
+                name:'outandinput',
+                params: { lname:lname },
+             })
+          },
           inventory(){
             let param;
             if(this.value=='单品名称'){

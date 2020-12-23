@@ -44,6 +44,17 @@
     <result column="picpath" jdbcType="INTEGER" property="picpath" />
   </resultMap>
 
+  <select id="selectAllBylname" resultMap="BaseResultMapvo">
+    <!--
+      查询单品表及其分类
+    -->
+    select * from sp_product p
+    <where>
+      <if test="lname!=null and lname!=''">
+         and p.lname like concat('%',#{lname},'%')
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated

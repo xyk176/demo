@@ -29,4 +29,7 @@ public class OutputServices {
         PageInfo<Output> info= new PageInfo<>(list);
         return info;
     }
+    public List<Output> selectoutxq(Integer output){
+        return mapper.selectoutxq(output);
+    }
 }

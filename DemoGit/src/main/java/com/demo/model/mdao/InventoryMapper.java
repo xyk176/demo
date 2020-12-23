@@ -54,4 +54,14 @@ public interface InventoryMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Inventory record);
+    /*
+     * @Author xieyukun
+     * @Description updatekucun
+     * @Date 20:58 2020/12/23
+     * @param [inentity, inusable, lid]
+     * @return java.lang.Integer
+     * 入库加库存
+    */
+    Integer updatekucun(Integer inentity,Integer inusable ,Integer lid);
+    Integer updatemaxcount(Integer maxcount,Integer inid);
 }

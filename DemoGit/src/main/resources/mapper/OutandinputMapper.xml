@@ -36,7 +36,7 @@
     insert into outandinput (outinid, lid, outinclass, 
       outindate, outincount, yewuid
       )
-    values (#{outinid,jdbcType=INTEGER}, #{lid,jdbcType=INTEGER}, #{outinclass,jdbcType=VARCHAR}, 
+    values (#{outinid,jdbcType=INTEGER}, #{product.lid,jdbcType=INTEGER}, #{outinclass,jdbcType=VARCHAR},
       #{outindate,jdbcType=TIMESTAMP}, #{outincount,jdbcType=INTEGER}, #{yewuid,jdbcType=INTEGER}
       )
   </insert>

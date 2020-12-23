@@ -19,6 +19,20 @@ import java.util.List;
 public class InventoryServices {
     @Autowired
     InventoryMapper mapper;
+    public Integer updatemaxcount(Integer maxcount,Integer inid){
+        return mapper.updatemaxcount(maxcount,inid);
+    }
+    /*
+     * 单品入库加库存
+     * @Author xieyukun
+     * @Description update
+     * @Date 15:27 2020/12/23
+     * @param [inentity, inusable, inid]
+     * @return java.lang.Integer
+    */
+    public Integer update(Integer inentity,Integer inusable ,Integer lid){
+        return mapper.updatekucun( inentity, inusable , lid);
+    }
     /*
      * @Author xieyukun
      * @Description selectAndproductAll

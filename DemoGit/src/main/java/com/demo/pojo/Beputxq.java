@@ -10,6 +10,14 @@ public class Beputxq {
     private SpProduct product;
     private Beput beput;
 
+    @Override
+    public String toString() {
+        return "Beputxq{" +
+                "bexqid=" + bexqid +
+                ", libecount=" + libecount +
+                '}';
+    }
+
     @Id
     @Column(name = "bexqid")
     public Integer getBexqid() {

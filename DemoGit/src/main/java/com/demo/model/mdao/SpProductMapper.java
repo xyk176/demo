@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface SpProductMapper {
+    List<SpProduct> selectAllBylname(String lname);
     /*
      * @Author xiahaifeng
      * @Description deleteByPrimaryKey
