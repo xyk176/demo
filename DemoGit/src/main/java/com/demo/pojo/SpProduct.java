@@ -28,19 +28,7 @@ public class SpProduct {
         return "SpProduct{" +
                 "lid=" + lid +
                 ", lname='" + lname + '\'' +
-                ", lguige='" + lguige + '\'' +
-                ", ldanwei='" + ldanwei + '\'' +
-                ", ltiaoma=" + ltiaoma +
-                ", lchengben=" + lchengben +
-                ", cid=" + cid +
                 ", commoditytopro=" + commoditytopro +
-                ", checkxqs=" + checkxqs +
-                ", beputxqs=" + beputxqs +
-                ", outandinputs=" + outandinputs +
-                ", inventorys=" + inventorys +
-                ", picturetopro=" + picturetopro +
-                ", prs=" + prs +
-                ", outputxqs=" + outputxqs +
                 '}';
     }
 
