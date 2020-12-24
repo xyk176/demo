@@ -44,6 +44,17 @@
     <result column="picpath" jdbcType="INTEGER" property="picpath" />
   </resultMap>
 
+  <select id="selectAllBylname" resultMap="BaseResultMapvo">
+    <!--
+      查询单品表及其分类
+    -->
+    select * from sp_product p
+    <where>
+      <if test="lname!=null and lname!=''">
+         and p.lname like concat('%',#{lname},'%')
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated
@@ -132,12 +143,11 @@
   <!--修改单品-->
   <update id="updateproduct">
         update sp_product
-    set lname = #{p.lname},
-      lguige = #{p.lguige},
-      ldanwei = #{p.ldanwei},
-      ltiaoma = #{p.ltiaoma},
-      lchengben = #{p.lchengben},
-      cid = #{p.cid}
-    where lid = #{p.lid}
+    set lname = #{lname},
+      lguige = #{lguige},
+      ldanwei = #{ldanwei},
+      ltiaoma = #{ltiaoma},
+      lchengben = #{lchengben}
+    where lid = #{lid}
   </update>
 </mapper>

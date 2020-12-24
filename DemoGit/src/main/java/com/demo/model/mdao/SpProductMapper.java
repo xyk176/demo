@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface SpProductMapper {
+    List<SpProduct> selectAllBylname(String lname);
     /*
      * @Author xiahaifeng
      * @Description deleteByPrimaryKey
@@ -48,7 +49,6 @@ public interface SpProductMapper {
     List<vo> selectAll(@Param("id") Integer id);
 
 
-
     /*
      * @Author xiahaifeng
      * @Description selectAllByPt
@@ -72,7 +72,18 @@ public interface SpProductMapper {
     /*新增库存表*/
     void insertkucun(@Param("i") Inventory inventory);
 
-    /*修改单品*/
-    void updateproduct(@Param("p") SpProduct product,Integer lid);
+    /*修改单品  update sp_product
+    set lname = #{lname},
+      lguige = #{lguige},
+      ldanwei = #{ldanwei},
+      ltiaoma = #{ltiaoma},
+      lchengben = #{lchengben}
+    where lid = #{p.lid}*/
+    void updateproduct(@Param("lname") String lname,
+                       @Param("lguige") String lguige,
+                       @Param("ldanwei") String ldanwei,
+                       @Param("ltiaoma") Integer ltiaoma,
+                       @Param("lchengben") String lchengben,
+                       @Param("lid") Integer lid);
 
 }

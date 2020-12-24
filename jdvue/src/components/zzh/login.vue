@@ -34,17 +34,16 @@ export default {
   },
   methods:{
     selectBylogin(){
-      let dd={
-        pwd:this.pwd,
-        users:this.users
+      let param={
+        cname:this.pwd,
+        password:this.users
       };
-      let ppp = this.$qs.stringify(dd);
-      this.$axios.post("emp/elogin",ppp)
+      this.$axios.post("customer/denglu",param)
         .then(r=>{
           if(r.data.code){
-            sessionStorage.setItem('eid',r.data.vo.eid);
+            sessionStorage.setItem('cid3',r.data.objs.cid3);
             this.$router.push({
-              name:'Menu'
+              name:'/personalCenter'
             })
           }
         })

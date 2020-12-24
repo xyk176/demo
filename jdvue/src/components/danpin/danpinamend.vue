@@ -98,25 +98,23 @@
    },
    methods:{
      load(){
-        // this.$axios.post("/sort/all")
-        // .then((res)=>{
-        //   this.options=res.data;
-        //   console.log("所有分类",this.options)
-        // }).catch(function(e){
-        //     console.log("报错了，错误信息：",e);
-        // });
+
      }
      ,updatedanpin(){
-       this.danpin.lname=this.lname;
-       this.danpin.lguige=this.lguige;
-       this.danpin.ldanwei=this.ldanwei;
-       this.danpin.ltiaoma=this.ltiaoma;
-       this.danpin.lchengben=this.lchengben;
-       console.log("主键",this.lid)
-       console.log("实体参数",this.danpin)
-       this.$axios.put("/product/updateproduct/"+this.lid,this.danpin)
+
+       let param={
+         lname:this.lname,
+         lguige:this.lguige,
+         ldanwei:this.ldanwei,
+         ltiaoma:this.ltiaoma,
+         lchengben:this.lchengben,
+         lid:this.lid
+       }
+       this.$axios.put("/product/updateproduct/",param)
        .then((res)=>{
+         console.log("canshu",param)
          alert("成功啦")
+         this.$router.push({path:'/liebiao'})
        })
      }
 

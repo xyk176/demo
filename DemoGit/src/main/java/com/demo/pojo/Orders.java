@@ -18,6 +18,7 @@ import java.util.Objects;
 @Entity
 public class Orders {
     private Integer oId;
+    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date oDate;
     private String pay;
     private BigDecimal price;

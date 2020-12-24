@@ -3,6 +3,7 @@ package com.demo.services;
 import com.demo.model.mdao.OutandinputMapper;
 import com.demo.pojo.Inventory;
 import com.demo.pojo.Outandinput;
+import com.demo.pojo.Output;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import java.util.List;
 public class OutandinputServices {
     @Autowired
     OutandinputMapper mapper;
+    public Integer insert(Outandinput o){
+        return mapper.insert(o);
+    }
     /*
      * @Author xieyukun
      * @Description selectAll

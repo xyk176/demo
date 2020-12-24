@@ -276,7 +276,30 @@
             },
         },
         mounted(){
-          this.outandinput();
+          if(this.$route.params.lname){
+              let param={
+                    no: 1,
+                    size: this.pageSize,
+                    lname:this.$route.params.lname,
+                    outinclass:'',
+                    ltiaoma:'',
+                    outinid:'',
+                    yewuid:'',
+                    date1:'',
+                    date2:''
+                }
+                    this.$axios.post("outandinput/selectAll",param)
+                      .then(r=>{
+                        if(r.status===200){
+                          console.log(r.data.list)
+                          this.outandinputlist=r.data.list
+                          this.total=r.data.total
+                        }
+                    })
+              }else{
+
+             this.outandinput();
+           }
         }
     }
 </script>
