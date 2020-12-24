@@ -214,7 +214,7 @@
           name: "user"
         })
       },
-      tijiao() { //提交订单
+      tijiao() { //提交订单 --付钱
         let Orders = {
           address: {
             adid: this.add_choose //地址id
