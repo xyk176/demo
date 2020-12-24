@@ -63,6 +63,7 @@ public class OrdersController {
     /*查询所有未发货订单*/
     @RequestMapping("wei")
     public PageInfo<Orders> orderstwo(Integer pageno,Integer size,String pay,String orsip){
+        System.out.println("进入方法："+pageno+"--"+size+"--"+pay+"--"+orsip);
         PageInfo<Orders> list=os.orderstwo(pageno,size,pay,orsip);
         return list;
     }

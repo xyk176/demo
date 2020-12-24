@@ -61,6 +61,7 @@ public class OrdersServices {
 
     /*查询未发货订单*/
     public PageInfo<Orders> orderstwo(Integer pageno, Integer size, String orsip, String pay){
+        System.out.println(orsip+"--"+pay);
         PageHelper.startPage(pageno,size);
         List<Orders> list=mapper.orderstwo(orsip,pay);
         PageInfo<Orders> ok=new PageInfo<>(list);
