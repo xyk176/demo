@@ -16,6 +16,17 @@
       <result column="lchengben" jdbcType="DECIMAL" property="lchengben" />
     </association>
   </resultMap>
+
+  <update id="updateinentity" parameterType="com.demo.pojo.Inventory">
+    <!--
+      盘点重置库存
+    -->
+    update inventory i
+    set
+    inentity = #{inentity,jdbcType=INTEGER},
+    inusable = #{inusable,jdbcType=INTEGER}
+    where inid = #{lid}
+  </update>
   <update id="updatekucun" parameterType="com.demo.pojo.Inventory">
     <!--
       单品入库加库存
@@ -24,11 +35,21 @@
     set
     inentity = inentity+#{inentity,jdbcType=INTEGER},
     inusable = inusable+#{inusable,jdbcType=INTEGER}
-    where inid = (select i.inid from sp_product sp  where sp.lid=#{lid})
+    where inid = #{lid}
+  </update>
+  <update id="updatekucunjian" parameterType="com.demo.pojo.Inventory">
+    <!--
+      单品入库减库存
+    -->
+    update inventory i
+    set
+    inentity = inentity-#{inentity,jdbcType=INTEGER},
+    inusable = inusable-#{inusable,jdbcType=INTEGER}
+    where inid = #{lid}
   </update>
   <update id="updatemaxcount" parameterType="com.demo.pojo.Inventory">
     <!--
-      单品入库加库存
+      设置超卖数量
     -->
     update inventory i
     set

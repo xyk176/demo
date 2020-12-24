@@ -24,6 +24,18 @@ public class Checks {
     private String cheremark;
     private List<Checkxq> checkxqs;
 
+    @Override
+    public String toString() {
+        return "Checks{" +
+                "cheid=" + cheid +
+                ", chedate=" + chedate +
+                ", chestate=" + chestate +
+                ", chebecount=" + chebecount +
+                ", chelosecoubt=" + chelosecoubt +
+                ", cheremark='" + cheremark + '\'' +
+                '}';
+    }
+
     @Id
     @Column(name = "cheid")
     public Integer getCheid() {

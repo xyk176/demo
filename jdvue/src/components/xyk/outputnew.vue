@@ -55,16 +55,16 @@
        <el-table
           :data="beputxq"
           style="width: 100%;">
-          <el-table-column prop="product.lname" label="单品名称">
+          <el-table-column prop="sproduct.lname" label="单品名称">
 
           </el-table-column>
-          <el-table-column prop="product.lguige" label="单品规格"></el-table-column>
-          <el-table-column prop="product.ldanwei" label="单位"></el-table-column>
-          <el-table-column label="入库数量">
+          <el-table-column prop="sproduct.lguige" label="单品规格"></el-table-column>
+          <el-table-column prop="sproduct.ldanwei" label="单位"></el-table-column>
+          <el-table-column label="出库数量">
               <template slot-scope="scope">
                 <el-input-number
                   style="width:150px"
-                  v-model.number="scope.row.libecount"
+                  v-model.number="scope.row.outxqcount"
                   :min="1"
                   :placeholder="1+''"
                 ></el-input-number>
@@ -92,11 +92,10 @@
   export default {
       data(){
         return {
-            suname:'',
+            suname:'其他出库',
             bedate:'',
             beremark:'',
             lname:'',
-            bename:this.$route.params.clas,
             current: 1,
             pageSize: 3,
             total: 0,
@@ -111,42 +110,41 @@
       },
       methods:{
         beputnew(){
-          // console.log(this.beputxq)
-          // console.log(this.bename)
-          // console.log(this.beremark)
-          // if(!this.bename){
-          //   this.bename='其他出库'
-          // }
-          // let b={
-          //    beclass:this.bename,
-          //    beremark:this.beremark,
-          //    supplier:{
-          //      suid:this.suname},
-          //    beputxqs:this.beputxq
-          // }
-          // console.log(b);
-          // this.$axios.put("beput/insert",b)
-          //   .then(r=>{
-          //     if(r.status===200){
-          //       console.log('date',r.data)
-          //       if(r.data>0){
-          //         alert("入库成功")
-          //       }
-          //     }
-          // })
+          console.log(this.beputxq)
+          console.log(this.suname)
+          console.log(this.beremark)
+          if(!this.suname){
+            this.suname='其他出库'
+          }
+          let b={
+             outclass:this.suname,
+             outremark:this.beremark,
+             outputxqs:this.beputxq
+          }
+          console.log(b);
+          this.$axios.put("output/insert",b)
+            .then(r=>{
+              if(r.status===200){
+                console.log('date',r.data)
+                if(r.data>0){
+                  alert("出库成功")
+                }
+              }
+          })
         },
         deleteshop(index,row){
         this.beputxq.splice(index,1);
         },
         pushshoplist(index,row){
-          row.libecount=1;
+          row.outxqcount=1;
           var json = {
-            libecount:row.libecount,
-            product:{
+            outxqcount:row.outxqcount,
+            sproduct:{
               lid:row.lid,
               lname:row.lname,
               lguige:row.lguige,
-              ldanwei:row.ldanwei
+              ldanwei:row.ldanwei,
+              inventorys:row.inventorys
             }
           }
           let t=true;
@@ -155,7 +153,7 @@
           }else{
             for(let j=0;j<1;j++){
               for(let i=0;i<this.beputxq.length;i++){
-                    if(row.lid==this.beputxq[i].lid){
+                    if(row.lid==this.beputxq[i].sproduct.lid){
                       t=false
                 }
               }

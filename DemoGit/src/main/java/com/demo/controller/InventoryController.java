@@ -24,6 +24,13 @@ import java.util.List;
 public class InventoryController {
     @Autowired
     InventoryServices is;
+    /*
+     * @Author xieyukun
+     * @Description updatemaxcount
+     * @Date 10:22 2020/12/24
+     * @param [i]
+     * @return java.lang.Integer
+    */
     @RequestMapping("updatemaxcount")
     public Integer updatemaxcount( @RequestBody Inventorylist i){
         System.out.println(i);

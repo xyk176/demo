@@ -11,6 +11,15 @@ public class Checkxq {
     private SpProduct product;
     private Checks checks;
 
+    @Override
+    public String toString() {
+        return "Checkxq{" +
+                "chexqid=" + chexqid +
+                ", chexqcount=" + chexqcount +
+                ", cheblcount=" + cheblcount +
+                '}';
+    }
+
     @Id
     @Column(name = "chexqid")
     public Integer getChexqid() {

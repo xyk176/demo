@@ -19,6 +19,36 @@ import java.util.List;
 public class InventoryServices {
     @Autowired
     InventoryMapper mapper;
+    /*
+     * @Author xieyukun
+     * @Description updateinentity
+     * @Date 15:45 2020/12/24
+     * @param [inentity, inusable, lid]
+     * 库存盘点重置单品库存
+     * @return java.lang.Integer
+    */
+    public Integer updateinentity(Integer inentity,Integer inusable ,Integer lid){
+        return mapper.updateinentity( inentity, inusable , lid);
+    }
+
+    /*
+     * @Author xieyukun
+     * @Description updatekucunjian
+     * @Date 10:21 2020/12/24
+     * @param [inentity, inusable, lid]
+     * @return java.lang.Integer
+     * 减库存
+    */
+    public Integer updatekucunjian(Integer inentity,Integer inusable ,Integer lid){
+        return mapper.updatekucunjian( inentity, inusable , lid);
+    }
+    /*
+     * @Author xieyukun
+     * @Description updatemaxcount
+     * @Date 10:21 2020/12/24
+     * @param [maxcount, inid]
+     * @return java.lang.Integer
+    */
     public Integer updatemaxcount(Integer maxcount,Integer inid){
         return mapper.updatemaxcount(maxcount,inid);
     }

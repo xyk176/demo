@@ -9,6 +9,14 @@ import java.util.List;
 @Mapper
 @Repository
 public interface ChecksMapper {
+    /*
+     * @Author xieyukun
+     * @Description selectAndchecksxq
+     * @Date 9:35 2020/12/24
+     * @param [cheid]
+     * @return java.util.List<com.demo.pojo.Checks>
+    */
+    List<Checks> selectAndchecksxq(Integer cheid);
     /* 查询盘点和产品
      * @Author xieyukun
      * @Description selectAndproduct

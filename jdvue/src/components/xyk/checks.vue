@@ -27,8 +27,9 @@
             </el-select>
         </div>
         <div class="beput_button">
-
-          <el-button style="float: left;">新建盘点</el-button>
+        <router-link to="checksnew">
+            <el-button style="float: left;">新建盘点</el-button>
+        </router-link>
         </div>
         <div class="shangping_jiansuo">
          <el-table
@@ -46,7 +47,9 @@
             <el-table-column prop="chelosecoubt" label="盘亏数量"></el-table-column>
             <el-table-column prop="cheremark" label="备注"></el-table-column>
             <el-table-column  label="操作">
-              <el-button>详情</el-button>
+              <template slot-scope="scope">
+                <el-button @click="checkxq(scope.row.cheid)">详情</el-button>
+              </template>
             </el-table-column>
           </el-table>
 
@@ -110,6 +113,15 @@
         }
       },
       methods:{
+        checkxq(id){
+          console.log(id);
+          this.$router.push({
+                  name:'checksxq',
+                  params: {
+                      id:id,
+                },
+           })
+        },
           checks(){
             let param;
             if(this.value=='单据编号'){
