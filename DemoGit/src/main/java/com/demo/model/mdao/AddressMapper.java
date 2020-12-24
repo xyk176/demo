@@ -1,6 +1,7 @@
 package com.demo.model.mdao;
 
 import com.demo.pojo.Address;
+import com.demo.pojo.OrderInfo;
 import com.demo.pojo.Orders;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -139,5 +140,16 @@ public interface AddressMapper {
      * @return java.util.List<com.demo.pojo.Orders>
      * 根据客户id查询订单
     */
-    List<Orders> selectOrders(String ortype,Integer cid);
+    List<Orders> selectOrders(String ortype,String orsip,Integer cid);
+
+    /*
+     * @Author 周子豪
+     * @Description 14:40
+     * @Date  2020/12/24
+     * @param [oId]
+     * @return java.util.List<com.demo.pojo.OrderInfo>
+     * 查看订单详情
+    */
+    List<OrderInfo> selectComxq(Integer oId);
+    Orders selectOrderxq(Integer oid);
 }

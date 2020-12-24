@@ -68,5 +68,15 @@ public interface CustomerMapper {
      * @return com.demo.pojo.Customer
      * 登录
     */
-    Customer dengLu(@Param("cname") String cname, @Param("password") String password);
+    Customer dengLu(String cname);
+
+    /*
+     * @Author 周子豪
+     * @Description 17:20
+     * @Date  2020/12/24
+     * @param [cname, password, cphone, cid]
+     * @return java.lang.Integer
+     * 修改个人信息
+    */
+    Integer updateCustomer(String cname,String password,String cphone,Integer cid);
 }

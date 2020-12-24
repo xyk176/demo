@@ -7,9 +7,7 @@
         </div>
         <el-menu
               default-active="2"
-              class="el-menu-vertical-demo"
-              @open="handleOpen"
-              @close="handleClose">
+              class="el-menu-vertical-demo">
               <router-link to="/user" tag="span">
                 <el-menu-item index="1">
                   <i class="el-icon-user"></i>
@@ -41,6 +39,16 @@
       <el-container>
         <el-header>
           <span>智慧零售个人中心</span>
+          <div class="denglu1">
+            <el-dropdown>
+              <span class="el-dropdown-link" style="margin-right: 10px">
+                <span class="duser">当前用户：{{cname}}</span><i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown" @click.native="tuichu()">
+                <el-dropdown-item >退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
         </el-header>
         <el-main>
           <router-view/>
@@ -55,7 +63,32 @@
     data() {
       return {
         circleUrl: "../../../static/image/"+'75c9da8530e839235647e143035b591a'+'.jpg',
+        cname:'',
+        customer:[]
       }
+    },
+    methods:{
+      selectAll(){
+        let param = {
+          cid:sessionStorage.getItem('cid3')
+        };
+        this.$axios.post("customer/selectByCid",param)
+        .then(r=>{
+          if(r.data){
+            this.customer = r.data.obj.cname;
+            this.cname = r.data.obj.cname;
+          }
+        })
+      },
+      tuichu(){
+        sessionStorage.clear();
+        this.$router.push({
+          name: 'login'
+        })
+      }
+    },
+    created(){
+      this.selectAll();
     }
   }
 </script>
@@ -108,5 +141,9 @@
     .el-menu-vertical-demo{
       border: 0px solid;
       margin-top: 20px;
+    }
+    .denglu1{
+      float: right;
+
     }
 </style>

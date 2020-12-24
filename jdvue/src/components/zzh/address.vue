@@ -84,7 +84,7 @@
     methods:{
       selectAddress(){
          let param = {
-           cid:1,
+           cid:sessionStorage.getItem('cid3'),
            no:this.current,
            size:this.pageSize
          };
@@ -119,7 +119,7 @@
        */
       insertAddress(){
         let param = {
-          cid:1,
+          cid:sessionStorage.getItem('cid3'),
           adprovince:this.form.adprovince,
           adcity:this.form.adcity,
           adarea:this.form.adarea,
@@ -150,7 +150,6 @@
           adarea:this.form.adarea,
           addetailed:this.form.addetailed
         };
-        // let ppp = this.$qs.stringify(param);
         this.$axios.post("address/updateAddress",param)
         .then(r=>{
           if(r.data){
@@ -172,7 +171,7 @@
       updateAdisdefault(row){
         let param = {
           adid:row.adid,
-          cid:1
+          cid:sessionStorage.getItem('cid3')
         };
         this.$axios.post("address/updateAdisdefault",param)
         .then(r=>{

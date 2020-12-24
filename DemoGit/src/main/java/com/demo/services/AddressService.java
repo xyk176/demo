@@ -5,6 +5,7 @@ import com.demo.model.mdao.AddressMapper;
 import com.demo.model.mdao.CustomerMapper;
 import com.demo.pojo.Address;
 import com.demo.pojo.Customer;
+import com.demo.pojo.OrderInfo;
 import com.demo.pojo.Orders;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -148,14 +149,40 @@ public class AddressService {
      * @Author 周子豪
      * @Description 19:24
      * @Date  2020/12/23
-     * @param [ortype, cid, no, size]
+     * @param [ortype, orsip, cid, no, size]
      * @return com.github.pagehelper.PageInfo<com.demo.pojo.Orders>
      * 根据客户id查询订单
     */
-    public PageInfo<Orders> selectOrders(String ortype,Integer cid,Integer no,Integer size){
+    public PageInfo<Orders> selectOrders(String ortype,String orsip,Integer cid,Integer no,Integer size){
         PageHelper.startPage(no,size);
-        List<Orders> list = addressMapper.selectOrders(ortype,cid);
+        List<Orders> list = addressMapper.selectOrders(ortype,orsip,cid);
         PageInfo<Orders> pageInfo = new PageInfo<>(list);
         return pageInfo;
+    }
+
+    /*
+     * @Author 周子豪
+     * @Description 14:41
+     * @Date  2020/12/24
+     * @param [oId]
+     * @return java.util.List<com.demo.pojo.OrderInfo>
+     * 查看订单详情
+    */
+    public List<OrderInfo> selectComxq(Integer oId){
+        List<OrderInfo> list = addressMapper.selectComxq(oId);
+        return list;
+    }
+
+    /*
+     * @Author 周子豪
+     * @Description 16:22
+     * @Date  2020/12/24
+     * @param [oid]
+     * @return com.demo.pojo.Orders
+     * 查看订单详细信息
+    */
+    public Orders selectOrderxq(Integer oid){
+        Orders orders = addressMapper.selectOrderxq(oid);
+        return orders;
     }
 }

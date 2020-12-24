@@ -45,7 +45,7 @@
     methods:{
       selectAddress(){
          let param = {
-           cid:1,
+           cid:sessionStorage.getItem('cid3'),
            no:this.current,
            size:this.pageSize
          };

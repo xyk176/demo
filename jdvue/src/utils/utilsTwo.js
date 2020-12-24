@@ -30,7 +30,7 @@ axios.interceptors.response.use((res)=>{
     const message = res.data.msg || '服务器错误，请查看后台日志信息...'; //后端返回的message
     if(res.status===200){
       /* 返回码为1*/
-      if(res.data.code){
+      if(res.data.code===1){
         /* 且携带返回提示信息*/
         if(res.data.msg){
            Message.success({message:res.data.msg,duration:4000});

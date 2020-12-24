@@ -122,12 +122,22 @@
       <result column="password" property="password"/>
       <result column="chead" property="chead"/>
     </association>
+    <association property="address" javaType="com.demo.pojo.Address">
+      <id property="adid" column="adid"/>
+      <result property="adprovince" column="adprovince"/>
+      <result property="adcity" column="adcity"/>
+      <result property="adarea" column="adarea"/>
+      <result property="addetailed" column="addetailed"/>
+      <result property="adisdelete" column="adisdelete"/>
+      <result property="adisdefault" column="adisdefault"/>
+    </association>
     <collection property="orderinfos" ofType="com.demo.pojo.OrderInfo">
       <id column="oi_id" property="oiId"/>
       <result column="coms" property="coms"/>
       <result column="comprice" property="comprice"/>
     </collection>
   </resultMap>
+  <!--分页查询订单、模糊搜索-->
   <select id="selectOrders" resultMap="orderResult">
     select * from orders o
     inner join customer c on o.cid3 = c.cid3
@@ -135,14 +145,55 @@
       <if test="ortype!='' and ortype!=null">
         and o.ortype like concat('%',#{ortype},'%')
       </if>
-<!--      <if test="orsip!='' and orsip!=null">-->
-<!--        and o.orsip like concat('%',#{orsip},'%')-->
-<!--      </if>-->
-<!--      <if test="pay!='' and pay!=null">-->
-<!--        and o.pay like concat('%',#{pay},'%')-->
-<!--      </if>-->
+      <if test="orsip!='' and orsip!=null">
+        and o.orsip like concat('%',#{orsip},'%')
+      </if>
         and o.cid3 = #{cid}
     </where>
     order by o.o_id  desc
+  </select>
+  <!--查看订单详情-->
+  <select id="selectOrderxq" resultMap="orderResult">
+    select * from orders o
+    inner join customer c on o.cid3 = c.cid3
+    inner join address a on o.adid = a.adid
+    where o.o_id = #{oid}
+  </select>
+
+  <resultMap id="orderxqResult" type="com.demo.pojo.OrderInfo">
+    <id column="oi_id" property="oiId"/>
+    <result column="coms" property="coms"/>
+    <result column="comprice" property="comprice"/>
+    <association property="com" javaType="com.demo.pojo.SpCommodity">
+      <id column="comid" property="comid"/>
+      <result column="comiszu" property="comiszu"/>
+      <result column="combarcode" property="combarcode"/>
+      <result column="comname" property="comname"/>
+      <result column="comsameprice" property="comsameprice"/>
+      <result column="compricemin" property="compricemin"/>
+      <result column="compricemax" property="compricemax"/>
+      <result column="commarketprice" property="commarketprice"/>
+      <result column="comweight" property="comweight"/>
+      <result column="comvolume" property="comvolume"/>
+      <result column="comsalesvolume" property="comsalesvolume"/>
+      <result column="comsalesstatus" property="comsalesstatus"/>
+      <result column="comdata" property="comdata"/>
+    </association>
+    <association property="order" javaType="com.demo.pojo.Orders">
+      <id column="o_id" property="oId" />
+      <result column="o_date" property="oDate" />
+      <result column="pay" property="pay" />
+      <result column="price" property="price" />
+      <result column="orsip" property="orsip" />
+      <result column="remarks" property="remarks" />
+      <result column="ortype" property="ortype" />
+    </association>
+  </resultMap>
+  <!--根据订单id查询商品信息-->
+  <select id="selectComxq" resultMap="orderxqResult">
+    select * from order_info xq
+    inner join sp_commodity com on xq.comid = com.comid
+    inner join orders o on xq.o_id = o.o_id
+    where xq.o_id = #{oId}
   </select>
 </mapper>

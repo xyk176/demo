@@ -66,6 +66,11 @@
 
   <!--登录-->
   <select id="dengLu" resultMap="BaseResultMap">
-    select * from customer where cname = #{cname} and password = #{password}
+    select * from customer where cname = #{cname}
   </select>
+
+  <update id="updateCustomer" parameterType="com.demo.pojo.Customer">
+    update customer set cname = #{cname},password = #{password},cphone = #{cphone}
+    where cid3 = #{cid}
+  </update>
 </mapper>
