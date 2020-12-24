@@ -103,19 +103,27 @@
           </el-form-item>
       </div>
       <div class="body" v-if="active==1">
-        <el-form-item label="商品名称" prop="comname">
-          <el-row>
-            <el-col :span="10">
-              <el-input type="text" placeholder="请输入商品名称" v-model="comentity.comname" maxlength="60" show-word-limit></el-input>
-            </el-col>
-          </el-row>
+        <div class="body_title">
+          拓展信息
+        </div>
+        <el-form-item label="商品属性" prop="comname">
+          <div class="com_tuozhan_box">
+            <div class="tuozhan_box_list"></div>
+            <div class="tuozhan_box_botton">
+              <el-button plain size="small"><i class="el-icon-plus" style="margin-right: 5px;"></i>新增属性</el-button>
+              <el-select v-model="cpyshuju.xuan" placeholder="请选择" size="small">
+                <el-option v-for="(v,i) in cpyshuju.cpys" :key="i"  :label="v.cpy.cpyname"  :value="v.cpy.cpyname">
+                </el-option>
+              </el-select>
+            </div>
+          </div>
         </el-form-item>
       </div>
       <div class="buttom_baocun" style="text-align: center;padding-top: 15px;">
         <router-link to="/Sangpinindex" tag="span">
           <el-button size="small" style="width: 120px;">取消</el-button>
         </router-link>
-        <el-button size="small" style="width: 120px;" type="primary">下一步</el-button>
+        <el-button size="small" style="width: 120px;" type="primary" @click="com_next()">{{active==1?'上一步':'下一步'}}</el-button>
         <el-button size="small" style="width: 120px;" type="primary" @click="com_insert()">保存</el-button>
       </div>
     </el-form>
@@ -269,7 +277,7 @@
        isxuanzepro:false,
        isxuanzeimg:false,
       },
-      active: 0,
+      active: 1,
       comentity:{
         comid:'',
         comiszu:'0',
@@ -320,6 +328,11 @@
         pic_list:[],
         picsg_list:[],
         pic_xuan:[]
+      },
+      /* 商品属性 */
+      cpyshuju:{
+        cpys:[],
+        xuan:'',
       },
       defaultProps: {
         children: 'children',
@@ -535,6 +548,14 @@
           })
         }
       },
+      /* 新增商品下一步 */
+      com_next(){
+        if(this.active==1){
+          this.active=0;
+        }else{
+          this.active=1;
+        }
+      },
       /* 添加保存商品 */
       com_insert(){
         this.$axios.put('commoditycomtroller/com_insert',this.comentity)
@@ -554,9 +575,21 @@
             console.log("报错了，错误信息：",e);
         });
       },
+      /* 查询全部商品属性 */
+      selectall_cpy(){
+        this.$axios.put('commoditycomtroller/selectall_cpy')
+        .then(r=>{
+            console.log("属性：",r.data);
+            this.cpyshuju.cpys=r.data;
+        }).catch(function(e){
+            console.log("报错了，错误信息：",e);
+        });
+      },
+
    },
    mounted(){
      this.comleibie_show();
+     this.selectall_cpy();
    }
   }
 </script>
@@ -752,5 +785,14 @@
     line-height: 60px;
     overflow: hidden;
     text-align: right;
+  }
+</style>
+<!-- 商品拓展信息 -->
+<style>
+  #sangpinadd .body .el-form-item .com_tuozhan_box{
+    width: 100%;
+    height: 60px;
+    border-radius: 8px;
+    background: #FFFFFF;
   }
 </style>

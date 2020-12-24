@@ -11,7 +11,7 @@ import java.util.Objects;
  * @Date 2020-12-21 12:00
  */
 @Entity
-@Table(name = "sp_commodityproperty", schema = "jindun", catalog = "")
+@Table(name = "sp_commodityproperty", schema = "jindun")
 public class SpCommodityproperty {
     private Integer cpyid;
     private Integer cpytopid;
@@ -70,5 +70,14 @@ public class SpCommodityproperty {
 
     public void setComs(List<Cpyandcom> coms) {
         this.coms = coms;
+    }
+
+    @Override
+    public String toString() {
+        return "SpCommodityproperty{" +
+                "cpyid=" + cpyid +
+                ", cpytopid=" + cpytopid +
+                ", cpyname='" + cpyname + '\'' +
+                '}';
     }
 }

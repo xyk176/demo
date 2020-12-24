@@ -3,6 +3,7 @@
 <mapper namespace="com.demo.model.mdao.SpCommoditypropertyMapper">
   <resultMap id="BaseResultMap" type="com.demo.pojo.SpCommodityproperty">
     <id column="cpyid" jdbcType="INTEGER" property="cpyid" />
+    <result column="cpytopid" jdbcType="INTEGER" property="cpytopid" />
     <result column="cpyname" jdbcType="VARCHAR" property="cpyname" />
   </resultMap>
 
@@ -42,7 +43,7 @@
       WARNING - @mbg.generated
       根据主键查询
     -->
-    select cpyid, cpyname
+    select cpyid,cpytopid cpyname
     from sp_commodityproperty
     where cpyid = #{cpyid,jdbcType=INTEGER}
   </select>
@@ -52,7 +53,7 @@
       WARNING - @mbg.generated
       查询全部
     -->
-    select cpyid, cpyname
+    select cpyid,cpytopid, cpyname
     from sp_commodityproperty
   </select>
 </mapper>

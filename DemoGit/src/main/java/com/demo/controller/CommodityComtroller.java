@@ -1,11 +1,13 @@
 package com.demo.controller;
 
+import com.demo.config.SpCommoditypropertyVO;
 import com.demo.pojo.*;
 import com.demo.services.*;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,6 +24,8 @@ public class CommodityComtroller {
     SpPicturesortService pisser;
     @Autowired
     SpPictureService picser;
+    @Autowired
+    SpCommoditypropertyService cpyser;
 
 
     /*
@@ -105,6 +109,35 @@ public class CommodityComtroller {
         return comser.insert(com);
     }
 
+
+    /*
+     * @Author xiahaifeng
+     * @Description selectall_cpy
+     * @Date 23:23 2020/12/23
+     * @param []
+     * @return java.util.List<com.demo.pojo.SpCommodityproperty>
+     * 查询全部商品属性
+    */
+    @RequestMapping("/selectall_cpy")
+    public List<SpCommoditypropertyVO> selectall_cpy(){
+        List<SpCommoditypropertyVO> newlist = new ArrayList<>();
+        List<SpCommodityproperty> list = cpyser.selectAll();
+        for (SpCommodityproperty spCommodityproperty1 : list) {
+            if(spCommodityproperty1.getCpytopid()==null){
+                newlist.add(new SpCommoditypropertyVO(spCommodityproperty1,null));
+            }
+        }
+        for (SpCommoditypropertyVO spCommodityproperty1 : newlist) {
+            List<SpCommodityproperty> shuju = new ArrayList<>();
+            for (SpCommodityproperty spCommodityproperty2 : list) {
+                if(spCommodityproperty1.getCpy().getCpyid().equals(spCommodityproperty2.getCpytopid())){
+                    shuju.add(spCommodityproperty2);
+                }
+            }
+            spCommodityproperty1.setCpylist(shuju);
+        }
+        return newlist;
+    }
 
 
 }
