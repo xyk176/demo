@@ -11,6 +11,8 @@ import Alldelivergoods from "../components/zqx/Alldelivergoods";
 import Sangpinindex from '@/components/shangpin/Sangpinindex'
 /* 商品新增 */
 import Sangpinadd from '@/components/shangpin/Sangpinadd'
+/* 商品标签 */
+import SangpinLable from '@/components/shangpin/SangpinLable'
 
 /* 单品列表 */
 import danpinliebiao from '@/components/danpin/danpinliebiao'
@@ -92,11 +94,11 @@ export default new Router({
       name: 'Navigation',
       component: Navigation,
       children:[
-          {
-            path: '/liebiao',
-            name: 'danpinliebiao',
-            component: danpinliebiao,
-           },
+        {
+          path: '/liebiao',
+          name: 'danpinliebiao',
+          component: danpinliebiao,
+         },
         {
           path: '/Sangpinindex',
           name: 'Sangpinindex',
@@ -106,6 +108,11 @@ export default new Router({
           path: '/Sangpinadd',
           name: 'Sangpinadd',
           component: Sangpinadd,
+        },
+        {
+          path: '/SangpinLable',
+          name: 'SangpinLable',
+          component: SangpinLable,
         },
         {
           path: '/Allorders',

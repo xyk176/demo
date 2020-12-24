@@ -23,11 +23,8 @@
                 <router-link to="/Sangpinindex" tag="span">
                   <el-menu-item index="1-3">商品库列表</el-menu-item>
                 </router-link>
-                <router-link to="/Sangpinindex" tag="span">
+                <router-link to="/SangpinLable" tag="span">
                   <el-menu-item index="1-4">商品标签</el-menu-item>
-                </router-link>
-                <router-link to="/Sangpinindex" tag="span">
-                  <el-menu-item index="1-5">商品属性</el-menu-item>
                 </router-link>
               </el-menu-item-group>
             </el-submenu>

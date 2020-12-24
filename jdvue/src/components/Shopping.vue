@@ -7,7 +7,7 @@
           <el-col :span="4">
             <div class="Left_div">
               <el-menu default-active="2" class="el-menu-vertical-demo" style=" max-width: 250px; min-height: 600px;">
-                <el-menu-item v-for="(i,index) in goods_type" :key="i.ccyid" :index="i.ccyname">
+                <el-menu-item v-for="(i,index) in goods_type" :key="index" :index="i.ccyname">
                   <div class="Goods_Div" @click="s_goods(i.ccyid)">
                     <img :src="i.ccytopid" class="img_div" />
                     <span class="font_span">{{i.ccyname}}</span>
@@ -20,7 +20,7 @@
             <div class="goodslist_div" v-if="goods_list.length>0">
               <div v-show="goods_show">
                 <el-row>
-                  <el-col :span="5" v-for="(o, index) in goods_list" :key="o.comid" style="margin-left: 37px; margin-top: 10px;">
+                  <el-col :span="5" v-for="(o, index) in goods_list" :key="index" style="margin-left: 37px; margin-top: 10px;">
                     <el-card :body-style="{ padding: '0px' }">
                       <img :src="o.pics[0].pic.picpath" class="image">
                       <div style="padding: 14px;">
@@ -55,8 +55,8 @@
                   <el-col :span="11">
                     <div>
                       <fieldset style="border-radius: 10px;">
-                        <legend style="margin-left: 25px;">商品参数</legend>
-                        <el-tag type="success" v-for="i in goods_ShuXin" style="margin: 10px;">
+                        <legend style="margin-left: 25px;">商品参数</legend> 
+                        <el-tag type="success" v-for="(i,index) in goods_ShuXin" :key="index" style="margin: 10px;">
                           {{i.cpr.cprname}}
                         </el-tag>
                       </fieldset>
@@ -66,7 +66,7 @@
                     <div>
                       <fieldset style="border-radius: 10px;">
                         <legend style="margin-left: 25px;">商品属性</legend>
-                        <el-tag type="success" v-for="i in goods_property" style="margin: 10px;">
+                        <el-tag type="success" v-for="(i,index) in goods_property"  :key="index" style="margin: 10px;">
                           {{i.cpr.cpyname}}
                         </el-tag>
                       </fieldset>
