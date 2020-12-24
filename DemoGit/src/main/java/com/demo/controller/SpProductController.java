@@ -60,4 +60,15 @@ public class SpProductController {
         System.out.println("info:"+info);
         return info;
     }
+
+    /*删除单品*/
+    @RequestMapping("/delete")
+    public int deleteByPrimaryKey(Integer lid){
+        return ps.deleteByPrimaryKey(lid);
+    }
+    /*删除库存*/
+    @RequestMapping("/delete2")
+    public int deleteByPrimaryKey2(Integer lid){
+        return ps.deleteByPrimaryKey2(lid);
+    }
 }

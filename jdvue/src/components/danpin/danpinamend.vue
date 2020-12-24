@@ -40,8 +40,7 @@
           <el-form-item label="单品分类">
             <el-row>
               <el-col :span="10">
-                <el-input type="text" v-model="cname" :disabled=true></el-input>
-
+                <el-input type="text" v-model="cname" :disabled="true"></el-input>
               </el-col>
             </el-row>
           </el-form-item>
@@ -66,7 +65,7 @@
         <router-link to="/liebiao" tag="span">
           <el-button size="small" style="width: 120px;">取消</el-button>
         </router-link>
-        <el-button size="small" style="width: 120px;" type="primary" @click="updatedanpin">保存</el-button>
+        <el-button size="small" style="width: 120px;" type="primary" @click="updatedanpin()">保存</el-button>
       </div>
     </el-form>
 
@@ -87,21 +86,13 @@
         lid:this.$route.query.params.lid,//单品图片
         cid2:this.$route.query.params.cid2,//单品分类id
         danpin:{},
-        // options: [],
-        // defaultPropss: {
-        //   children: 'sorts',
-        //   label: 'cname',
-        //   value: 'cid2',
-        //   checkStrictly: true
-        // },
      }
    },
    methods:{
      load(){
-
+        console.log("aaaaaaa")
      }
      ,updatedanpin(){
-
        let param={
          lname:this.lname,
          lguige:this.lguige,
@@ -110,7 +101,8 @@
          lchengben:this.lchengben,
          lid:this.lid
        }
-       this.$axios.put("/product/updateproduct/",param)
+       console.log("修改参数",param)
+       this.$axios.post("/product/updateproduct/",param)
        .then((res)=>{
          console.log("canshu",param)
          alert("成功啦")

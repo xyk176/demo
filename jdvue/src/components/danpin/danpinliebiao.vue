@@ -22,14 +22,15 @@
             <el-button plain size="mini">导入修改</el-button>
             <el-button plain size="mini">导出单品</el-button>
             <el-button plain size="mini">修改分类</el-button>
-            <el-button plain size="mini">删除</el-button>
+            <el-button plain size="mini" @click="delect()">删除</el-button>
           </div>
         </div>
         <div style="margin-top: 15px;width: 99%;margin-left: 7px">
           <el-table
             :data="tableData"
             stripe
-            style="width: 100%">
+            style="width: 100%"
+            @selection-change="handleSelectionChange">
              <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column label="单品图片">
               <template slot-scope="scope">
@@ -41,10 +42,7 @@
               label="单品名称"
               width="180">
             </el-table-column>
-            <el-table-column
-              prop="lid"
-              width="0">
-            </el-table-column>
+
             <el-table-column
               prop="ltiaoma"
               label="单品条码"
@@ -114,7 +112,8 @@ name: "Allorders",
       checkStrictly: true
     },
     value: '',
-    cfid:null//分类主键
+    cfid:null,//分类主键
+    dels:[],
     }
   },
   methods:{
@@ -172,15 +171,38 @@ name: "Allorders",
       this.currentPage4=val;
       this.load();
     }
+    //修改
     ,getbianji(r){
       console.log(r);
       this.$router.push({path:'/danpinamend',query:{params:r}})
     }
+    ,handleSelectionChange(r){
+      this.dels=r;
+      console.log("选中的值",this.dels)
+    }
+    ,dele(r){
+      this.$axios.post("/product/delete",r).then((res)=>{
+        // alert("单品删除成功")
+      })
+      this.$axios.post("/product/delete2",r).then((res)=>{
+        // alert("库存删除成功")
+      })
+    }
+    ,delect(){
+      this.dels.forEach(res=>{
+        this.dele(res);
+      })
+      this.load();
+    }
+
+
+
   },
 
   created() {
     this.load();
     this.loadData();
+    this.handleSelectionChange();
   }
 }
 </script>

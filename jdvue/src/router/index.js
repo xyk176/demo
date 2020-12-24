@@ -53,7 +53,7 @@ export default new Router({
       component: login
     },
     {
-      path: '/',
+      path: '/shopping',
       name: 'Shopping',
       component: Shopping
     },
@@ -85,7 +85,7 @@ export default new Router({
       ]
     },
     {
-      path: '/navigation',
+      path: '/',
       name: 'Navigation',
       component: Navigation,
       children:[

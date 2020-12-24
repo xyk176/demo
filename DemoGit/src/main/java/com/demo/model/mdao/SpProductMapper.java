@@ -13,14 +13,13 @@ import java.util.List;
 public interface SpProductMapper {
     List<SpProduct> selectAllBylname(String lname);
     /*
-     * @Author xiahaifeng
-     * @Description deleteByPrimaryKey
-     * @Date 19:30 2020/12/22
-     * @param [lid]
-     * @return int
-     * 根据主键删除
+     * 根据主键删除单品
     */
     int deleteByPrimaryKey(Integer lid);
+    /*
+     * 根据主键删除库存
+     */
+    int deleteByPrimaryKey2(Integer lid);
 
     /*
      * @Author xiahaifeng

@@ -74,4 +74,13 @@ public class SpProductServicts {
     public void updateproduct(String lname,String lguige,String ldanwei,Integer ltiaoma,String lchengben,Integer lid){
         mapper.updateproduct(lname, lguige, ldanwei, ltiaoma, lchengben, lid);
     }
+
+    /*删除单品*/
+    public int deleteByPrimaryKey(Integer lid){
+        return mapper.deleteByPrimaryKey(lid);
+    }
+    /*删除库存*/
+    public int deleteByPrimaryKey2(Integer lid){
+        return mapper.deleteByPrimaryKey2(lid);
+    }
 }
