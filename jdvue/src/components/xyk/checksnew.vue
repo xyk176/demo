@@ -1,24 +1,10 @@
 <template>
   <div id="inventory">
-    <div  class="font">入库单-{{bename}}</div>
+    <div  class="font">库存盘点-新增盘点</div>
     <div class="body">
       <div class="shangping_jiansuo">
         <div style="font-size:18px ;">基本信息</div>
       <el-form >
-        <el-row :span="24" style="margin-bottom: 10px;" v-if="bename=='采购入库'">
-          <el-col :span="12"   style="text-align: center;">
-              <el-form-item label="供应商名称:" label-width="30%">
-                <el-select style="margin-right: 15px;float: left;width: 240px;" v-model="suname" placeholder="请选择">
-                     <el-option
-                       v-for="item in supplier"
-                       :key="item.suid"
-                       :label="item.suname"
-                       :value="item.suid">
-                     </el-option>
-                   </el-select>
-              </el-form-item>
-          </el-col>
-        </el-row>
         <el-row :span="24">
           <el-col :span="12"   style="text-align: center;">
               <el-form-item label="备注:" label-width="30%">
@@ -60,15 +46,21 @@
           </el-table-column>
           <el-table-column prop="product.lguige" label="单品规格"></el-table-column>
           <el-table-column prop="product.ldanwei" label="单位"></el-table-column>
-          <el-table-column label="入库数量">
+          <el-table-column prop="inentity" label="实物库存"></el-table-column>
+          <el-table-column label="盘点数量">
               <template slot-scope="scope">
                 <el-input-number
                   style="width:150px"
-                  v-model.number="scope.row.libecount"
-                  :min="1"
+                  v-model.number="scope.row.chexqcount"
+                  :min="0"
                   :placeholder="1+''"
                 ></el-input-number>
               </template>
+          </el-table-column>
+          <el-table-column prop="cheblcount" label="盈亏数量">
+                <template slot-scope="scope">
+                  {{scope.row.cheblcount=scope.row.chexqcount-scope.row.inentity}}
+                </template>
           </el-table-column>
           <el-table-column label="">
               <template slot-scope="scope">
@@ -77,8 +69,8 @@
           </el-table-column>
         </el-table>
         <div style="margin-top: 20px;margin-left: auto;">
-        <el-button type="primary" @click="beputnew">确认入库</el-button>
-        <router-link to="beput">
+        <el-button type="primary" @click="beputnew">完成盘点</el-button>
+        <router-link to="output">
 
           <el-button>取消</el-button>
         </router-link></div>
@@ -92,41 +84,44 @@
   export default {
       data(){
         return {
-            suname:'',
             bedate:'',
             beremark:'',
             lname:'',
-            bename:this.$route.params.clas,
             current: 1,
             pageSize: 3,
             total: 0,
             splist:[],
             beputxq:[],
-            supplier:[]
         }
       },
       methods:{
         beputnew(){
           console.log(this.beputxq)
-          console.log(this.bename)
           console.log(this.beremark)
-          if(!this.bename){
-            this.bename='其他出库'
+          let ying=0;
+          let kui=0;
+          for(var i=0;i<this.beputxq.length;i++){
+              if(this.beputxq[i].cheblcount>0){
+                  ying+=this.beputxq[i].cheblcount;
+              }else{
+                  kui+=this.beputxq[i].cheblcount;
+              }
           }
+          console.log('盈',ying);
+          console.log('亏',kui);
           let b={
-             beclass:this.bename,
-             beremark:this.beremark,
-             supplier:{
-               suid:this.suname},
-             beputxqs:this.beputxq
+             chebecount:ying,
+             chelosecoubt:kui,
+             cheremark:this.beremark,
+             checkxqs:this.beputxq
           }
           console.log(b);
-          this.$axios.put("beput/insert",b)
+          this.$axios.put("checks/insert",b)
             .then(r=>{
               if(r.status===200){
                 console.log('date',r.data)
                 if(r.data>0){
-                  alert("入库成功")
+                  alert("出库成功")
                 }
               }
           })
@@ -135,16 +130,23 @@
         this.beputxq.splice(index,1);
         },
         pushshoplist(index,row){
-          console.log(row)
-          row.libecount=1;
+          console.log('单品',row);
+          row.chexqcount=0;
+          row.cheblcount=0;
           var json = {
-            libecount:row.libecount,
+            /* 单个的盘点的数量*/
+            chexqcount:row.chexqcount,
+            /* 盈亏数量，根据盘点数量减实物库存实时修改*/
+            cheblcount:row.cheblcount,
+            /* 实物库存*/
+            inentity:row.inventorys[0].inentity,
             product:{
+
+              inventorys:row.inventorys,
               lid:row.lid,
               lname:row.lname,
               lguige:row.lguige,
-              ldanwei:row.ldanwei,
-              inventorys:row.inventorys
+              ldanwei:row.ldanwei
             }
           }
           let t=true;
@@ -154,7 +156,7 @@
             for(let j=0;j<1;j++){
               for(let i=0;i<this.beputxq.length;i++){
                     if(row.lid==this.beputxq[i].product.lid){
-                      t=false
+                      t=false;
                 }
               }
             }
@@ -167,10 +169,6 @@
           console.log(this.beputxq)
         },
           inventory(){
-            this.$axios.post("supplier/selectNewBeput")
-            .then(r=>{
-              this.supplier=r.data
-            })
             let param={
                         no: this.current,
                         size: this.pageSize,

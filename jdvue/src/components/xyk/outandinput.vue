@@ -277,6 +277,7 @@
         },
         mounted(){
           if(this.$route.params.lname){
+              this.nameandtiao=this.$route.params.lname;
               let param={
                     no: 1,
                     size: this.pageSize,
