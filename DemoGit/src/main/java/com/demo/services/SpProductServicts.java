@@ -83,4 +83,9 @@ public class SpProductServicts {
     public int deleteByPrimaryKey2(Integer lid){
         return mapper.deleteByPrimaryKey2(lid);
     }
+
+    /*修改单品分类*/
+    public void delectfenlei(Integer lid){
+        mapper.delectfenlei(lid);
+    }
 }

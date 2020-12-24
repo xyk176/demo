@@ -71,4 +71,10 @@ public class SpProductController {
     public int deleteByPrimaryKey2(Integer lid){
         return ps.deleteByPrimaryKey2(lid);
     }
+
+    /*修改单品分类*/
+    @RequestMapping("/delectfenlei")
+    public void delectfenlei(Integer lid){
+        ps.delectfenlei(lid);
+    }
 }

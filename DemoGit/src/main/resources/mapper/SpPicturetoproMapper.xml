@@ -8,11 +8,9 @@
     <result column="ptpiszhu" jdbcType="INTEGER" property="ptpiszhu" />
   </resultMap>
 
-  <insert id="insert" parameterType="com.demo.pojo.SpPicturetopro">
-    insert into sp_picturetopro (ptpid, lid, picid,
-      ptpiszhu)
-    values (#{ptpid,jdbcType=INTEGER}, #{lid,jdbcType=INTEGER}, #{picid,jdbcType=INTEGER}, 
-      #{ptpiszhu,jdbcType=INTEGER})
+  <insert id="insertInfo" parameterType="com.demo.pojo.SpPicturetopro">
+    insert into sp_picturetopro (ptpid, lid, picid,ptpiszhu)
+    values (null, #{s.product.lid}, #{s.picture.picid},#{s.ptpiszhu})
   </insert>
 
 </mapper>

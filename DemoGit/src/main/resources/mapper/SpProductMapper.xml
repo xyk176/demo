@@ -84,6 +84,8 @@
       #{p.lchengben}, #{p.cid})
   </insert>
 
+
+
   <update id="updateByPrimaryKey" parameterType="com.demo.pojo.SpProduct">
     <!--
       WARNING - @mbg.generated
@@ -160,4 +162,13 @@
           lchengben = #{lchengben}
         where lid = #{lid}
   </update>
+
+  <!--修改单品分类-->
+  <update id="delectfenlei">
+    UPDATE sp_product SET cid2=18 where lid=#{lid}
+  </update>
+
+  <select id="selectMaxId" resultType="com.demo.pojo.SpProduct">
+    select * from sp_product where lid=(select max(lid) from sp_product)
+  </select>
 </mapper>

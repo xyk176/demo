@@ -21,10 +21,13 @@
             <el-button plain size="mini">导入单品</el-button>
             <el-button plain size="mini">导入修改</el-button>
             <el-button plain size="mini">导出单品</el-button>
-            <el-button plain size="mini">修改分类</el-button>
+            <el-button plain size="mini" @click="xiugai()">修改分类</el-button>
             <el-button plain size="mini" @click="delect()">删除</el-button>
           </div>
         </div>
+
+
+
         <div style="margin-top: 15px;width: 99%;margin-left: 7px">
           <el-table
             :data="tableData"
@@ -89,6 +92,25 @@
               layout="total, sizes, prev, pager, next, jumper"
               :total="total">
             </el-pagination>
+
+        <!-- 修改分类的弹出框-->
+        <el-dialog title="修改分类" :visible.sync="seen" style="height: 500px;">
+              <el-cascader
+                  :options="options"
+                  :props="defaultPropss"
+                  @change="changea"
+                  clearable>
+              </el-cascader>
+              <p>
+                <div style="height: 220px;"></div>
+              <el-button plain @click="changea2()">确认选择</el-button>
+              <router-link to="/liebiao" tag="span">
+                <el-button plain>取消</el-button>
+              </router-link>
+              </p>
+        </el-dialog>
+
+
       </div>
     </div>
 
@@ -114,6 +136,7 @@ name: "Allorders",
     value: '',
     cfid:null,//分类主键
     dels:[],
+    seen:false
     }
   },
   methods:{
@@ -176,6 +199,7 @@ name: "Allorders",
       console.log(r);
       this.$router.push({path:'/danpinamend',query:{params:r}})
     }
+    //选中表格的值
     ,handleSelectionChange(r){
       this.dels=r;
       console.log("选中的值",this.dels)
@@ -195,7 +219,16 @@ name: "Allorders",
       this.load();
     }
 
-
+    ,xiugai2(r){
+      this.$axios.post("/product/delectfenlei",r)
+    }
+    ,xiugai(){
+      // this.dels.forEach(r=>{
+      //   this.xiugai2(r)
+      // })
+      // this.load();
+      this.seen=true
+    }
 
   },
 
@@ -230,7 +263,6 @@ name: "Allorders",
 }
 .right{
   width: 13%;
-  height: 500px;
   background: #FFFFFF;
   border-radius: 6px;
   border: 1px solid #E2E2E2;

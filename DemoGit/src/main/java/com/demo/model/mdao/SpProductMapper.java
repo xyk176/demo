@@ -85,4 +85,9 @@ public interface SpProductMapper {
                        @Param("lchengben") String lchengben,
                        @Param("lid") Integer lid);
 
+    /*修改单品分类*/
+    void delectfenlei(@Param("lid") Integer lid);
+
+    /**/
+    SpProduct selectMaxId();
 }

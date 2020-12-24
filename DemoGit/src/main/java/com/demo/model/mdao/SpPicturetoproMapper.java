@@ -1,7 +1,9 @@
 package com.demo.model.mdao;
 
 import com.demo.pojo.SpPicturetopro;
+import com.demo.pojo.SpProduct;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Mapper
@@ -13,6 +15,7 @@ public interface SpPicturetoproMapper {
      *
      * @mbg.generated
      */
-    int insert(SpPicturetopro record);
+    int insertInfo(@Param("s") SpPicturetopro topro);
+
 
 }

@@ -185,9 +185,11 @@
         cid2:0,//单品分类id
         lchengben:null,//单品成本
         pics:[],
+        picturetopro:[
+
+        ]
       },
       kucun:{},
-      picturetopro:[]
      }
    },
    methods:{
@@ -207,16 +209,28 @@
       },
       /* 新增单品*/
       savedanpin(){
-        console.log("新增的图片",this.comentity.pics[0].pic.picpath)
-        this.comentity.ldanwei=this.ldanwei;//单品单位
-        this.comentity.prs = {cid2:this.comentity.cid2};
-        this.$axios.put("/product/insert",this.comentity).then((res)=>{
+       this.comentity.ldanwei=this.ldanwei;//单品单位
+       this.comentity.prs = {cid2:this.comentity.cid2};
+
+
+        this.comentity.pics.forEach(i=>{
+          this.comentity.picturetopro.push({
+            ptpiszhu:i.ptciszhu,
+            picture:i
+          })
+        });
+
+        this.$axios.put("/picturetopro/add",this.comentity).then((res)=>{
           console.log("新增的单品：",this.comentity);
           //跳转页面
           this.$router.push({path:'/liebiao'})
         })
-        
-        this.$axios.put("/picturetopro/add",this.picturetopro)
+         console.log("新增的图片",this.comentity)
+
+        /* this.$axios.put("/picturetopro/add",this.picturetopro).then((res)=>{
+          console.log("新增的图片",this.picturetopro)
+        }) */
+
       }
       ,/* 选择的图片移除操作 */
       pic_deleteRow(index) {

@@ -17,6 +17,26 @@ public class SpPicturetopro {
     private SpProduct product;
     private SpPicture picture;
 
+    public SpPicturetopro(Integer ptpid, Integer ptpiszhu, SpProduct product, SpPicture picture) {
+        this.ptpid = ptpid;
+        this.ptpiszhu = ptpiszhu;
+        this.product = product;
+        this.picture = picture;
+    }
+
+    public SpPicturetopro() {
+    }
+
+    @Override
+    public String toString() {
+        return "SpPicturetopro{" +
+                "ptpid=" + ptpid +
+                ", ptpiszhu=" + ptpiszhu +
+                ", product=" + product +
+                ", picture=" + picture +
+                '}';
+    }
+
     @Id
     @Column(name = "ptpid")
     public Integer getPtpid() {

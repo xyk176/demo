@@ -1,8 +1,10 @@
 package com.demo.controller;
 
 import com.demo.pojo.SpPicturetopro;
+import com.demo.pojo.SpProduct;
 import com.demo.services.SpPicturetoproServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +21,9 @@ public class SpPicturetoproController {
     SpPicturetoproServices ps;
 
     @RequestMapping("/add")
-    public int insert(SpPicturetopro record){
-        return ps.insert(record);
+    public void insert(@RequestBody SpProduct record){
+        System.out.println("什么鬼"+record);
+        ps.insert(record);
+
     }
 }
