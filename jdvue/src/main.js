@@ -11,6 +11,10 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
+/*收货地址*/
+import VDistpicker from 'v-distpicker';
+Vue.component('v-distpicker', VDistpicker);
+
 /* utilsTwo引用 */
 import axios from './utils/utilsTwo'
 Vue.prototype.$axios = axios;
@@ -26,6 +30,7 @@ Vue.prototype.moment = moment
 //日期转换
 import Dateformat from './utils/dateFormat.js'
 Vue.prototype.$Dateformat = Dateformat
+
 
 
 Vue.filter('dateYMDHMSFormat1', function(dateStr, pattern = 'YYYY年MM月DD日') {

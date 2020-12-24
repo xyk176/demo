@@ -26,6 +26,24 @@ public class Supplier {
     private String sufax;
     private List<Beput> beputs;
 
+    @Override
+    public String toString() {
+        return "Supplier{" +
+                "suid=" + suid +
+                ", suname='" + suname + '\'' +
+                ", suphone='" + suphone + '\'' +
+                ", susheng='" + susheng + '\'' +
+                ", sushi='" + sushi + '\'' +
+                ", suqu='" + suqu + '\'' +
+                ", sulxr='" + sulxr + '\'' +
+                ", sulxrphone='" + sulxrphone + '\'' +
+                ", suqq='" + suqq + '\'' +
+                ", suwx='" + suwx + '\'' +
+                ", suemail='" + suemail + '\'' +
+                ", sufax='" + sufax + '\'' +
+                '}';
+    }
+
     @Id
     @Column(name = "suid")
     public Integer getSuid() {

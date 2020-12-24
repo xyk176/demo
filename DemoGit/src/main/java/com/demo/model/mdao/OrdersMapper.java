@@ -1,8 +1,6 @@
 package com.demo.model.mdao;
 
-import com.demo.pojo.OrderInfo;
-import com.demo.pojo.Orders;
-import com.demo.pojo.SpCommodity;
+import com.demo.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -55,5 +53,14 @@ public interface OrdersMapper {
     /*
     * 查询订单详情商品和图片
     * */
-    List<SpCommodity> selectcompic(Integer oiId);
+    List<picvo> selectcompic(Integer oId);
+
+    /*根据编号查询订单*/
+    ordervo seorder(Integer oId);
+
+    /*根据订单编号修改订单状态*/
+    Integer uporder(@Param("or")Orders o);
+
+    /*查询未发货订单*/
+    List<Orders> orderstwo( @Param("orsip") String orsip, @Param("pay") String pay);
 }

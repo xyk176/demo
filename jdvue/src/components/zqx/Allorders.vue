@@ -87,7 +87,7 @@
             label="操作">
             <template slot-scope="scope">
               <el-button icon="el-icon-search" circle size="mini" @click="xq(scope.row)"></el-button>
-              <el-button icon="el-icon-edit" circle size="mini" @click="xg(scope.row)"></el-button>
+              <el-button circle size="mini" @click="xg(scope.row)">发货</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -107,13 +107,26 @@
     </div>
 
     <el-dialog title="详情" :visible.sync="infos">
-      <!--      <el-table
+            <el-table
             :data="info"
             stripe
             style="width: 100%">
               <el-table-column
-                prop="com.comname"
+                prop="comname"
                 label="商品">
+              </el-table-column>
+              <el-table-column>
+                <template slot-scope="scope">
+                  <img :src="scope.row.picpath" style="width: 50px;height: 50px">
+                </template>
+              </el-table-column>
+              <el-table-column
+                prop="cprname"
+                label="商品参数">
+              </el-table-column>
+              <el-table-column
+                prop="cpyname"
+                label="商品属性">
               </el-table-column>
               <el-table-column
                 prop="coms"
@@ -123,24 +136,20 @@
                 prop="comprice"
                 label="购买总价">
               </el-table-column>
-            </el-table>-->
-      <div style="width: 95%;">
-        <span>商品</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span>购买数量</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span>购买总价</span>
-      </div>
-      <div style="width: 95%;" v-for="i in info">
-        <div style="width: 35%;float: left">{{ i.com.comname }}</div>
-        <div style="width: 20%;margin-left: 35px;float: left">{{ i.coms }}</div>
-        <div style="width: 20%;margin-left: 65px;float: left">{{ i.comprice }}</div>
-      </div>
+            </el-table>
     </el-dialog>
 
-    <el-dialog title="更改发货" :visible.sync="xx">
+    <el-dialog title="商品发货" :visible.sync="xx">
       <el-form :model="gg">
+        <el-form-item label="下单时间">
+          <span>{{gg.oDate}}</span>
+        </el-form-item>
+        <el-form-item label="下单用户">
+          <span>{{gg.cname}}</span>
+        </el-form-item>
+        <el-form-item label="收货地址用户">
+          <span>{{gg.adprovince}}&nbsp;&nbsp;&nbsp;&nbsp;{{gg.adcity}}&nbsp;&nbsp;&nbsp;&nbsp;{{gg.adarea}}&nbsp;&nbsp;&nbsp;&nbsp;{{gg.addetailed}}</span>
+        </el-form-item>
         <el-form-item label="发货方式">
           <el-select v-model="gg.orsip" placeholder="请选择">
             <el-option
@@ -152,6 +161,9 @@
           </el-select>
         </el-form-item>
       </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="ty">确 定</el-button>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -161,8 +173,8 @@ export default {
   name: "Allorders",
   data() {
     return {
-      gg:{},
-      xx:false,
+      gg: {},
+      xx: false,
       infos: false,
       totals: 0,
       page: 1,
@@ -206,8 +218,11 @@ export default {
       value2: '',
       value3: '',
       value4: '',
-      info: {},
-      oiid:[]
+      info: [],
+      piccss:{},
+      oid:'',
+      oid2:'',
+      odate:''
     }
   },
   methods: {
@@ -269,18 +284,37 @@ export default {
       console.log(`每页 ${val} 条`);
     },
     xq(r) {
-      this.info = r.orderinfos
-      console.log("当前行", this.info)
+      this.oid=r.oId;
+      console.log("当前行", this.oid)
       this.infos = true;
-      this.$axios.put("order/selectcompic", this.info).then((res)=>{
+      this.$axios.post("order/selectcompic", {oId:this.oid}).then((res) => {
         console.log(res.data);
+        this.info=res.data;
       })
-      console.log(this.oiid);
     },
-    xg(r){
-      this.gg=r;
-      console.log(r);
-      this.xx=true;
+    xg(r) {
+      console.log(r.oId);
+      this.xx = true;
+      this.oid2=r.oId;
+      this.$axios.post("order/seorder",{oId:this.oid2}).then((res)=>{
+        console.log(res.data)
+        this.gg=res.data;
+        this.gg.oDate=this.$Dateformat(this.gg.oDate,"yyyy-mm-dd HH:MM:ss")
+      })
+    },
+    ty(){
+      console.log(this.gg)
+      this.$axios.post("order/uporder",{
+        oId:this.gg.oId,
+        oDate:this.gg.oDate,
+        pay:this.gg.pay,
+        price:this.gg.price,
+        orsip:this.gg.orsip,
+        remarks:this.gg.remarks
+      }).then((res)=>{
+        this.loadata();
+        this.xx=false;
+      })
     }
   },
   created() {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" @click="xinzeng = true">新增</el-button>
+    <el-button type="primary" @click="clearInsert">新增</el-button>
     <el-table :data="address" style="width: 100%">
       <el-table-column prop="adid" label="ID"></el-table-column>
       <el-table-column prop="adprovince" label="省"></el-table-column>
@@ -15,12 +15,22 @@
       </el-table-column>
       <el-table-column label="操作" width="300px">
         <template slot-scope="ss">
-          <el-button size="mini" @click="">删除</el-button>
+          <el-button size="mini" @click="updateAdisdelete(ss.row)">删除</el-button>
           <el-button size="mini" @click="update(ss.$index,ss.row)">编辑</el-button>
           <el-button v-if="ss.row.adisdefault=='否'" size="mini" @click="updateAdisdefault(ss.row)">设为默认</el-button>
         </template>
       </el-table-column>
     </el-table>
+    <!-- current-page	当前页数，支持 .sync 修饰符-->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="current"
+      :page-sizes="[1, 2, 4, 8]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total">
+    </el-pagination>
     <!--新增收货地址-->
     <el-dialog title="新增收货地址" :visible.sync="xinzeng">
       <el-form label-position="right" label-width="80px" :model="form">
@@ -65,21 +75,44 @@
        address:[],
        form:{},
        xiugai:false,
-       xinzeng:false
+       xinzeng:false,
+       current:1,
+       pageSize:2,
+       total:0
       }
     },
     methods:{
       selectAddress(){
          let param = {
-           cid:1
+           cid:1,
+           no:this.current,
+           size:this.pageSize
          };
          this.$axios.post("address/selectByCidAll",param)
            .then(r=>{
              if (r.data){
-               this.address = r.data.objs;
+               this.address = r.data.list;
+               this.total = r.data.total;
                console.log(r);
              }
            })
+      },
+      handleCurrentChange(pagerindex){
+        //参数是当前页码
+        this.current = pagerindex;
+        this.selectAddress();
+      },
+      /* pageSize 改变时会触发*/
+      handleSizeChange(pagesize){
+        this.pageSize=pagesize;
+        this.selectAddress();
+      },
+      /**
+       * 清空新增弹框
+       */
+      clearInsert(){
+        this.form = {};
+        this.xinzeng = true;
       },
       /**
        * 新增收货地址
@@ -92,12 +125,14 @@
           adarea:this.form.adarea,
           addetailed:this.form.addetailed
         };
-        this.$axios.post("address/isnertAddress",param)
+        this.$axios.post("address/insertAddress",param)
         .then(r=>{
-          this.address = r.data.objs;
-          console.log(r);
-          this.xinzeng = false;
-          this.selectAddress();
+          if(r.data){
+            this.address = r.data.obj;
+            console.log(r);
+            this.xinzeng = false;
+            this.selectAddress();
+          }
         })
       },
       update($index,row){
@@ -139,8 +174,23 @@
           adid:row.adid,
           cid:1
         };
-        let ppp = this.$qs.stringify(param);
         this.$axios.post("address/updateAdisdefault",param)
+        .then(r=>{
+          if(r.data){
+            this.address = r.data.objs;
+            console.log(r);
+            this.selectAddress();
+          }
+        })
+      },
+      /**
+       * 删除收货地址（逻辑删除）
+       */
+      updateAdisdelete(row){
+        let param = {
+          adid:row.adid
+        };
+        this.$axios.post("address/updateAdisdelete",param)
         .then(r=>{
           if(r.data){
             this.address = r.data.objs;

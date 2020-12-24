@@ -24,8 +24,20 @@ public class Beput {
     private Supplier supplier;
     private List<Beputxq> beputxqs;
 
+    @Override
+    public String toString() {
+        return "Beput{" +
+                "beid=" + beid +
+                ", beclass='" + beclass + '\'' +
+                ", beremark='" + beremark + '\'' +
+                ", yewuid=" + yewuid +
+                ", beputxqs=" + beputxqs +
+                '}';
+    }
+
     @Id
     @Column(name = "beid", nullable = false)
+
     public int getBeid() {
         return beid;
     }

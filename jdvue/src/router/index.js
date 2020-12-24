@@ -13,9 +13,13 @@ import Sangpinindex from '@/components/shangpin/Sangpinindex'
 import Sangpinadd from '@/components/shangpin/Sangpinadd'
 
 /* 单品列表 */
-import danpinliebiao from '@/components/danpinliebiao'
+import danpinliebiao from '@/components/danpin/danpinliebiao'
 /* 单品分类 */
-import danpinfenlei from '@/components/danpinfenlei'
+import danpinfenlei from '@/components/danpin/danpinfenlei'
+/* 单品新增 */
+import danpinadd from '@/components/danpin/danpinadd'
+/* 单品修改 */
+import danpinamend from '@/components/danpin/danpinamend'
 
 /* 库存 */
 import inventory from '@/components/xyk/inventory'
@@ -25,11 +29,20 @@ import login from '@/components/zzh/login'
 import address from '@/components/zzh/address'
 import outandinput from '@/components/xyk/outandinput'
 import beput from '@/components/xyk/beput'
+import beputxq from '@/components/xyk/beputxq'
+import beputnew from '@/components/xyk/beputnew'
 import output from '@/components/xyk/output'
+import outputxq from '@/components/xyk/outputxq'
 import checks from '@/components/xyk/checks'
 import supplier from '@/components/xyk/supplier'
+import suppliernew from '@/components/xyk/suppliernew'
 import maxcount from '@/components/xyk/maxcount'
+import addressDelete from '@/components/zzh/addressDelete'
+import personalCenter from '@/components/zzh/personalCenter'
+import orders from '@/components/zzh/orders'
+import user from '@/components/zzh/user'
 
+import Shopping from '@/components/Shopping'
 Vue.use(Router)
 
 export default new Router({
@@ -40,12 +53,39 @@ export default new Router({
       component: login
     },
     {
-      path: '/address',
-      name: 'address',
-      component: address
+      path: '/',
+      name: 'Shopping',
+      component: Shopping
     },
     {
-      path: '/',
+      path: '/personalCenter',
+      name: 'personalCenter',
+      component: personalCenter,
+      children:[
+        {
+          path: '/address',
+          name: 'address',
+          component: address
+        },
+        {
+          path: '/addressDelete',
+          name: 'addressDelete',
+          component: addressDelete
+        },
+        {
+          path: '/orders',
+          name: 'orders',
+          component: orders
+        },
+        {
+          path: '/user',
+          name: 'user',
+          component: user
+        }
+      ]
+    },
+    {
+      path: '/navigation',
       name: 'Navigation',
       component: Navigation,
       children:[
@@ -88,9 +128,21 @@ export default new Router({
           name: 'beput',
           component: beput
         },{
+          path: '/beputxq',
+          name: 'beputxq',
+          component: beputxq
+        },{
+          path: '/beputnew',
+          name: 'beputnew',
+          component: beputnew
+        },{
           path: '/output',
           name: 'output',
           component: output
+        },{
+          path: '/outputxq',
+          name: 'outputxq',
+          component: outputxq
         },{
           path: '/checks',
           name: 'checks',
@@ -100,6 +152,10 @@ export default new Router({
           name: 'supplier',
           component: supplier
         },{
+          path: '/suppliernew',
+          name: 'suppliernew',
+          component: suppliernew
+        },{
           path: '/maxcount',
           name: 'maxcount',
           component: maxcount
@@ -107,6 +163,14 @@ export default new Router({
             path: '/fenlei',
             name: 'danpinfenlei',
             component: danpinfenlei,
+        },{
+            path: '/danpinadd',
+            name: 'danpinadd',
+            component: danpinadd,
+        },{
+            path: '/danpinamend',
+            name: 'danpinamend',
+            component: danpinamend,
         }
       ]
     }

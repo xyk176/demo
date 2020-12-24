@@ -1,9 +1,11 @@
 package com.demo.controller;
 
 import com.demo.pojo.Inventory;
+import com.demo.pojo.Inventorylist;
 import com.demo.services.InventoryServices;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,16 @@ import java.util.List;
 public class InventoryController {
     @Autowired
     InventoryServices is;
+    @RequestMapping("updatemaxcount")
+    public Integer updatemaxcount( @RequestBody Inventorylist i){
+        System.out.println(i);
+        int a=0;
+        for (Inventory o : i.getInventory()) {
+            is.updatemaxcount(i.getMaxcount(),o.getInid());
+            a++;
+        }
+        return a;
+    }
     /*
      * @Author xieyukun
      * @Description page

@@ -17,6 +17,16 @@ public class SpCommodityproperty {
     private Integer cpytopid;
     private String cpyname;
     private List<Cpyandcom> coms;
+    private List<SpCommodityproperty> cpys;
+
+    @Transient
+    public List<SpCommodityproperty> getCpys() {
+        return cpys;
+    }
+
+    public void setCpys(List<SpCommodityproperty> cpys) {
+        this.cpys = cpys;
+    }
 
     @Id
     @Column(name = "cpyid")

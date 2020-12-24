@@ -1,6 +1,7 @@
 package com.demo.model.mdao;
 
 import com.demo.pojo.Address;
+import com.demo.pojo.Orders;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -99,4 +100,44 @@ public interface AddressMapper {
      * 删除收货地址（逻辑删除）
     */
     Integer updateAdisdelete(Integer adid);
+
+    /*
+     * @Author 周子豪
+     * @Description 11:10
+     * @Date  2020/12/23
+     * @param [cid]
+     * @return java.util.List<com.demo.pojo.Address>
+     * 查询已删除的收货地址
+    */
+    List<Address> selectByCidAll1(Integer cid);
+
+    /*
+     * @Author 周子豪
+     * @Description 14:01
+     * @Date  2020/12/23
+     * @param [adid]
+     * @return java.lang.Integer
+     * 恢复收货地址
+    */
+    Integer updateAdisdelete1(Integer adid);
+
+    /*
+     * @Author 周子豪
+     * @Description 15:46
+     * @Date  2020/12/23
+     * @param [adid]
+     * @return java.lang.Integer
+     * 删除收货地址（物理删除）
+    */
+    Integer deleteAddress(Integer adid);
+
+    /*
+     * @Author 周子豪
+     * @Description 19:21
+     * @Date  2020/12/23
+     * @param [ortype, cid]
+     * @return java.util.List<com.demo.pojo.Orders>
+     * 根据客户id查询订单
+    */
+    List<Orders> selectOrders(String ortype,Integer cid);
 }

@@ -1,6 +1,6 @@
 package com.demo.model.mdao;
 
-import com.demo.pojo.SpCommodity;
+import com.demo.pojo.Inventory;
 import com.demo.pojo.SpProduct;
 import com.demo.pojo.vo;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface SpProductMapper {
+    List<SpProduct> selectAllBylname(String lname);
     /*
      * @Author xiahaifeng
      * @Description deleteByPrimaryKey
@@ -29,7 +30,7 @@ public interface SpProductMapper {
      * @return int
      * 新增
     */
-    int insert(SpProduct record);
+    int insert(@Param("p") SpProduct record);
 
     /*
      * @Author xiahaifeng
@@ -43,9 +44,10 @@ public interface SpProductMapper {
 
 
     /**
-     查询单品表及其分类
+     查询单品表及其分类，图片
      */
-    List<vo> selectAll();
+    List<vo> selectAll(@Param("id") Integer id);
+
 
     /*
      * @Author xiahaifeng
@@ -66,4 +68,22 @@ public interface SpProductMapper {
      * 修改
     */
     int updateByPrimaryKey(SpProduct record);
+
+    /*新增库存表*/
+    void insertkucun(@Param("i") Inventory inventory);
+
+    /*修改单品  update sp_product
+    set lname = #{lname},
+      lguige = #{lguige},
+      ldanwei = #{ldanwei},
+      ltiaoma = #{ltiaoma},
+      lchengben = #{lchengben}
+    where lid = #{p.lid}*/
+    void updateproduct(@Param("lname") String lname,
+                       @Param("lguige") String lguige,
+                       @Param("ldanwei") String ldanwei,
+                       @Param("ltiaoma") Integer ltiaoma,
+                       @Param("lchengben") String lchengben,
+                       @Param("lid") Integer lid);
+
 }
