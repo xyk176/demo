@@ -1,5 +1,7 @@
 package com.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -16,6 +18,7 @@ import java.util.Objects;
 @Entity
 public class Orders {
     private Integer oId;
+    @JsonFormat(pattern ="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date oDate;
     private String pay;
     private BigDecimal price;

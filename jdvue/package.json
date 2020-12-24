@@ -13,6 +13,8 @@
     "axios": "^0.21.0",
     "element-ui": "^2.14.1",
     "font-awesome": "^4.7.0",
+    "qs": "^6.9.4",
+    "v-distpicker": "^1.2.9",
     "vue": "^2.5.2",
     "vue-moment": "^4.1.0",
     "vue-router": "^3.0.1"

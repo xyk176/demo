@@ -16,10 +16,20 @@
                 <router-link to="/liebiao" tag="span">
                 <el-menu-item index="1-1">单品库列表</el-menu-item>
                 </router-link>
+                <router-link to="/fenlei" tag="span">
                 <el-menu-item index="1-2">单品库分类</el-menu-item>
+                </router-link>
               </el-menu-item-group>
               <el-menu-item-group title="商品库">
-                <el-menu-item index="1-3">商品库列表3</el-menu-item>
+                <router-link to="/Sangpinindex" tag="span">
+                  <el-menu-item index="1-3">商品库列表</el-menu-item>
+                </router-link>
+                <router-link to="/Sangpinindex" tag="span">
+                  <el-menu-item index="1-4">商品标签</el-menu-item>
+                </router-link>
+                <router-link to="/Sangpinindex" tag="span">
+                  <el-menu-item index="1-5">商品属性</el-menu-item>
+                </router-link>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="2">
@@ -27,6 +37,31 @@
                 <i class="el-icon-menu"></i>
                 <span>库存</span>
               </template>
+              <el-menu-item-group title="进销存">
+                <router-link tag="span" to="inventory">
+                  <el-menu-item index="2-1">库存</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="outandinput">
+                <el-menu-item index="2-2">出入库明细</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="beput">
+                <el-menu-item index="2-3">入库单</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="output">
+                <el-menu-item index="2-4">出库单</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="checks">
+                <el-menu-item index="2-5">库存盘点</el-menu-item>
+                </router-link>
+                <router-link tag="span" to="maxcount">
+                <el-menu-item index="2-6">库存控制</el-menu-item>
+                </router-link>
+              </el-menu-item-group>
+              <el-menu-item-group title="设置">
+                <router-link tag="span" to="supplier">
+                <el-menu-item index="2-7">供应商管理</el-menu-item>
+                </router-link>
+              </el-menu-item-group>
             </el-submenu>
             <el-submenu index="3">
               <template slot="title">
@@ -34,10 +69,10 @@
                 <span>订单</span>
               </template>
               <el-menu-item-group>
-                <router-link to="/Allorders">
+                <router-link to="/Allorders" tag="span">
                   <el-menu-item index="3-1">所有订单</el-menu-item>
                 </router-link>
-                <router-link to="/Alldelivergoods">
+                <router-link to="/Alldelivergoods" tag="span">
                   <el-menu-item index="3-2">发货管理</el-menu-item>
                 </router-link>
               </el-menu-item-group>
@@ -95,7 +130,7 @@
     padding: 10px;
   }
 
-  #navigation .ismain .body{
+  #navigation .ismain>.body{
     width: 100%;
     height: 500px;
     background: #FFFFFF;

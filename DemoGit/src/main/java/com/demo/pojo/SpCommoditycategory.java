@@ -11,12 +11,20 @@ import java.util.Objects;
  * @Date 2020-12-21 14:01
  */
 @Entity
-@Table(name = "sp_commoditycategory", schema = "jindun", catalog = "")
+@Table(name = "sp_commoditycategory", schema = "jindun")
 public class SpCommoditycategory {
     private Integer ccyid;
-    private String ccytopid;
     private String ccyname;
+    private String ccytopid;
     private List<SpCommodity> coms;
+
+    public String getCcytopid() {
+        return ccytopid;
+    }
+
+    public void setCcytopid(String ccytopid) {
+        this.ccytopid = ccytopid;
+    }
 
     @Id
     @Column(name = "ccyid")
@@ -26,16 +34,6 @@ public class SpCommoditycategory {
 
     public void setCcyid(Integer ccyid) {
         this.ccyid = ccyid;
-    }
-
-    @Basic
-    @Column(name = "ccytopid")
-    public String getCcytopid() {
-        return ccytopid;
-    }
-
-    public void setCcytopid(String ccytopid) {
-        this.ccytopid = ccytopid;
     }
 
     @Basic
@@ -54,13 +52,12 @@ public class SpCommoditycategory {
         if (o == null || getClass() != o.getClass()) return false;
         SpCommoditycategory that = (SpCommoditycategory) o;
         return ccyid == that.ccyid &&
-                Objects.equals(ccytopid, that.ccytopid) &&
                 Objects.equals(ccyname, that.ccyname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ccyid, ccytopid, ccyname);
+        return Objects.hash(ccyid, ccyname);
     }
 
     @OneToMany(mappedBy = "ccy")

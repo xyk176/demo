@@ -11,13 +11,9 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
-
-//图片懒加载
-import VueLazyLoad from 'vue-lazyload'
-Vue.use(VueLazyLoad,{
-    error:'./static/error.png',
-    loading:'./static/loading.png'
-})
+/*收货地址*/
+import VDistpicker from 'v-distpicker';
+Vue.component('v-distpicker', VDistpicker);
 
 /* utilsTwo引用 */
 import axios from './utils/utilsTwo'
@@ -34,7 +30,6 @@ Vue.prototype.moment = moment
 //日期转换
 import Dateformat from './utils/dateFormat.js'
 Vue.prototype.$Dateformat = Dateformat
-
 
 
 

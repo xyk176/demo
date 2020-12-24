@@ -19,6 +19,15 @@ public class OrderInfo {
     private Orders order;
     private SpCommodity com;
 
+    @Override
+    public String toString() {
+        return "OrderInfo{" +
+                "oiId=" + oiId +
+                ", coms=" + coms +
+                ", comprice=" + comprice +
+                '}';
+    }
+
     @Id
     @Column(name = "oi_id", nullable = false)
     public Integer getOiId() {

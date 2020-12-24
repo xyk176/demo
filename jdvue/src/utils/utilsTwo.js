@@ -28,7 +28,6 @@ axios.interceptors.request.use((config) => {
 */
 axios.interceptors.response.use((res)=>{
     const message = res.data.msg || '服务器错误，请查看后台日志信息...'; //后端返回的message
-
     if(res.status===200){
       /* 返回码为1*/
       if(res.data.code){
@@ -49,7 +48,6 @@ axios.interceptors.response.use((res)=>{
     //还可以返回res.data   那么Vue中获取后台响应的数据，不需要加data
     return res;
 },error=>{
-    //stopLoading();//取消加载状态框
     Notification.error({
       title:"响应失败",
       message:"请查看F12的参数提交情况",

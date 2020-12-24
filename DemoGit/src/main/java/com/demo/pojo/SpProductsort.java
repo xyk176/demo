@@ -5,15 +5,28 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "sp_productsort", schema = "jindun", catalog = "")
+@Table(name = "sp_productsort", schema = "jindun")
 public class SpProductsort {
     private Integer cid2;
     private String cname;
     private Integer cfid;
     private List<SpProduct> pros;
+    private List<SpProductsort> sorts;
+
+    @Override
+    public String toString() {
+        return "SpProductsort{" +
+                "cid2=" + cid2 +
+                ", cname='" + cname + '\'' +
+                ", cfid=" + cfid +
+                ", pros=" + pros +
+                ", sorts=" + sorts +
+                '}';
+    }
 
     @Id
     @Column(name = "cid2", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getCid2() {
         return cid2;
     }
@@ -21,6 +34,8 @@ public class SpProductsort {
     public void setCid2(Integer cid2) {
         this.cid2 = cid2;
     }
+
+
 
     @Basic
     @Column(name = "cname", nullable = true, length = 20)
@@ -63,5 +78,14 @@ public class SpProductsort {
 
     public void setPros(List<SpProduct> pros) {
         this.pros = pros;
+    }
+
+    @Transient
+    public List<SpProductsort> getSorts() {
+        return sorts;
+    }
+
+    public void setSorts(List<SpProductsort> sorts) {
+        this.sorts = sorts;
     }
 }
