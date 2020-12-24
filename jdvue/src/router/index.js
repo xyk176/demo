@@ -28,6 +28,7 @@ import beput from '@/components/xyk/beput'
 import beputxq from '@/components/xyk/beputxq'
 import beputnew from '@/components/xyk/beputnew'
 import output from '@/components/xyk/output'
+import outputnew from '@/components/xyk/outputnew'
 import outputxq from '@/components/xyk/outputxq'
 import checks from '@/components/xyk/checks'
 import supplier from '@/components/xyk/supplier'
@@ -103,6 +104,10 @@ export default new Router({
           path: '/output',
           name: 'output',
           component: output
+        },{
+          path: '/outputnew',
+          name: 'outputnew',
+          component: outputnew
         },{
           path: '/outputxq',
           name: 'outputxq',
