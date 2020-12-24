@@ -18,6 +18,14 @@ public class SpCommoditycategoryService {
     @Autowired
     SpCommoditycategoryMapper mapper;
 
+    /*
+     * @Author xiahaifeng
+     * @Description selectAll
+     * @Date 14:08 2020/12/24
+     * @param []
+     * @return java.util.List<com.demo.pojo.SpCommoditycategory>
+     * 查询全部商品类目
+    */
     public List<SpCommoditycategory> selectAll(){
         return mapper.selectAll();
     }

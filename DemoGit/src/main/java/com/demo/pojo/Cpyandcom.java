@@ -12,7 +12,7 @@ import java.util.Objects;
 @Entity
 public class Cpyandcom {
     private Integer cpcoid;
-    private SpCommodityproperty cpr;
+    private SpCommodityproperty cpy;
     private SpCommodity com;
 
     @Id
@@ -40,12 +40,12 @@ public class Cpyandcom {
 
     @ManyToOne
     @JoinColumn(name = "cpyid", referencedColumnName = "cpyid")
-    public SpCommodityproperty getCpr() {
-        return cpr;
+    public SpCommodityproperty getCpy() {
+        return cpy;
     }
 
-    public void setCpr(SpCommodityproperty cpr) {
-        this.cpr = cpr;
+    public void setCpy(SpCommodityproperty cpr) {
+        this.cpy = cpr;
     }
 
     @ManyToOne

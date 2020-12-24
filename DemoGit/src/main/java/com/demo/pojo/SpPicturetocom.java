@@ -64,4 +64,13 @@ public class SpPicturetocom {
     public void setPic(SpPicture pic) {
         this.pic = pic;
     }
+
+    @Override
+    public String toString() {
+        return "SpPicturetocom{" +
+                "ptcid=" + ptcid +
+                ", ptciszhu=" + ptciszhu +
+                ", pic=" + pic +
+                '}';
+    }
 }

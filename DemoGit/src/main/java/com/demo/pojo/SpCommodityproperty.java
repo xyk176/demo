@@ -17,7 +17,7 @@ public class SpCommodityproperty {
     private Integer cpytopid;
     private String cpyname;
     private List<Cpyandcom> coms;
-    private List<SpCommodityproperty> cpys;
+    /*private List<SpCommodityproperty> cpys;
 
     @Transient
     public List<SpCommodityproperty> getCpys() {
@@ -27,7 +27,7 @@ public class SpCommodityproperty {
     public void setCpys(List<SpCommodityproperty> cpys) {
         this.cpys = cpys;
     }
-
+*/
     @Id
     @Column(name = "cpyid")
     public Integer getCpyid() {
@@ -73,12 +73,21 @@ public class SpCommodityproperty {
         return Objects.hash(cpyid, cpytopid, cpyname);
     }
 
-    @OneToMany(mappedBy = "cpr")
+    @OneToMany(mappedBy = "cpy")
     public List<Cpyandcom> getComs() {
         return coms;
     }
 
     public void setComs(List<Cpyandcom> coms) {
         this.coms = coms;
+    }
+
+    @Override
+    public String toString() {
+        return "SpCommodityproperty{" +
+                "cpyid=" + cpyid +
+                ", cpytopid=" + cpytopid +
+                ", cpyname='" + cpyname + '\'' +
+                '}';
     }
 }

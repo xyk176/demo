@@ -19,6 +19,7 @@ public class SpCommoditylabel {
 
     @Id
     @Column(name = "cllid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getCllid() {
         return cllid;
     }

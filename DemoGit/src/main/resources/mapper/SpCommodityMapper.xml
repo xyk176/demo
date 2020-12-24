@@ -50,7 +50,7 @@
     where comid = #{comid,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.demo.pojo.SpCommodity">
+  <insert id="insert" parameterType="com.demo.pojo.SpCommodity" useGeneratedKeys="true" keyProperty="comid">
     <!--
       WARNING - @mbg.generated
       商品新增
@@ -61,7 +61,7 @@
       commarketprice, comweight, comvolume, 
       comsalesvolume, comsalesstatus, comdata
       )
-    values (#{comid,jdbcType=INTEGER}, #{cllid,jdbcType=INTEGER}, #{ccyid,jdbcType=INTEGER}, 
+    values (#{comid,jdbcType=INTEGER}, #{cll.cllid,jdbcType=INTEGER}, #{ccy.ccyid,jdbcType=INTEGER},
       #{comiszu,jdbcType=INTEGER}, #{combarcode,jdbcType=VARCHAR}, #{comname,jdbcType=VARCHAR}, 
       #{comsameprice,jdbcType=DECIMAL}, #{compricemin,jdbcType=DECIMAL}, #{compricemax,jdbcType=DECIMAL}, 
       #{commarketprice,jdbcType=DECIMAL}, #{comweight,jdbcType=DECIMAL}, #{comvolume,jdbcType=DECIMAL}, 
@@ -91,6 +91,17 @@
       comdata = #{comdata,jdbcType=TIMESTAMP}
     where comid = #{comid,jdbcType=INTEGER}
   </update>
+
+  <update id="updateByPrimaryKeyByStus" parameterType="com.demo.pojo.SpCommodity">
+    <!--
+      WARNING - @mbg.generated
+      根据主键修改商品可售状态
+    -->
+    update sp_commodity
+    set comsalesstatus = #{comsalesstatus,jdbcType=INTEGER}
+    where comid = #{comid,jdbcType=INTEGER}
+  </update>
+
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
@@ -137,5 +148,18 @@
       and c.${tiaojian} = #{canshu,jdbcType=INTEGER}
     </if>
     order by c.comid desc
+  </select>
+
+
+  <select id="selectAllByCllid" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+      根据商品标签查询商品
+    -->
+    select comid,comiszu, combarcode, comname, comsameprice, compricemin,
+    compricemax, commarketprice, comweight, comvolume, comsalesvolume, comsalesstatus,
+    comdata
+    from sp_commodity
+    where cllid = #{cllid,jdbcType=INTEGER}
   </select>
 </mapper>

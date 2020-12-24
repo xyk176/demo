@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "sp_product", schema = "jindun", catalog = "")
+@Table(name = "sp_product", schema = "jindun")
 public class SpProduct {
     private Integer lid;
     private String lname;

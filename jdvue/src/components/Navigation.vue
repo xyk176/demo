@@ -14,7 +14,6 @@
               </template>
               <el-menu-item-group title="单品库">
                 <router-link to="/liebiao" tag="span">
-                <el-menu-item index="1-1">单品库列表</el-menu-item>
                 </router-link>
                 <router-link to="/fenlei" tag="span">
                 <el-menu-item index="1-2">单品库分类</el-menu-item>
@@ -132,7 +131,6 @@
 
   #navigation .ismain>.body{
     width: 100%;
-    height: 500px;
     background: #FFFFFF;
     border-radius: 6px;
     border: 1px solid #E2E2E2;

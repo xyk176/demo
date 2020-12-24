@@ -87,4 +87,13 @@ public class SpPicture {
     public void setPicturetopros(List<SpPicturetopro> picturetopros) {
         this.picturetopros = picturetopros;
     }
+
+    @Override
+    public String toString() {
+        return "SpPicture{" +
+                "picid=" + picid +
+                ", picsort=" + picsort +
+                ", picpath='" + picpath + '\'' +
+                '}';
+    }
 }

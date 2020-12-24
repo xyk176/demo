@@ -1,7 +1,7 @@
 package com.demo.services;
 
-import com.demo.model.mdao.SpCommodityMapper;
-import com.demo.pojo.SpCommodity;
+import com.demo.model.mdao.*;
+import com.demo.pojo.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,14 @@ import java.util.List;
 public class SpCommodityService {
     @Autowired
     SpCommodityMapper mapper;
+    @Autowired
+    SpCommoditytoproMapper promapper;
+    @Autowired
+    SpPicturetocomMapper picmapper;
+    @Autowired
+    CpyandcomMapper cpymapper;
+    @Autowired
+    CprandcomMapper cprmapper;
 
     /*
      * @Author xiahaifeng
@@ -26,5 +34,60 @@ public class SpCommodityService {
     public PageInfo<SpCommodity> selectAllByPt(String tiaojian,String canshu,Integer pageNum,Integer pageSize){
         PageHelper.startPage(pageNum,pageSize);
         return new PageInfo<>(mapper.selectAllByPt(tiaojian,canshu));
+    }
+
+    /*
+     * @Author xiahaifeng
+     * @Description insert
+     * @Date 21:18 2020/12/23
+     * @param [record]
+     * @return boolean
+     * 新增商品
+    */
+    public boolean insert(SpCommodity record){
+        try {
+            mapper.insert(record);
+            for (SpCommoditytopro copr : record.getCoprs()) {
+                copr.setCom(record);
+                promapper.insert(copr);
+            }
+            for (SpPicturetocom pic : record.getPics()) {
+                pic.setCom(record);
+                picmapper.insert(pic);
+            }
+            if(record.getCprs().size()!=0){
+                for (Cprandcom cpr : record.getCprs()) {
+                    cpr.setCom(record);
+                    cprmapper.insert(cpr);
+                }
+            }
+            if(record.getCpys().size()!=0){
+                for (Cpyandcom cpy : record.getCpys()) {
+                    cpy.setCom(record);
+                    cpymapper.insert(cpy);
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /*
+     * @Author xiahaifeng
+     * @Description updateByPrimaryKeyByStus
+     * @Date 16:20 2020/12/24
+     * @param [record]
+     * @return boolean
+     * 根据主键修改商品可售状态
+    */
+    public boolean updateByPrimaryKeyByStus(SpCommodity record){
+        try {
+            mapper.updateByPrimaryKeyByStus(record);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 }
