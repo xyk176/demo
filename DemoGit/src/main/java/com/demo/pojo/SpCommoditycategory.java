@@ -18,14 +18,6 @@ public class SpCommoditycategory {
     private String ccytopid;
     private List<SpCommodity> coms;
 
-    public String getCcytopid() {
-        return ccytopid;
-    }
-
-    public void setCcytopid(String ccytopid) {
-        this.ccytopid = ccytopid;
-    }
-
     @Id
     @Column(name = "ccyid", nullable = false)
     public Integer getCcyid() {

@@ -16,7 +16,7 @@
     where cpyid = #{cpyid,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.demo.pojo.SpCommodityproperty">
+  <insert id="insert" parameterType="com.demo.pojo.SpCommodityproperty" useGeneratedKeys="true" keyProperty="cpyid">
     <!--
       WARNING - @mbg.generated
       新增

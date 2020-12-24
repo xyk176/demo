@@ -17,16 +17,16 @@ public class SpCommodityparameter {
     private Integer cprtopid;
     private String cprname;
     private List<Cprandcom> coms;
-    private List<SpCommodityparameter> cprs;
-
-    @Transient
-    public List<SpCommodityparameter> getCprs() {
-        return cprs;
-    }
-
-    public void setCprs(List<SpCommodityparameter> cprs) {
-        this.cprs = cprs;
-    }
+//    private List<SpCommodityparameter> cprss;
+//
+//    @Transient
+//    public List<SpCommodityparameter> getCprss() {
+//        return cprss;
+//    }
+//
+//    public void setCprss(List<SpCommodityparameter> cprss) {
+//        this.cprss = cprss;
+//    }
 
     @Id
     @Column(name = "cprid")

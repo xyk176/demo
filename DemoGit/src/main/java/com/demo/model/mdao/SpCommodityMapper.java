@@ -52,6 +52,16 @@ public interface SpCommodityMapper {
 
     /*
      * @Author xiahaifeng
+     * @Description selectAllByCllid
+     * @Date 17:14 2020/12/24
+     * @param [cllid]
+     * @return java.util.List<com.demo.pojo.SpCommodity>
+     * 根据商品标签查询商品
+    */
+    List<SpCommodity> selectAllByCllid(Integer cllid);
+
+    /*
+     * @Author xiahaifeng
      * @Description selectAllByPt
      * @Date 9:15 2020/12/22
      * @param [tiaojian, canshu]
@@ -69,4 +79,14 @@ public interface SpCommodityMapper {
      * 根据主键修改
     */
     int updateByPrimaryKey(SpCommodity record);
+
+    /*
+     * @Author xiahaifeng
+     * @Description updateByPrimaryKey
+     * @Date 9:12 2020/12/22
+     * @param [record]
+     * @return int
+     * 根据主键修改商品可售状态
+     */
+    int updateByPrimaryKeyByStus(SpCommodity record);
 }

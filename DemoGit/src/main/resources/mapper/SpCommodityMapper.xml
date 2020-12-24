@@ -92,6 +92,17 @@
     where comid = #{comid,jdbcType=INTEGER}
   </update>
 
+  <update id="updateByPrimaryKeyByStus" parameterType="com.demo.pojo.SpCommodity">
+    <!--
+      WARNING - @mbg.generated
+      根据主键修改商品可售状态
+    -->
+    update sp_commodity
+    set comsalesstatus = #{comsalesstatus,jdbcType=INTEGER}
+    where comid = #{comid,jdbcType=INTEGER}
+  </update>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
@@ -137,5 +148,18 @@
       and c.${tiaojian} = #{canshu,jdbcType=INTEGER}
     </if>
     order by c.comid desc
+  </select>
+
+
+  <select id="selectAllByCllid" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated
+      根据商品标签查询商品
+    -->
+    select comid,comiszu, combarcode, comname, comsameprice, compricemin,
+    compricemax, commarketprice, comweight, comvolume, comsalesvolume, comsalesstatus,
+    comdata
+    from sp_commodity
+    where cllid = #{cllid,jdbcType=INTEGER}
   </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.demo.controller;
 
+import com.demo.config.SpCommodityparameterVO;
 import com.demo.config.SpCommoditypropertyVO;
 import com.demo.pojo.*;
 import com.demo.services.*;
@@ -26,6 +27,10 @@ public class CommodityComtroller {
     SpPictureService picser;
     @Autowired
     SpCommoditypropertyService cpyser;
+    @Autowired
+    SpCommodityparameterService cprser;
+    @Autowired
+    SpCommoditylabelService cllser;
 
 
     /*
@@ -140,4 +145,135 @@ public class CommodityComtroller {
     }
 
 
+    /*
+     * @Author xiahaifeng
+     * @Description selectall_cpr
+     * @Date 14:23 2020/12/24
+     * @param []
+     * @return java.util.List<com.demo.config.SpCommodityparameterVO>
+     * 查询全部商品参数
+    */
+    @RequestMapping("/selectall_cpr")
+    public List<SpCommodityparameterVO> selectall_cpr(){
+        List<SpCommodityparameterVO> newlist = new ArrayList<>();
+        List<SpCommodityparameter> list = cprser.selectAll();
+        for (SpCommodityparameter cpr1 : list) {
+            if(cpr1.getCprtopid()==null){
+                newlist.add(new SpCommodityparameterVO(cpr1,null));
+            }
+        }
+        for (SpCommodityparameterVO cpr1 : newlist) {
+            List<SpCommodityparameter> shuju = new ArrayList<>();
+            for (SpCommodityparameter cpr2 : list) {
+                if(cpr1.getCpr().getCprid().equals(cpr2.getCprtopid())){
+                    shuju.add(cpr2);
+                }
+            }
+            cpr1.setCprlist(shuju);
+        }
+        return newlist;
+    }
+
+    /*
+     * @Author xiahaifeng
+     * @Description cpy_insert
+     * @Date 11:35 2020/12/24
+     * @param [com]
+     * @return boolean
+     * 新增商品属性
+    */
+    @RequestMapping("/cpy_insert")
+    public boolean cpy_insert(@RequestBody List<SpCommodityproperty> cpys){
+        return cpyser.insert(cpys);
+    }
+
+    /*
+     * @Author xiahaifeng
+     * @Description cpr_insert
+     * @Date 14:35 2020/12/24
+     * @param [cprs]
+     * @return boolean
+     * 新增商品参数
+    */
+    @RequestMapping("/cpr_insert")
+    public boolean cpr_insert(@RequestBody List<SpCommodityparameter> cprs){
+        return cprser.insert(cprs);
+    }
+
+
+    /*
+     * @Author xiahaifeng
+     * @Description selectall_cll
+     * @Date 15:46 2020/12/24
+     * @param []
+     * @return java.util.List<com.demo.pojo.SpCommoditylabel>
+     * 查询全部商品标签
+    */
+    @RequestMapping("/selectall_cll")
+    public List<SpCommoditylabel> selectall_cll(){
+        return cllser.selectAll();
+    }
+
+
+    /*
+     * @Author xiahaifeng
+     * @Description selectall_cll
+     * @Date 15:46 2020/12/24
+     * @param []
+     * @return java.util.List<com.demo.pojo.SpCommoditylabel>
+     * 根据主键修改商品可售状态
+     */
+    @RequestMapping("/cpr_updateByPrimaryKeyByStus")
+    public boolean cpr_updateByPrimaryKeyByStus(@RequestBody SpCommodity com){
+        return comser.updateByPrimaryKeyByStus(com);
+    }
+
+    /*
+     * @Author xiahaifeng
+     * @Description selectall_cll
+     * @Date 15:46 2020/12/24
+     * @param []
+     * @return java.util.List<com.demo.pojo.SpCommoditylabel>
+     * 根据主键修改商品可售状态
+     */
+    @RequestMapping("/cpr_updatecomstus")
+    public boolean cpr_updatecomstus(@RequestBody List<SpCommodity> coms){
+        boolean isok = true;
+        for (SpCommodity com : coms) {
+            boolean isno =  comser.updateByPrimaryKeyByStus(com);
+            if(!isno){
+                isok=false;
+            }
+        }
+        return isok;
+    }
+
+
+    /*
+     * @Author xiahaifeng
+     * @Description selectallcll_tiaojian
+     * @Date 17:44 2020/12/24
+     * @param [canshu]
+     * @return java.util.List<com.demo.pojo.SpCommoditylabel>
+     * 带条件的联合商品查询全部标签
+    */
+    @RequestMapping("/selectallcll_tiaojian")
+    public List<SpCommoditylabel> selectallcll_tiaojian(@RequestParam("canshu")String canshu){
+        return cllser.selectAllAndCom(canshu);
+    }
+
+
+    /*
+     * @Author xiahaifeng
+     * @Description cll_insetupdate
+     * @Date 17:46 2020/12/24
+     * @param [cll]
+     * @return boolean
+     * 商品标签修改和新增
+    */
+    @RequestMapping("/cll_insetupdate")
+    public boolean cll_insetupdate(@RequestBody SpCommoditylabel cll){
+        return cllser.insertupdate(cll);
+    }
 }
+

@@ -19,7 +19,38 @@ public class SpCommoditypropertyService {
     @Autowired
     SpCommoditypropertyMapper mapper;
 
+    /*
+     * @Author xiahaifeng
+     * @Description selectAll
+     * @Date 14:31 2020/12/24
+     * @param []
+     * @return java.util.List<com.demo.pojo.SpCommodityproperty>
+     * 查询全部商品属性
+    */
     public List<SpCommodityproperty> selectAll(){
         return mapper.selectAll();
+    }
+
+    /*
+     * @Author xiahaifeng
+     * @Description insert
+     * @Date 14:31 2020/12/24
+     * @param [spCommoditypropertys]
+     * @return boolean
+     * 新增商品属性
+    */
+    public boolean insert(List<SpCommodityproperty> spCommoditypropertys){
+        try {
+            SpCommodityproperty fucpy = spCommoditypropertys.get(0);
+            mapper.insert(fucpy);
+            spCommoditypropertys.remove(0);
+            for (SpCommodityproperty spCommodityproperty : spCommoditypropertys) {
+                spCommodityproperty.setCpytopid(fucpy.getCpyid());
+                mapper.insert(spCommodityproperty);
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
