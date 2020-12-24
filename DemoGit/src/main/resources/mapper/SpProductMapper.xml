@@ -41,6 +41,7 @@
     <result column="cid" jdbcType="INTEGER" property="cid" />
     <result column="cname" jdbcType="VARCHAR" property="cname" />
     <result column="cfid" jdbcType="INTEGER" property="cfid" />
+    <result column="picpath" jdbcType="INTEGER" property="picpath" />
   </resultMap>
 
   <select id="selectAllBylname" resultMap="BaseResultMapvo">
@@ -63,20 +64,19 @@
     where lid = #{lid,jdbcType=INTEGER}
   </delete>
 
-  <insert id="insert" parameterType="com.demo.pojo.SpProduct">
+  <insert id="insert" parameterType="com.demo.pojo.SpProduct" keyProperty="lid" useGeneratedKeys="true">
     <!--
       新增单品
     -->
     insert into sp_product (lid, cid2, lname, 
       lguige, ldanwei, ltiaoma, 
       lchengben, cid)
-    values (#{p.lid}, #{p.cid2}, #{p.lname},#{p.lguige}, #{p.ldanwei}, #{p.ltiaoma},
+    values (null, #{p.prs.cid2}, #{p.lname},#{p.lguige}, #{p.ldanwei}, #{p.ltiaoma},
       #{p.lchengben}, #{p.cid})
   </insert>
 
   <update id="updateByPrimaryKey" parameterType="com.demo.pojo.SpProduct">
     <!--
-
       WARNING - @mbg.generated
       修改
     -->
@@ -102,9 +102,18 @@
 
   <select id="selectAll" resultMap="BaseResultMapvo">
     <!--
-      查询单品表及其分类
+      查询单品表及其分类,图片
     -->
-    select * from sp_product p LEFT JOIN sp_productsort s on p.cid2=s.cid2
+    select p.*,c.*,s.*
+    from sp_product p
+    left join sp_picturetopro pp on p.lid=pp.lid
+    left join sp_picture c on c.picid=pp.picid
+    LEFT JOIN sp_productsort s on p.cid2=s.cid2
+    <where>
+      <if test="id!=null and id!=''">
+        and s.cid2=#{id}
+      </if>
+    </where>
   </select>
 
   <select id="selectAllBuPic" resultMap="BaseResultMapAndPic">
@@ -125,4 +134,20 @@
     </if>
     order by p.lid desc
   </select>
+
+  <!--新增库存表-->
+  <insert id="insertkucun">
+    insert into inventory (inid,lid,inentity,inoccupy,inusable,maxcount) values (null,#{i.product.lid},#{i.inentity},#{i.inoccupy},#{i.inusable},#{i.maxcount})
+  </insert>
+
+  <!--修改单品-->
+  <update id="updateproduct">
+        update sp_product
+    set lname = #{lname},
+      lguige = #{lguige},
+      ldanwei = #{ldanwei},
+      ltiaoma = #{ltiaoma},
+      lchengben = #{lchengben}
+    where lid = #{lid}
+  </update>
 </mapper>

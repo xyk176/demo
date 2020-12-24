@@ -32,6 +32,7 @@ public class Address {
 
     @Id
     @Column(name = "adid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getAdid() {
         return adid;
     }

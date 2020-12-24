@@ -25,8 +25,8 @@ public class SpProductService {
         mapper.insert(product);
     }
     // 查询单品表及其分类
-    public List<vo> selectall(){
-        return mapper.selectAll();
+    public List<vo> selectall(Integer id){
+        return mapper.selectAll(id);
     }
 
     public PageInfo<SpProduct> selectAll(Integer pageNo, Integer pageSize,

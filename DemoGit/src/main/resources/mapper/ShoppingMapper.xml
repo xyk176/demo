@@ -12,6 +12,7 @@
     <result column="stype" jdbcType="INTEGER" property="stype" />
   </resultMap>
 
+
   <resultMap id="shoppResult" type="com.demo.pojo.SpCommodity">
     <id column="comid" property="comid"/>
     <result column="comiszu" property="comiszu"/>
@@ -26,18 +27,128 @@
     <result column="comsalesvolume" property="comsalesvolume"/>
     <result column="comsalesstatus" property="comsalesstatus"/>
     <result column="comdata" property="comdata"/>
+    <collection property="pics" ofType="com.demo.pojo.SpPicturetocom"
+                column="comid" select="com.demo.model.mdao.ShoppingMapper.s_GoodsImg">
+      <id column="ptcid" property="ptcid"/>
+      <result column="ptciszhu" jdbcType="INTEGER" property="ptciszhu" />
+      <association property="pic" javaType="com.demo.pojo.SpPicture">
+        <id column="picid" jdbcType="INTEGER" property="picid" />
+        <result column="picpath" jdbcType="VARCHAR" property="picpath" />
+      </association>
+    </collection>
+
+    <collection property="cprs" ofType="com.demo.pojo.Cprandcom"
+                column="comid" select="com.demo.model.mdao.ShoppingMapper.s_Goodscpr">
+      <id column="cproid" property="cproid"/>
+      <association property="cpr" javaType="com.demo.pojo.SpCommodityparameter">
+        <id column="cprid" property="cprid"/>
+        <result column="cprname" property="cprname"/>
+      </association>
+    </collection>
+
+    <collection property="cpys" ofType="com.demo.pojo.Cpyandcom"
+                column="comid" select="com.demo.model.mdao.ShoppingMapper.s_Goodscpy">
+      <id column="cpcoid" property="cpcoid" />
+      <association property="cpy" javaType="com.demo.pojo.SpCommodityproperty">
+        <id column="cpyid" property="cpyid"/>
+        <result column="cpyname" property="cpyname"/>
+        <result column="cprtopid" property="cprtopid"/>
+      </association>
+    </collection>
+
   </resultMap>
 
-  <resultMap id="modityRequest" type="spCommoditycategory">
+  <!--属性ResultMap-->
+  <resultMap id="cpyResult" type="com.demo.pojo.Cpyandcom">
+    <id column="cpcoid" property="cpcoid"/>
+    <association property="cpr" javaType="com.demo.pojo.SpCommodityproperty" >
+      <id column="cpyid" property="cpyid"/>
+      <result column="cpyname" property="cpyname"/>
+      <result column="cprtopid" property="cprtopid"/>
+    </association>
+  </resultMap>
+
+  <!--根据商品ID  查询商品属性
+  List<SpCommodityproperty> s_Goodscpy(Integer goodsID)-->
+  <select id="s_Goodscpy" resultMap="cpyResult">
+    select cpy.*, y.*, y.cpyid as cpyid from cpyandcom y left join sp_commodityproperty cpy
+    on y.cpyid = cpy.cpyid  where y.comid = #{comid}
+  </select>
+
+
+
+  <!--参数ResultMap-->
+  <resultMap id="cprResult" type="com.demo.pojo.Cprandcom">
+    <id column="cproid" property="cproid"/>
+    <association property="cpr" javaType="com.demo.pojo.SpCommodityparameter">
+      <id column="cprid" property="cprid"/>
+      <result column="cprtopid" property="cprtopid"/>
+      <result column="cprname" property="cprname"/>
+    </association>
+  </resultMap>
+
+
+  <!--根据商品ID  查询商品参数
+  List<SpCommodityparameter> s_Goodscpr(Integer goodsID)-->
+  <select id="s_Goodscpr" resultMap="cprResult">
+    select cpr.*, r.* from cprandcom r inner join sp_commodityparameter cpr
+    on r.cprid = cpr.cprid  where r.comid = #{comid}
+  </select>
+  <!--查询商品多种参数  子查询
+  List<SpCommodityparameter> s_GoodsParam(Integer cprid)-->
+  <!--<select id="s_GoodsParam" resultMap="cprResult">
+    select cpr.* from sp_commodityparameter cpr where cpr.cprtopid = #{cprid}
+  </select>-->
+
+  <!--图片-->
+  <resultMap id="picResult" type="com.demo.pojo.SpPicturetocom">
+    <id column="ptcid" jdbcType="INTEGER" property="ptcid" />
+    <result column="ptciszhu" jdbcType="INTEGER" property="ptciszhu" />
+    <association property="pic" javaType="com.demo.pojo.SpPicture">
+      <id column="picid" jdbcType="INTEGER" property="picid" />
+      <result column="picpath" jdbcType="VARCHAR" property="picpath" />
+    </association>
+  </resultMap>
+  <!--根据商品ID 查询商品图片
+  List<SpPicture> s_GoodsImg(Integer goodsID)-->
+  <select id="s_GoodsImg" resultMap="picResult">
+    select p.*,c.* from sp_picturetocom p  inner join sp_picture c on p.picid=c.picid where p.comid = #{comid}
+  </select>
+
+
+
+
+
+  <!--根据商品ID  查看商品信息
+  List<SpCommodity> s_GoodsXiangQing(Integer goodsID)-->
+  <select id="s_GoodsXiangQing" resultMap="shoppResult">
+    select go.* from sp_commodity go
+    where go.comid = #{goodsID}
+  </select>
+
+
+  <!--根据商品分类id  查询该分类的所有商品
+  List<SpCommodity> s_Goods(Integer goodsTypeID)-->
+  <select id="s_Goods" resultMap="shoppResult">
+    select g.* from sp_commodity g WHERE g.ccyid = #{goodsTypeID}
+  </select>
+
+
+  <resultMap id="goodstypeResult" type="com.demo.pojo.SpCommoditycategory">
     <id column="ccyid" property="ccyid"/>
-    <result column="ccytopid" property="ccytopid"/>
     <result column="ccyname" property="ccyname"/>
+    <result column="ccytopid" property="ccytopid"/>
   </resultMap>
    <!--查询所有商品分类
-   List<SpCommodity> selectAll()-->
-  <select id="s_GoodsType" resultMap="modityRequest">
+   List<SpCommoditycategory> s_GoodsType()-->
+  <select id="s_GoodsType" resultMap="goodstypeResult">
     select sc.* from sp_commoditycategory sc
   </select>
+
+
+
+
+
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--

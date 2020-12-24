@@ -32,6 +32,7 @@ import Dateformat from './utils/dateFormat.js'
 Vue.prototype.$Dateformat = Dateformat
 
 
+
 Vue.filter('dateYMDHMSFormat1', function(dateStr, pattern = 'YYYY年MM月DD日') {
   if(!dateStr) return '';
   return moment(dateStr).format(pattern);
