@@ -45,42 +45,7 @@
               </el-col>
             </el-row>
           </el-form-item>
-          <el-form-item label="售价区间">
-            <el-row>
-              <el-col :span="4">
-                <el-input-number style="width: 100%;" :controls="false" v-model="comentity.compricemin" :max="comentity.compricemax"></el-input-number>
-              </el-col>
-              <el-col :span="1" style="text-align: center;"><span>——</span></el-col>
-              <el-col :span="4">
-                <el-input-number style="width: 100%;" :controls="false" v-model="comentity.compricemax" :min="comentity.compricemin"></el-input-number>
-              </el-col>
-            </el-row>
-          </el-form-item>
-          <el-form-item label="市场价">
-            <el-row>
-              <el-col :span="4">
-                <el-input-number style="width: 100%;" :controls="false" v-model="comentity.commarketprice" :min="0"></el-input-number>
-              </el-col>
-            </el-row>
-          </el-form-item>
-          <el-form-item label="重量">
-            <el-row>
-              <el-col :span="5">
-                <el-input style="width: 100%;" :controls="false" v-model="comentity.comweight" :min="0">
-                  <template slot="append">Kg</template>
-                </el-input>
-              </el-col>
-            </el-row>
-          </el-form-item>
-          <el-form-item label="体积">
-            <el-row>
-              <el-col :span="5">
-                <el-input style="width: 100%;" :controls="false" v-model="comentity.comvolume" :min="0">
-                  <template slot="append">m³</template>
-                </el-input>
-              </el-col>
-            </el-row>
-          </el-form-item>
+          
           <el-form-item label="商品图片" prop="coprs">
             <div class="body_pic_box">
               <ul>
@@ -101,6 +66,12 @@
               </ul>
             </div>
           </el-form-item>
+          <el-form-item label="销售状态">
+            <el-radio-group v-model="comentity.comsalesstatus">
+                <el-radio :label="1">可售</el-radio>
+                <el-radio :label="0">禁售</el-radio>
+              </el-radio-group>
+          </el-form-item>
       </div>
       <div class="body" v-if="active==1">
         <div class="body_title">
@@ -108,15 +79,109 @@
         </div>
         <el-form-item label="商品属性" prop="comname">
           <div class="com_tuozhan_box">
-            <div class="tuozhan_box_list"></div>
+            <div class="tuozhan_box_list" v-if="cpyshuju.xuan_cpy.length!=0">
+              <ul>
+                <li v-for="(v,i) in cpyshuju.xuan_cpy" :key="i">
+                  <el-row>
+                    <el-col :span="6">{{v.cpy.cpyname}}</el-col>
+                    <el-col :span="12">
+                      <el-select v-model="v.xuan_canshu" placeholder="请选择" size="small" @change="$forceUpdate()">
+                        <el-option v-for="(item,index) in v.cpylist" :key="index"  :label="item.cpyname"  :value="item.cpyid">
+                        </el-option>
+                      </el-select>
+                    </el-col>
+                    <el-col :span="6">
+                      <el-button type="text" size="small" @click="select_deletecange(i)">移除</el-button>
+                    </el-col>
+                  </el-row>
+                </li>
+              </ul>
+            </div>
             <div class="tuozhan_box_botton">
-              <el-button plain size="small"><i class="el-icon-plus" style="margin-right: 5px;"></i>新增属性</el-button>
-              <el-select v-model="cpyshuju.xuan" placeholder="请选择" size="small">
-                <el-option v-for="(v,i) in cpyshuju.cpys" :key="i"  :label="v.cpy.cpyname"  :value="v.cpy.cpyname">
+              <el-button plain size="small" @click="addcpy_show"><i class="el-icon-plus" style="margin-right: 5px;" ></i>新增属性</el-button>
+              <el-select v-model="cpyshuju.xuan" placeholder="请选择" size="small" @change="select_cange">
+                <el-option v-for="(v,i) in cpyshuju.cpys" :key="i"  :label="v.cpy.cpyname"  :value="i">
                 </el-option>
               </el-select>
             </div>
           </div>
+        </el-form-item>
+        <el-form-item label="商品参数" prop="comname">
+          <div class="com_tuozhan_box">
+            <div class="tuozhan_box_list" v-if="cprshuju.xuan_cpr.length!=0">
+              <ul>
+                <li v-for="(v,i) in cprshuju.xuan_cpr" :key="i">
+                  <el-row>
+                    <el-col :span="6">{{v.cpr.cprname}}</el-col>
+                    <el-col :span="12">
+                      <el-select v-model="v.xuan_canshu" placeholder="请选择" size="small" @change="$forceUpdate()">
+                        <el-option v-for="(item,index) in v.cprlist" :key="index"  :label="item.cprname"  :value="item.cprid">
+                        </el-option>
+                      </el-select>
+                    </el-col>
+                    <el-col :span="6">
+                      <el-button type="text" size="small" @click="selectcpr_deletecange(i)">移除</el-button>
+                    </el-col>
+                  </el-row>
+                </li>
+              </ul>
+            </div>
+            <div class="tuozhan_box_botton">
+              <el-button plain size="small" @click="addcpr_show"><i class="el-icon-plus" style="margin-right: 5px;" ></i>新增参数</el-button>
+              <el-select v-model="cprshuju.xuan" placeholder="请选择" size="small" @change="selectcpr_cange">
+                <el-option v-for="(v,i) in cprshuju.cprs" :key="i"  :label="v.cpr.cprname"  :value="i">
+                </el-option>
+              </el-select>
+            </div>
+          </div>
+        </el-form-item>
+        <el-form-item label="商品标签">
+          <el-select v-model="comentity.cll.cllid" placeholder="请选择">
+            <el-option  v-for="(v,i) in combiaoqian.biaoqian_list" :key="i" :label="v.cllname" :value="v.cllid"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="初始销量">
+          <el-row>
+            <el-col :span="4">
+              <el-input-number style="width: 100%;" :controls="false" v-model="comentity.comsalesvolume" :min="0"></el-input-number>
+            </el-col>
+          </el-row>
+        </el-form-item>
+        <el-form-item label="售价区间">
+          <el-row>
+            <el-col :span="4">
+              <el-input-number style="width: 100%;" :controls="false" v-model="comentity.compricemin" :max="comentity.compricemax"></el-input-number>
+            </el-col>
+            <el-col :span="1" style="text-align: center;"><span>——</span></el-col>
+            <el-col :span="4">
+              <el-input-number style="width: 100%;" :controls="false" v-model="comentity.compricemax" :min="comentity.compricemin"></el-input-number>
+            </el-col>
+          </el-row>
+        </el-form-item>
+        <el-form-item label="市场价">
+          <el-row>
+            <el-col :span="4">
+              <el-input-number style="width: 100%;" :controls="false" v-model="comentity.commarketprice" :min="0"></el-input-number>
+            </el-col>
+          </el-row>
+        </el-form-item>
+        <el-form-item label="重量">
+          <el-row>
+            <el-col :span="5">
+              <el-input style="width: 100%;" :controls="false" v-model="comentity.comweight" :min="0">
+                <template slot="append">Kg</template>
+              </el-input>
+            </el-col>
+          </el-row>
+        </el-form-item>
+        <el-form-item label="体积">
+          <el-row>
+            <el-col :span="5">
+              <el-input style="width: 100%;" :controls="false" v-model="comentity.comvolume" :min="0">
+                <template slot="append">m³</template>
+              </el-input>
+            </el-col>
+          </el-row>
         </el-form-item>
       </div>
       <div class="buttom_baocun" style="text-align: center;padding-top: 15px;">
@@ -265,7 +330,53 @@
             <el-button size="small">取 消</el-button>
           </div>
        </el-dialog>
-    </div>
+      </div>
+
+      <!-- 属性新增弹窗 -->
+      <el-dialog title="新增属性" id="addcpy_dialog" :visible.sync="tanchuang.iscpyadd" width="30%" :close-on-click-modal="false" top="20px">
+        <el-form ref="add_cpy" :rules="caddpy__rules" :model="cpyshuju.add_cpy" label-width="80px">
+          <el-form-item label="属性名称" prop="cpyname">
+            <el-input v-model="cpyshuju.add_cpy.cpyname" maxlength="10" show-word-limit></el-input>
+          </el-form-item>
+          <el-form-item label="属性值">
+            <el-input placeholder="请输入内容" v-model="cpyshuju.add_cpy.zicpyname" class="input-with-select">
+              <el-button slot="append" @click="addcpyzi_click">添加</el-button>
+            </el-input>
+          </el-form-item>
+          <div class="add_cpy_zibox">
+            <el-tag v-for="(tag,i) in cpyshuju.add_cpy.zicpy" :key="i" closable  type="success" @close="cpy_handleClose(i)">
+              {{tag.cpyname}}
+            </el-tag>
+          </div>
+          <el-form-item style="text-align: right;">
+            <el-button size="small">取消</el-button>
+            <el-button type="primary" size="small" @click="addcpy_queding('add_cpy')">保存</el-button>
+          </el-form-item>
+        </el-form>
+      </el-dialog>
+
+      <!-- 参数新增弹窗 -->
+      <el-dialog title="新增参数" id="addcpr_dialog" :visible.sync="tanchuang.iscpradd" width="30%" :close-on-click-modal="false" top="20px">
+        <el-form ref="add_cpr" :rules="caddpr__rules" :model="cprshuju.add_cpr" label-width="80px">
+          <el-form-item label="参数名称" prop="cprname">
+            <el-input v-model="cprshuju.add_cpr.cprname" maxlength="10" show-word-limit></el-input>
+          </el-form-item>
+          <el-form-item label="参数值">
+            <el-input placeholder="请输入内容" v-model="cprshuju.add_cpr.zicprname" class="input-with-select">
+              <el-button slot="append" @click="addcprzi_click">添加</el-button>
+            </el-input>
+          </el-form-item>
+          <div class="add_cpy_zibox">
+            <el-tag v-for="(tag,i) in cprshuju.add_cpr.zicpr" :key="i" closable  type="success" @close="cpr_handleClose(i)">
+              {{tag.cprname}}
+            </el-tag>
+          </div>
+          <el-form-item style="text-align: right;">
+            <el-button size="small">取消</el-button>
+            <el-button type="primary" size="small" @click="addcpr_queding('add_cpr')">保存</el-button>
+          </el-form-item>
+        </el-form>
+      </el-dialog>
   </div>
 </template>
 
@@ -276,8 +387,10 @@
       tanchuang:{
        isxuanzepro:false,
        isxuanzeimg:false,
+       iscpyadd:false,
+       iscpradd:false
       },
-      active: 1,
+      active: 0,
       comentity:{
         comid:'',
         comiszu:'0',
@@ -295,17 +408,24 @@
         pics:[],
         cprs:[],
         cpys:[],
-        cll:{},
+        cll:{
+          cllid:''
+        },
         ccy:{
           ccyid:''
         }
       },
+      /* 商品列表 */
       comleibie:{
         fuety:{
           ccyid:'',
           ccyname:''
         },
         leibie_list:[]
+      },
+      /* 商品标签 */
+      combiaoqian:{
+        biaoqian_list:[]
       },
       /* 关联单品所需参数 */
       proshuju:{
@@ -333,6 +453,23 @@
       cpyshuju:{
         cpys:[],
         xuan:'',
+        xuan_cpy:[],
+        add_cpy:{
+          cpyname:'',
+          zicpyname:'',
+          zicpy:[]
+        },
+      },
+      /* 商品参数 */
+      cprshuju:{
+        cprs:[],
+        xuan:'',
+        xuan_cpr:[],
+        add_cpr:{
+          cprname:'',
+          zicprname:'',
+          zicpr:[]
+        },
       },
       defaultProps: {
         children: 'children',
@@ -354,6 +491,17 @@
           { required: true, message: '请选择图片'}
         ],
       },
+      caddpy__rules:{
+        cpyname: [
+          { required: true, message: '请输入商品属性', trigger: 'blur' }
+        ]
+      },
+      caddpr__rules:{
+        cprname: [
+          { required: true, message: '请输入商品参数', trigger: 'blur' }
+        ]
+      },
+
      }
    },
    methods:{
@@ -558,6 +706,24 @@
       },
       /* 添加保存商品 */
       com_insert(){
+        if(this.cpyshuju.xuan_cpy.length!=0){
+          this.cpyshuju.xuan_cpy.forEach(v=>{
+            this.comentity.cpys.push({
+              cpy:{
+                cpyid:v.xuan_canshu
+              }
+            })
+          })
+        }
+        if(this.cprshuju.xuan_cpr.length!=0){
+          this.cprshuju.xuan_cpr.forEach(v=>{
+            this.comentity.cprs.push({
+              cpr:{
+                cprid:v.xuan_canshu
+              }
+            })
+          })
+        }
         this.$axios.put('commoditycomtroller/com_insert',this.comentity)
         .then(r=>{
             if(r.data){
@@ -579,17 +745,187 @@
       selectall_cpy(){
         this.$axios.put('commoditycomtroller/selectall_cpy')
         .then(r=>{
-            console.log("属性：",r.data);
             this.cpyshuju.cpys=r.data;
         }).catch(function(e){
             console.log("报错了，错误信息：",e);
         });
       },
+      /* 商品属性选择事件 */
+      select_cange(v){
+        let isno=true;
+        this.cpyshuju.xuan_cpy.forEach(v1=>{
+          if(v1.cpy.cpyid==this.cpyshuju.cpys[v].cpy.cpyid){
+            isno=false;
+          }
+        })
+        if(isno){
+          this.cpyshuju.cpys[v].xuan_canshu='';
+          this.cpyshuju.xuan_cpy.push(this.cpyshuju.cpys[v]);
+        }
+      },
+      /* 商品属性选择移除事件 */
+      select_deletecange(v){
+        this.cpyshuju.xuan_cpy.splice(v, 1);
+      },
+      /* 新增属性弹窗 */
+      addcpy_show(){
+        this.tanchuang.iscpyadd=true;
+      },
+      /* 新增属性中添加属性值方法 */
+      addcpyzi_click(){
+        if(this.cpyshuju.add_cpy.zicpyname!=''){
+          this.cpyshuju.add_cpy.zicpy.push({
+            cpyname:this.cpyshuju.add_cpy.zicpyname
+          })
+        }
+        this.cpyshuju.add_cpy.zicpyname='';
+      },
+      /* 新增属性中删除已添属性值 */
+      cpy_handleClose(tag) {
+        this.cpyshuju.add_cpy.zicpy.splice(tag, 1);
+      },
+      /* 新增商品属性确定 */
+      addcpy_queding(formName){
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            if(this.cpyshuju.add_cpy.zicpy.length!=0){
+              let zhi = [];
+              zhi.push({
+                cpyname:this.cpyshuju.add_cpy.cpyname
+              })
+              this.cpyshuju.add_cpy.zicpy.forEach(v=>{
+                zhi.push({
+                  cpyname:v.cpyname
+                })
+              })
+              this.$axios.put('commoditycomtroller/cpy_insert',zhi)
+              .then(r=>{
 
+                  if(r.data){
+                    this.$message({
+                      message: '创建成功！',
+                      type: 'success'
+                    });
+                   this.tanchuang.iscpyadd=false;
+                   this.selectall_cpy();
+                  }else{
+                    this.$message.error('创建失败！');
+                  }
+              }).catch(function(e){
+                  console.log("报错了，错误信息：",e);
+              });
+            }else{
+              this.$message({
+                message: '至少有一个属性值！',
+                type: 'warning'
+              });
+            }
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      /* 查询全部商品参数 */
+      selectall_cpr(){
+        this.$axios.put('commoditycomtroller/selectall_cpr')
+        .then(r=>{
+            this.cprshuju.cprs=r.data;
+        }).catch(function(e){
+            console.log("报错了，错误信息：",e);
+        });
+      },
+      /* 商品参数选择事件 */
+      selectcpr_cange(v){
+        let isno=true;
+        this.cprshuju.xuan_cpr.forEach(v1=>{
+          if(v1.cpr.cprid==this.cprshuju.cprs[v].cpr.cprid){
+            isno=false;
+          }
+        })
+        if(isno){
+          this.cprshuju.cprs[v].xuan_canshu='';
+          this.cprshuju.xuan_cpr.push(this.cprshuju.cprs[v]);
+        }
+      },
+      /* 商品参数选择移除事件 */
+      selectcpr_deletecange(v){
+        this.cprshuju.xuan_cpr.splice(v, 1);
+      },
+      /* 新增参数弹窗 */
+      addcpr_show(){
+        this.tanchuang.iscpradd=true;
+      },
+      /* 新增参数中添加属性值方法 */
+      addcprzi_click(){
+        if(this.cprshuju.add_cpr.zicprname!=''){
+          this.cprshuju.add_cpr.zicpr.push({
+            cprname:this.cprshuju.add_cpr.zicprname
+          })
+        }
+        this.cprshuju.add_cpr.zicprname='';
+      },
+      /* 新增参数中删除已添属性值 */
+      cpr_handleClose(tag) {
+        this.cprshuju.add_cpr.zicpr.splice(tag, 1);
+      },
+      /* 新增商品参数确定 */
+      addcpr_queding(formName){
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            if(this.cprshuju.add_cpr.zicpr.length!=0){
+              let zhi = [];
+              zhi.push({
+                cprname:this.cprshuju.add_cpr.cprname
+              })
+              this.cprshuju.add_cpr.zicpr.forEach(v=>{
+                zhi.push({
+                  cprname:v.cprname
+                })
+              })
+              this.$axios.put('commoditycomtroller/cpr_insert',zhi)
+              .then(r=>{
+
+                  if(r.data){
+                    this.$message({
+                      message: '创建成功！',
+                      type: 'success'
+                    });
+                   this.tanchuang.iscpradd=false;
+                   this.selectall_cpr();
+                  }else{
+                    this.$message.error('创建失败！');
+                  }
+              }).catch(function(e){
+                  console.log("报错了，错误信息：",e);
+              });
+            }else{
+              this.$message({
+                message: '至少有一个参数值！',
+                type: 'warning'
+              });
+            }
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      /* 查询全部商品标签 */
+      selectAll_cll(){
+        this.$axios.post('commoditycomtroller/selectall_cll')
+        .then(r=>{
+            this.combiaoqian.biaoqian_list=r.data;
+        }).catch(function(e){
+            console.log("报错了，错误信息：",e);
+        });
+      },
    },
    mounted(){
+     this.selectAll_cll();
      this.comleibie_show();
      this.selectall_cpy();
+     this.selectall_cpr();
    }
   }
 </script>
@@ -791,8 +1127,59 @@
 <style>
   #sangpinadd .body .el-form-item .com_tuozhan_box{
     width: 100%;
-    height: 60px;
     border-radius: 8px;
     background: #FFFFFF;
+  }
+  #sangpinadd .body .el-form-item .com_tuozhan_box .tuozhan_box_botton{
+    height: 60px;
+    line-height: 60px;
+    padding: 0px 15px;
+  }
+  #sangpinadd .body .el-form-item .com_tuozhan_box .tuozhan_box_list{
+    padding: 10px;
+  }
+  #sangpinadd .body .el-form-item .com_tuozhan_box .tuozhan_box_list ul{
+    list-style: none;
+    overflow: hidden;
+  }
+  #sangpinadd .body .el-form-item .com_tuozhan_box .tuozhan_box_list ul li{
+    width: 33%;
+    float: left;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    box-sizing: border-box;
+  }
+  #sangpinadd .body .el-form-item .com_tuozhan_box .tuozhan_box_list ul li .el-row{
+    border-radius: 6px;
+    border: 1px solid #E2E2E2;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
+    padding: 0px 5px;
+    box-sizing: border-box;
+  }
+  #sangpinadd .body .el-form-item .com_tuozhan_box .tuozhan_box_list ul li .el-col{
+    text-align: center;
+  }
+</style>
+<!--新增商品属性弹窗样式  -->
+<style>
+  #sangpinadd #addcpy_dialog .el-dialog{
+    border-radius: 8px;
+  }
+  #sangpinadd #addcpy_dialog .el-dialog .add_cpy_zibox{
+    padding: 10px 20px;
+  }
+  #sangpinadd #addcpy_dialog .el-dialog .add_cpy_zibox .el-tag{
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
+  #sangpinadd #addcpr_dialog .el-dialog{
+    border-radius: 8px;
+  }
+  #sangpinadd #addcpr_dialog .el-dialog .add_cpy_zibox{
+    padding: 10px 20px;
+  }
+  #sangpinadd #addcpr_dialog .el-dialog .add_cpy_zibox .el-tag{
+    margin-left: 5px;
+    margin-bottom: 5px;
   }
 </style>
