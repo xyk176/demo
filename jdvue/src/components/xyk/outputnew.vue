@@ -1,19 +1,19 @@
 <template>
   <div id="inventory">
-    <div  class="font">入库单-{{bename}}</div>
+    <div  class="font">出库单-新建出库单</div>
     <div class="body">
       <div class="shangping_jiansuo">
         <div style="font-size:18px ;">基本信息</div>
       <el-form >
-        <el-row :span="24" style="margin-bottom: 10px;" v-if="bename=='采购入库'">
+        <el-row :span="24" style="margin-bottom: 10px;">
           <el-col :span="12"   style="text-align: center;">
-              <el-form-item label="供应商名称:" label-width="30%">
+              <el-form-item label="出库类型:" label-width="30%">
                 <el-select style="margin-right: 15px;float: left;width: 240px;" v-model="suname" placeholder="请选择">
                      <el-option
                        v-for="item in supplier"
-                       :key="item.suid"
+                       :key="item.suname"
                        :label="item.suname"
-                       :value="item.suid">
+                       :value="item.suname">
                      </el-option>
                    </el-select>
               </el-form-item>
@@ -55,16 +55,16 @@
        <el-table
           :data="beputxq"
           style="width: 100%;">
-          <el-table-column prop="product.lname" label="单品名称">
+          <el-table-column prop="sproduct.lname" label="单品名称">
 
           </el-table-column>
-          <el-table-column prop="product.lguige" label="单品规格"></el-table-column>
-          <el-table-column prop="product.ldanwei" label="单位"></el-table-column>
-          <el-table-column label="入库数量">
+          <el-table-column prop="sproduct.lguige" label="单品规格"></el-table-column>
+          <el-table-column prop="sproduct.ldanwei" label="单位"></el-table-column>
+          <el-table-column label="出库数量">
               <template slot-scope="scope">
                 <el-input-number
                   style="width:150px"
-                  v-model.number="scope.row.libecount"
+                  v-model.number="scope.row.outxqcount"
                   :min="1"
                   :placeholder="1+''"
                 ></el-input-number>
@@ -77,8 +77,8 @@
           </el-table-column>
         </el-table>
         <div style="margin-top: 20px;margin-left: auto;">
-        <el-button type="primary" @click="beputnew">确认入库</el-button>
-        <router-link to="beput">
+        <el-button type="primary" @click="beputnew">确认出库</el-button>
+        <router-link to="output">
 
           <el-button>取消</el-button>
         </router-link></div>
@@ -92,41 +92,42 @@
   export default {
       data(){
         return {
-            suname:'',
+            suname:'其他出库',
             bedate:'',
             beremark:'',
             lname:'',
-            bename:this.$route.params.clas,
             current: 1,
             pageSize: 3,
             total: 0,
             splist:[],
             beputxq:[],
-            supplier:[]
+            supplier:[
+              {suname:'过期出库'},
+              {suname:'报废出库'},
+              {suname:'其他出库'},
+            ]
         }
       },
       methods:{
         beputnew(){
           console.log(this.beputxq)
-          console.log(this.bename)
+          console.log(this.suname)
           console.log(this.beremark)
-          if(!this.bename){
-            this.bename='其他出库'
+          if(!this.suname){
+            this.suname='其他出库'
           }
           let b={
-             beclass:this.bename,
-             beremark:this.beremark,
-             supplier:{
-               suid:this.suname},
-             beputxqs:this.beputxq
+             outclass:this.suname,
+             outremark:this.beremark,
+             outputxqs:this.beputxq
           }
           console.log(b);
-          this.$axios.put("beput/insert",b)
+          this.$axios.put("output/insert",b)
             .then(r=>{
               if(r.status===200){
                 console.log('date',r.data)
                 if(r.data>0){
-                  alert("入库成功")
+                  alert("出库成功")
                 }
               }
           })
@@ -135,11 +136,10 @@
         this.beputxq.splice(index,1);
         },
         pushshoplist(index,row){
-          console.log(row)
-          row.libecount=1;
+          row.outxqcount=1;
           var json = {
-            libecount:row.libecount,
-            product:{
+            outxqcount:row.outxqcount,
+            sproduct:{
               lid:row.lid,
               lname:row.lname,
               lguige:row.lguige,
@@ -153,7 +153,7 @@
           }else{
             for(let j=0;j<1;j++){
               for(let i=0;i<this.beputxq.length;i++){
-                    if(row.lid==this.beputxq[i].product.lid){
+                    if(row.lid==this.beputxq[i].sproduct.lid){
                       t=false
                 }
               }
@@ -167,10 +167,6 @@
           console.log(this.beputxq)
         },
           inventory(){
-            this.$axios.post("supplier/selectNewBeput")
-            .then(r=>{
-              this.supplier=r.data
-            })
             let param={
                         no: this.current,
                         size: this.pageSize,

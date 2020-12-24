@@ -28,9 +28,9 @@
           <el-table-column prop="suphone" label="单位电话"></el-table-column>
           <el-table-column prop="sulxr" label="联系人"></el-table-column>
           <el-table-column prop="sulxrphone" label="联系电话"></el-table-column>
-          <el-table-column label="操作">
+         <!-- <el-table-column label="操作">
             <el-button >删除</el-button>
-          </el-table-column>
+          </el-table-column> -->
         </el-table>
 
 

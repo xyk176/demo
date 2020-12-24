@@ -3,13 +3,20 @@
 <mapper namespace="com.demo.model.mdao.SpProductMapper">
   <resultMap id="BaseResultMap" type="com.demo.pojo.SpProduct">
     <id column="lid" jdbcType="INTEGER" property="lid" />
-    <result column="cid2" jdbcType="INTEGER" property="cid2" />
     <result column="lname" jdbcType="VARCHAR" property="lname" />
     <result column="lguige" jdbcType="VARCHAR" property="lguige" />
     <result column="ldanwei" jdbcType="VARCHAR" property="ldanwei" />
     <result column="ltiaoma" jdbcType="INTEGER" property="ltiaoma" />
     <result column="lchengben" jdbcType="DECIMAL" property="lchengben" />
     <result column="cid" jdbcType="INTEGER" property="cid" />
+    <collection property="inventorys" ofType="com.demo.pojo.Inventory">
+
+      <id column="inid" jdbcType="INTEGER" property="inid" />
+      <result column="inentity" jdbcType="INTEGER" property="inentity" />
+      <result column="inoccupy" jdbcType="INTEGER" property="inoccupy" />
+      <result column="inusable" jdbcType="INTEGER" property="inusable" />
+      <result column="maxcount" jdbcType="INTEGER" property="maxcount" />
+    </collection>
   </resultMap>
 
   <resultMap id="BaseResultMapAndPic" type="com.demo.pojo.SpProduct">
@@ -44,11 +51,12 @@
     <result column="picpath" jdbcType="INTEGER" property="picpath" />
   </resultMap>
 
-  <select id="selectAllBylname" resultMap="BaseResultMapvo">
+  <select id="selectAllBylname" resultMap="BaseResultMap">
     <!--
       查询单品表及其分类
     -->
     select * from sp_product p
+    inner join inventory i on p.lid=i.lid
     <where>
       <if test="lname!=null and lname!=''">
          and p.lname like concat('%',#{lname},'%')

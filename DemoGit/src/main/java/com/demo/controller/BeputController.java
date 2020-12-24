@@ -86,8 +86,10 @@ public class BeputController {
             bexq.setLibecount(bexq.getLibecount());
             //新增入库详情
             bs.insertxq(bexq);
-            is.update(bexq.getLibecount(),bexq.getLibecount(),bexq.getProduct().getLid());
+            /*加库存*/
+            is.update(bexq.getLibecount(),bexq.getLibecount(),bexq.getProduct().getInventorys().get(0).getInid());
              Outandinput o=new Outandinput();
+             /*出入库明细添加*/
              o.setOutinclass(b.getBeclass());
              o.setOutincount(bexq.getLibecount());
              o.setProduct(bexq.getProduct());

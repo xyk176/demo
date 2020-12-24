@@ -49,7 +49,7 @@
         </div>
         <el-dialog title="批量设置" :visible.sync="shezhi">
               <el-input-number
-                style="width:150px"
+                style="width:120px"
                 v-model.number="maxcount"
                 :min="1"
                 :placeholder="1+''"

@@ -1,7 +1,9 @@
 package com.demo.services;
 
 import com.demo.model.mdao.ChecksMapper;
+import com.demo.model.mdao.CheckxqMapper;
 import com.demo.pojo.Checks;
+import com.demo.pojo.Checkxq;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,40 @@ import java.util.List;
 public class ChecksServices {
     @Autowired
     ChecksMapper mapper;
+    @Autowired
+    CheckxqMapper cxmapper;
+    /*
+     * @Author xieyukun
+     * @Description insert
+     * @Date 15:05 2020/12/24
+     * @param [c]
+     * @return java.lang.Integer
+    */
+    public Checks insert(Checks c){
+        mapper.insert(c);
+        return c;
+
+    }
+    /*
+     * @Author xieyukun
+     * @Description insertxq
+     * @Date 15:05 2020/12/24
+     * @param [cx]
+     * @return java.lang.Integer
+    */
+    public Integer insertxq(Checkxq cx){
+        return cxmapper.insert(cx);
+    }
+    /*
+     * @Author xieyukun
+     * @Description selectAndchecksxq
+     * @Date 10:14 2020/12/24
+     * @param [cheid]
+     * @return java.util.List<com.demo.pojo.Checks>
+    */
+    public List<Checks> selectAndchecksxq(Integer cheid){
+        return mapper.selectAndchecksxq(cheid);
+    }
     /*
      * @Author xieyukun
      * @Description selectAndproduct

@@ -36,8 +36,9 @@
             </el-select>
         </div>
         <div class="beput_button">
-
-          <el-button style="float: left;">新建出库</el-button>
+         <router-link to="outputnew">
+            <el-button style="float: left;">新建出库</el-button>
+         </router-link>
         </div>
         <div class="shangping_jiansuo">
          <el-table
@@ -122,6 +123,10 @@
                       value: '盘亏出库'
                     }, {
                       value: '其他出库'
+                    }, {
+                      value: '报废出库'
+                    }, {
+                      value: '过期出库'
                     }],
         }
       },

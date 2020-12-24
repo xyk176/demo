@@ -32,8 +32,11 @@ import beput from '@/components/xyk/beput'
 import beputxq from '@/components/xyk/beputxq'
 import beputnew from '@/components/xyk/beputnew'
 import output from '@/components/xyk/output'
+import outputnew from '@/components/xyk/outputnew'
 import outputxq from '@/components/xyk/outputxq'
 import checks from '@/components/xyk/checks'
+import checksnew from '@/components/xyk/checksnew'
+import checksxq from '@/components/xyk/checksxq'
 import supplier from '@/components/xyk/supplier'
 import suppliernew from '@/components/xyk/suppliernew'
 import maxcount from '@/components/xyk/maxcount'
@@ -53,7 +56,7 @@ export default new Router({
       component: login
     },
     {
-      path: '/',
+      path: '/Shopping',
       name: 'Shopping',
       component: Shopping
     },
@@ -85,7 +88,7 @@ export default new Router({
       ]
     },
     {
-      path: '/navigation',
+      path: '/',
       name: 'Navigation',
       component: Navigation,
       children:[
@@ -140,6 +143,10 @@ export default new Router({
           name: 'output',
           component: output
         },{
+          path: '/outputnew',
+          name: 'outputnew',
+          component: outputnew
+        },{
           path: '/outputxq',
           name: 'outputxq',
           component: outputxq
@@ -147,6 +154,14 @@ export default new Router({
           path: '/checks',
           name: 'checks',
           component: checks
+        },{
+          path: '/checksnew',
+          name: 'checksnew',
+          component: checksnew
+        },{
+          path: '/checksxq',
+          name: 'checksxq',
+          component: checksxq
         },{
           path: '/supplier',
           name: 'supplier',

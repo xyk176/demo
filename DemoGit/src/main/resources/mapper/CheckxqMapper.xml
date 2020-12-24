@@ -27,7 +27,7 @@
     -->
     insert into checkxq (chexqid, cheid, lid, 
       chexqcount, cheblcount)
-    values (#{chexqid,jdbcType=INTEGER}, #{cheid,jdbcType=INTEGER}, #{lid,jdbcType=INTEGER}, 
+    values (#{chexqid,jdbcType=INTEGER}, #{checks.cheid,jdbcType=INTEGER}, #{product.lid,jdbcType=INTEGER},
       #{chexqcount,jdbcType=INTEGER}, #{cheblcount,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.demo.pojo.Checkxq">
