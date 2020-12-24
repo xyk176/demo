@@ -1,7 +1,9 @@
 <template>
   <div style="overflow: hidden;position: relative;">
     <el-container>
-      <el-header>Header</el-header>
+      <el-header>
+        <el-tag @click="s_carts">查看购物车</el-tag>
+      </el-header>
       <el-main>
         <el-row>
           <el-col :span="4">
@@ -43,14 +45,24 @@
               </div>
               <div v-show="!goods_show">
                 <!-- 商品详情区 -->
-                <div style="display: inline-block;">
-                  <el-image style="width: 496px; height: 463px;border-radius: 17px;" title="点击查看更多图片" :src="url"
-                    :preview-src-list="img_list">
-                  </el-image>
-                </div>
-                <div class="goodsXinXi_div">
+                <el-row :gutter="10">
+                  <el-col :span="11">
+                    <div style="display: inline-block;">
+                      <el-image style="width: 496px; height: 463px;border-radius: 17px;" title="点击查看更多图片" :src="url"
+                        :preview-src-list="img_list">
+                      </el-image>
+                    </div>
+                  </el-col>
+                  <el-col :span="12">
+                    <div class="goodsXinXi_div">
+                        <el-input-number v-model="num" :min="1" :max="10" class="num_button">
+                        </el-input-number>
+                        <el-button @click="add_cart">加入购物车</el-button>
+                    </div>
+                  </el-col>
+                </el-row>
 
-                </div>
+
                 <el-row :gutter="20">
                   <el-col :span="11">
                     <div>
@@ -82,6 +94,45 @@
         </el-row>
       </el-main>
     </el-container>
+    <el-drawer
+      title="我是标题"
+      :visible.sync="cart_show"
+      :size="size"
+      :with-header="false">
+       <el-table
+          ref="multipleTable"
+          :data="cartData"
+          tooltip-effect="dark"
+          style="width: 100%"
+          @selection-change="handleSelectionChange">
+          <el-table-column
+            type="selection"
+            width="55">
+          </el-table-column>
+          <el-table-column
+            label="商品图片"
+            width="120">
+            <template slot-scope="scope">
+              <img :src="scope.row.com.pics[0].pic.picpath" style="width: 120px;height: 120px;">
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="商品名称"
+            width="120">
+            <template slot-scope="scope">{{ scope.row.com.comname }}</template>
+          </el-table-column>
+          <el-table-column
+            label="价格"
+            width="120">
+            <template slot-scope="scope">{{ scope.row.com.commarketprice }}</template>
+          </el-table-column>
+          <el-table-column
+            label="数量"
+            show-overflow-tooltip>
+            <template slot-scope="scope">{{ scope.row.number }}</template>
+          </el-table-column>
+        </el-table>
+    </el-drawer>
   </div>
 </template>
 
@@ -90,21 +141,42 @@
   export default {
     data() {
       return {
+        cid:1,//客户ID
         goods_type: [], //所有商品类型
         goods_list: [], //一个商品类型---所有商品
         goods_show: false, //商品列表界面  商品详情界面   切换
         type_id: 0, //商品分类ID
-        pageSize: 8,
-        current: 0,
-        total: 0,
-        url: "",
+        pageSize: 8,//一页多少条数据
+        current: 0,//当前为多少页
+        total: 0,//多少条数据
+        url: "",//主图地址
         img_list: [], //商品详情图
         activeName:"1",//展示商品参数  折叠面板
         goods_property:[],//商品参数
         goods_ShuXin:[],//商品属性
+        num: 1,//添加商品数量
+        cartData:[],//客户的购物车
+        cart_show:false,//购物车界面
+        size:"520px",//购物车界面宽度
       }
     },
     methods: {
+      handleSelectionChange(){//购物车界面   复选框
+
+      },
+      s_carts(){//查询购物车--根据客户ID
+      this.cart_show = true;
+        let param={cid:this.cid};
+        this.$axios.post("/shopping/s_Carts",param)
+        .then(res=>{
+          this.cartData = res.data.objs;
+          console.log("购物车信息--",res.data);
+
+        })
+      },
+      add_cart(){//添加购物车
+
+      },
       goods_xiangqing(goodsID) { //根据商品id  查看商品详细信息
         this.goods_show = false; //商品列表隐藏  商品详细信息界面显示
         let param = {
@@ -126,7 +198,7 @@
         this.$axios.post('shopping/s_GoodsType')
           .then(res => {
             this.goods_type = res.data.objs; //拿到所有商品分类
-            console.log("查看多有商品分类--", res.data.objs);
+            //console.log("查看多有商品分类--", res.data.objs);
           })
       },
       s_goods(type_id) {

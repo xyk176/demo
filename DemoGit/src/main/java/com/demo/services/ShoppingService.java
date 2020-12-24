@@ -6,6 +6,7 @@ package com.demo.services;/**
  */
 
 import com.demo.model.mdao.ShoppingMapper;
+import com.demo.pojo.Shopping;
 import com.demo.pojo.SpCommodity;
 import com.demo.pojo.SpCommoditycategory;
 import com.demo.pojo.SpCommoditytopro;
@@ -29,6 +30,18 @@ import java.util.List;
 public class ShoppingService {
     @Autowired
     ShoppingMapper smapper;
+
+    /*
+     * @Author xieyukun
+     * @Description s_Carts
+     * @Date 0:40 2020-12-24
+     * @param []
+     * @return java.util.List<com.demo.pojo.Shopping>
+     查询所有购物车
+    */
+    public List<Shopping> s_Carts(Integer cid){
+        return smapper.s_Carts(cid);
+    }
 
     //根据商品ID  查看商品详情
     public List<SpCommodity> s_GoodsXiangQing(Integer goodsID){

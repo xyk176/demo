@@ -1,10 +1,15 @@
 
+.num_button{
+  position: absolute;
+  bottom: 0px;
+}
 .goodsXinXi_div {
   display: inline-block;
   background: #00FFFF;
   height: 463px;
-  width: 591px;
+  width: 585px;
   border-radius: 17px;
+  position: relative;
 }
 
 .item-pic {

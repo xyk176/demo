@@ -15,6 +15,15 @@ public class Shopping {
     private Integer stype;
     private SpCommodity com;
     private Customer customer;
+    private Integer number;
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 
     @Id
     @Column(name = "shid")

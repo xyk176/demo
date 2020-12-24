@@ -9,10 +9,33 @@ import java.util.List;
 @Mapper
 @Repository
 public interface ShoppingMapper {
-    //根据商品ID 查询商品图片
+    /*
+     * @Author xieyukun
+     * @Description s_Carts
+     * @Date 0:30 2020-12-24
+     * @param []
+     * @return java.util.List<com.demo.pojo.Shopping>
+     查询所有购物车--根据客户ID
+    */
+    List<Shopping> s_Carts(Integer cid);
+    /*
+     * @Author xieyukun
+     * @Description s_GoodsImg
+     * @Date 0:28 2020-12-24
+     * @param [comid]
+     * @return java.util.List<com.demo.pojo.SpPicturetocom>
+     根据商品ID 查询商品图片
+    */
     List<SpPicturetocom> s_GoodsImg(Integer comid);
 
-    //根据商品ID  查询商品参数
+    /*
+     * @Author xieyukun
+     * @Description s_Goodscpr
+     * @Date 0:29 2020-12-24
+     * @param [goodsID]
+     * @return java.util.List<com.demo.pojo.Cprandcom>
+     根据商品ID  查询商品参数
+    */
     List<Cprandcom> s_Goodscpr(Integer goodsID);
 
     /*
@@ -25,7 +48,14 @@ public interface ShoppingMapper {
     */
     List<SpCommodityparameter> s_GoodsParam(Integer cprid);
 
-    //根据商品ID  查询商品属性
+    /*
+     * @Author xieyukun
+     * @Description s_Goodscpy
+     * @Date 0:29 2020-12-24
+     * @param [goodsID]
+     * @return java.util.List<com.demo.pojo.Cpyandcom>
+     根据商品ID  查询商品属性
+    */
     List<Cpyandcom> s_Goodscpy(Integer goodsID);
 
     /*
@@ -38,13 +68,34 @@ public interface ShoppingMapper {
     */
     List<SpCommodityproperty> s_GoodsProperty(Integer cpyid);
 
-    //根据商品ID  查看商品详情
+    /*
+     * @Author xieyukun
+     * @Description s_GoodsXiangQing
+     * @Date 0:29 2020-12-24
+     * @param [goodsID]
+     * @return java.util.List<com.demo.pojo.SpCommodity>
+     根据商品ID  查看商品详情
+    */
     List<SpCommodity> s_GoodsXiangQing(Integer goodsID);
 
-    //查询所有商品分类
+    /*
+     * @Author xieyukun
+     * @Description s_GoodsType
+     * @Date 0:29 2020-12-24
+     * @param []
+     * @return java.util.List<com.demo.pojo.SpCommoditycategory>
+     查询所有商品分类
+    */
     List<SpCommoditycategory> s_GoodsType();
 
-    //根据商品分类id  查询该分类的所有商品
+    /*
+     * @Author xieyukun
+     * @Description s_Goods
+     * @Date 0:30 2020-12-24
+     * @param [goodsTypeID]
+     * @return java.util.List<com.demo.pojo.SpCommodity>
+     根据商品分类id  查询该分类的所有商品
+    */
     List<SpCommodity> s_Goods(Integer goodsTypeID);
 
 
