@@ -293,7 +293,7 @@ export default {
       })
     },
     xg(r) {
-      console.log(r.oId);
+      console.log(r);
       this.xx = true;
       this.oid2=r.oId;
       this.$axios.post("order/seorder",{oId:this.oid2}).then((res)=>{

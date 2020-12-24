@@ -61,14 +61,20 @@ public interface OrdersMapper {
     /*根据订单编号修改订单状态*/
     Integer uporder(@Param("or")Orders o);
     /*新增出库单*/
-    Integer insertoutput(@Param("op")Output output);
+    Output insertoutput(@Param("op")Output output);
     /*新增出库详情*/
-    Integer insertoutputxq(@Param("opxq")Outputxq outputxq);
+    Outputxq insertoutputxq(@Param("opxq")Outputxq outputxq);
     /*修改库存*/
     Integer updateinventory(@Param("in")Inventory inventory);
     /*根据订单编号查询订单详情*/
     List<OrderInfo> selectorderinfo(Integer oId);
+    /*根据订单详情编号查询商品*/
+    List<SpCommodity> selectspcom(Integer oiId);
+    /*根据商品编号查询单品*/
+    List<SpProduct> selectproduct(Integer comid);
 
     /*查询未发货订单*/
     List<Orders> orderstwo( @Param("orsip") String orsip, @Param("pay") String pay);
+
+    void updatekucunjian(int outxqcount, int outxqcount1, Integer inid);
 }

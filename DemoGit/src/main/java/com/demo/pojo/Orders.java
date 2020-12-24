@@ -1,6 +1,7 @@
 package com.demo.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -29,6 +30,23 @@ public class Orders {
     private Customer customer;
     private Address address;
     private List<Output> outputs;
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "oId=" + oId +
+                ", oDate=" + oDate +
+                ", pay='" + pay + '\'' +
+                ", price=" + price +
+                ", orsip='" + orsip + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", ortype='" + ortype + '\'' +
+                ", orderinfos=" + orderinfos +
+                ", customer=" + customer +
+                ", address=" + address +
+                ", outputs=" + outputs +
+                '}';
+    }
 
     @Id
     @Column(name = "o_id")

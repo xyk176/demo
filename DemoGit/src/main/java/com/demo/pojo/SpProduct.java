@@ -23,6 +23,27 @@ public class SpProduct {
     private SpProductsort prs;
     private List<Outputxq> outputxqs;
 
+    @Override
+    public String toString() {
+        return "SpProduct{" +
+                "lid=" + lid +
+                ", lname='" + lname + '\'' +
+                ", lguige='" + lguige + '\'' +
+                ", ldanwei='" + ldanwei + '\'' +
+                ", ltiaoma=" + ltiaoma +
+                ", lchengben=" + lchengben +
+                ", cid=" + cid +
+                ", commoditytopro=" + commoditytopro +
+                ", checkxqs=" + checkxqs +
+                ", beputxqs=" + beputxqs +
+                ", outandinputs=" + outandinputs +
+                ", inventorys=" + inventorys +
+                ", picturetopro=" + picturetopro +
+                ", prs=" + prs +
+                ", outputxqs=" + outputxqs +
+                '}';
+    }
+
     @Id
     @Column(name = "lid", nullable = false)
     public Integer getLid() {
