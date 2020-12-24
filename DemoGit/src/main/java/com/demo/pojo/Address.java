@@ -21,6 +21,19 @@ public class Address {
     private String adisdefault;
     private Customer customer;
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "adid=" + adid +
+                ", adprovince='" + adprovince + '\'' +
+                ", adcity='" + adcity + '\'' +
+                ", adarea='" + adarea + '\'' +
+                ", addetailed='" + addetailed + '\'' +
+                ", adisdelete='" + adisdelete + '\'' +
+                ", adisdefault='" + adisdefault + '\'' +
+                '}';
+    }
+
     @OneToOne(mappedBy = "address")
     public Orders getOrder() {
         return order;

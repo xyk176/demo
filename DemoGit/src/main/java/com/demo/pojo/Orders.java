@@ -30,6 +30,22 @@ public class Orders {
     private Address address;
     private List<Output> outputs;
 
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "oId=" + oId +
+                ", oDate=" + oDate +
+                ", pay='" + pay + '\'' +
+                ", price=" + price +
+                ", orsip='" + orsip + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", ortype='" + ortype + '\'' +
+                ", customer=" + customer +
+                ", address=" + address +
+                '}';
+    }
+
     @Id
     @Column(name = "o_id")
     public Integer getoId() {

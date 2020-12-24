@@ -21,6 +21,18 @@ public class Customer {
     private List<Shopping> shoppings;
     private List<Address> address;
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "orderss=" + orderss +
+                ", cid3=" + cid3 +
+                ", cname='" + cname + '\'' +
+                ", cphone='" + cphone + '\'' +
+                ", password='" + password + '\'' +
+                ", chead='" + chead + '\'' +
+                '}';
+    }
+
     @OneToMany(mappedBy = "customer")
     public List<Orders> getOrderss() {
         return orderss;
