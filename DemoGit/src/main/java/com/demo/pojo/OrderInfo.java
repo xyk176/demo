@@ -11,7 +11,7 @@ import java.util.Objects;
  * @Date 2020-12-21 14:06
  */
 @Entity
-@Table(name = "order_info", schema = "jindun", catalog = "")
+@Table(name = "order_info", schema = "jindun")
 public class OrderInfo {
     private Integer oiId;
     private Integer coms;
@@ -25,6 +25,8 @@ public class OrderInfo {
                 "oiId=" + oiId +
                 ", coms=" + coms +
                 ", comprice=" + comprice +
+                ", order=" + order +
+                ", com=" + com +
                 '}';
     }
 

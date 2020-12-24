@@ -6,17 +6,16 @@ package com.demo.services;/**
  */
 
 import com.demo.model.mdao.ShoppingMapper;
-import com.demo.pojo.Shopping;
-import com.demo.pojo.SpCommodity;
-import com.demo.pojo.SpCommoditycategory;
-import com.demo.pojo.SpCommoditytopro;
+import com.demo.pojo.*;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -30,6 +29,107 @@ import java.util.List;
 public class ShoppingService {
     @Autowired
     ShoppingMapper smapper;
+
+    /*
+     * @Author xieyukun
+     * @Description up_ships
+     * @Date 1:31 2020-12-25
+     * @param [ship_list]
+     * @return java.lang.Integer
+     * 拿到所有要添加订单的购物车id   把他们的状态改为0--不可见
+    */
+    public Integer up_ships(List<Integer> ship_list){
+        return smapper.up_ships(ship_list);
+    }
+
+    /*
+     * @Author xieyukun
+     * @Description up_cartNum
+     * @Date 1:01 2020-12-25
+     * @param [number, shid]
+     * @return java.lang.Integer
+     * 如果商品已经存在购物车  那么累加数量
+    */
+    public Integer up_cartNum(Integer number,Integer shid){
+        try {
+            smapper.up_cartNum(number, shid);
+            return 1;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    /*
+     * @Author xieyukun
+     * @Description s_oldShopping
+     * @Date 0:31 2020-12-25
+     * @param [comid]
+     * @return com.demo.pojo.Shopping
+     * 根据新增商品的ID  查看购物车是否存在
+    */
+    public Shopping s_oldShopping(Integer comid){
+        return smapper.s_oldShopping(comid);
+    }
+
+    /*
+     * @Author xieyukun
+     * @Description add_carts
+     * @Date 21:00 2020-12-24
+     * @param [cart]
+     * @return com.demo.pojo.Shopping
+     * 添加一条购物信息
+    */
+    public Shopping add_carts(Shopping cart){
+        System.out.println("aaaaaaaaaaaa");
+        smapper.add_carts(cart);
+        return cart;
+    }
+
+    /*
+     * @Author xieyukun
+     * @Description add_Orderinfo
+     * @Date 20:11 2020-12-24
+     * @param [l]
+     * @return java.lang.Integer
+     * 添加订单详情
+    */
+    public List<OrderInfo> add_Orderinfo(List<OrderInfo> l){
+            smapper.add_Orderinfo(l);
+            return l;
+    }
+
+    /*
+     * @Author xieyukun
+     * @Description add_Order
+     * @Date 17:16 2020-12-24
+     * @param [adid, cid, pay, price, remarks, o_date]
+     * @return java.lang.Integer
+     * 添加一条订单
+    */
+    public Orders add_Order(Orders o){
+
+            smapper.add_Order(o);
+            return o;
+
+    }
+
+
+    /*
+     * @Author xieyukun
+     * @Description d_Cart_ByID
+     * @Date 10:24 2020-12-24
+     * @param [ship]
+     * @return java.lang.Integer
+     * 根据购物车ID  删除一条购物记录
+    */
+    public Integer d_Cart_ByID(List<Integer> ship){
+        try {
+            smapper.d_Cart_ByID(ship);
+            return 1;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
 
     /*
      * @Author xieyukun

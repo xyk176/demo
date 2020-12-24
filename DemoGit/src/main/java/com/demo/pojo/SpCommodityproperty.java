@@ -17,15 +17,15 @@ public class SpCommodityproperty {
     private Integer cpytopid;
     private String cpyname;
     private List<Cpyandcom> coms;
-    private List<SpCommodityproperty> cpys;
+    private List<SpCommodityproperty> cpyss;
 
     @Transient
-    public List<SpCommodityproperty> getCpys() {
-        return cpys;
+    public List<SpCommodityproperty> getCpyss() {
+        return cpyss;
     }
 
     public void setCpys(List<SpCommodityproperty> cpys) {
-        this.cpys = cpys;
+        this.cpyss = cpys;
     }
 
     @Id

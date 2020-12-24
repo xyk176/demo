@@ -8,12 +8,92 @@
     <result column="stype" jdbcType="INTEGER" property="stype" />
   </resultMap>
 
+
+  <resultMap id="oldResult" type="com.demo.pojo.Shopping">
+    <id column="shid" jdbcType="INTEGER" property="shid" />
+    <result column="stype" jdbcType="INTEGER" property="stype" />
+    <result column="number" property="number"/>
+    <association property="com" javaType="com.demo.pojo.SpCommodity">
+      <id column="comid" property="comid"/>
+    </association>
+  </resultMap>
+
+  <!--拿到所有要添加订单的购物车id   把他们的状态改为0&#45;&#45;不可见
+  Integer up_ships(@Param("ship_list")List<Integer> ship_list)-->
+  <update id="up_ships" parameterType="java.lang.Integer">
+    update shopping set stype = 0
+    <where>
+      <if test="ship_list.size>0 and ship_list != null">
+        <foreach collection="ship_list" item="i" separator="or">
+          shid = #{i}
+        </foreach>
+      </if>
+    </where>
+  </update>
+
+  <!--如果商品已经存在购物车  那么累加数量
+  Integer up_cartNum(@Param("number") Integer number,@Param("shid")Integer shid)-->
+  <update id="up_cartNum" >
+    update shopping set number = #{number } where shid = #{shid}
+  </update>
+
+
+  <!--根据新增商品的ID  查看购物车是否存在
+  Shopping s_oldShopping(Integer comid)-->
+  <select id="s_oldShopping" resultMap="oldResult">
+    select s.* ,sp.* from shopping s
+    left join sp_commodity sp on sp.comid = s.comid
+    where s.comid = #{comid} and s.stype>0
+  </select>
+
+  <!--添加一条购物信息
+  Integer add_carts(@Param("c") Shopping cart)-->
+  <insert id="add_carts" parameterType="com.demo.pojo.Shopping">
+    insert into shopping(cid3,comid,stype,number)
+    values (#{customer.cid3,jdbcType=INTEGER},#{com.comid,jdbcType=INTEGER},1,#{number,jdbcType=INTEGER})
+  </insert>
+
+  <!--添加订单详情
+  Integer add_Orderinfo(@Param("l")List<OrderInfo> l)-->
+  <insert id="add_Orderinfo" >
+    insert into order_info (coms,comprice,comid,o_id)
+    values
+    <foreach collection="l" item="i"  index="index" open="" close="" separator=",">
+      (#{i.coms},#{i.comprice},#{i.com.comid},#{i.order.oId})
+    </foreach>
+  </insert>
+
+  <!--添加一条订单
+  Integer add_Order(@Param("o") Orders o)-->
+  <insert id="add_Order" useGeneratedKeys="true" keyProperty="oId">
+    insert into orders(cid3,o_date,pay,price,orsip,adid,remarks,ortype)
+    values (#{o.customer.cid3},#{o.oDate},#{o.pay},#{o.price},'顺丰',#{o.address.adid},#{o.remarks},'未发货')
+
+  </insert>
+
+  <!--根据购物车ID  删除一条购物记录
+  Integer d_Cart_ByID(List<Integer> ship)-->
+  <update id="d_Cart_ByID" parameterType="java.lang.Integer">
+    update shopping s set  s.stype = 0
+    <where>
+      <if test="ship!=null and ship.size>0">
+        <foreach collection="ship" item="id" >
+           or s.shid = #{id}
+        </foreach>
+      </if>
+    </where>
+  </update>
+
   <resultMap id="cartResultMap" type="com.demo.pojo.Shopping">
     <id column="shid" property="shid"/>
     <result column="stype" property="stype"/>
     <result column="number" property="number"/>
-    <association property="customer" javaType="com.demo.pojo.Customer">
-      <id column="cid3" property="cid3"/>
+    <association property="customer" javaType="com.demo.pojo.Customer" column="cid3" select="com.demo.model.mdao.ShoppingMapper.s_Address">
+      <id column="cid3" jdbcType="INTEGER" property="cid3" />
+      <result column="cname" jdbcType="VARCHAR" property="cname" />
+      <result column="cphone" jdbcType="VARCHAR" property="cphone" />
+      <result column="password" jdbcType="VARCHAR" property="password" />
+      <result column="chead" jdbcType="VARCHAR" property="chead" />
     </association>
     <association property="com" javaType="com.demo.pojo.SpCommodity">
       <id column="comid" property="comid"/>
@@ -43,10 +123,35 @@
   <!--查询所有购物车==根据客户ID
   List<Shopping> s_Carts(Integer cid)-->
   <select id="s_Carts" resultMap="cartResultMap">
-    select s.* from shopping sh
+    select s.*, sh.* from shopping sh
     LEFT JOIN customer c on sh.cid3 = c.cid3
     LEFT JOIN sp_commodity s on s.comid = sh.comid
     where sh.cid3 = #{cid} and  sh.stype &gt; 0
+  </select>
+
+  <!--地址ResultMap-->
+  <resultMap id="AddressResultMap" type="com.demo.pojo.Customer">
+    <id column="cid3" jdbcType="INTEGER" property="cid3" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="cphone" jdbcType="VARCHAR" property="cphone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="chead" jdbcType="VARCHAR" property="chead" />
+    <collection property="address" ofType="com.demo.pojo.Address">
+      <id column="adid" jdbcType="INTEGER" property="adid" />
+      <result column="adprovince" jdbcType="VARCHAR" property="adprovince" />
+      <result column="adcity" jdbcType="VARCHAR" property="adcity" />
+      <result column="adarea" jdbcType="VARCHAR" property="adarea" />
+      <result column="addetailed" jdbcType="VARCHAR" property="addetailed" />
+      <result column="adisdelete" jdbcType="VARCHAR" property="adisdelete" />
+      <result column="adisdefault" jdbcType="VARCHAR" property="adisdefault" />
+    </collection>
+  </resultMap>
+  <!--根据用户id  查询地址
+  List<Customer> s_Address(Integer cid);-->
+  <select id="s_Address" resultMap="AddressResultMap">
+    select a.*,c.* from  customer c
+    left join address a on a.cid3 = c.cid3
+    where a.cid3 = #{cid}
   </select>
 
 

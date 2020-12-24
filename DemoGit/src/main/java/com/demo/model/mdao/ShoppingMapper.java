@@ -2,13 +2,97 @@ package com.demo.model.mdao;
 
 import com.demo.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper
 @Repository
 public interface ShoppingMapper {
+
+    /*
+     * @Author xieyukun
+     * @Description up_ships
+     * @Date 1:28 2020-12-25
+     * @param [ship_list]
+     * @return java.lang.Integer
+     * 拿到所有要添加订单的购物车id   把他们的状态改为0--不可见
+    */
+    Integer up_ships(@Param("ship_list")List<Integer> ship_list);
+
+    /*
+     * @Author xieyukun
+     * @Description up_cartNum
+     * @Date 0:58 2020-12-25
+     * @param [number, shid]
+     * @return java.lang.Integer
+     * 如果商品已经存在购物车  那么累加数量
+    */
+    Integer up_cartNum(@Param("number") Integer number,@Param("shid")Integer shid);
+
+    /*
+     * @Author xieyukun
+     * @Description s_oldShopping
+     * @Date 0:27 2020-12-25
+     * @param [comid]
+     * @return com.demo.pojo.Shopping
+     * 根据新增商品的ID  查看购物车是否存在
+    */
+    Shopping s_oldShopping(Integer comid);
+
+    /*
+     * @Author xieyukun
+     * @Description add_carts
+     * @Date 20:56 2020-12-24
+     * @param [cart]
+     * @return java.lang.Integer
+     * 添加一条购物信息
+    */
+    Integer add_carts(Shopping c);
+
+    /*
+     * @Author xieyukun
+     * @Description add_Orderinfo
+     * @Date 19:40 2020-12-24
+     * @param [l]
+     * @return java.lang.Integer
+     * 添加订单详情
+    */
+    Integer add_Orderinfo(@Param("l")List<OrderInfo> l);
+
+    /*
+     * @Author xieyukun
+     * @Description add_Order
+     * @Date 17:00 2020-12-24
+     * @param [adid, cid, pay, price, remarks]
+     * @return java.lang.Integer
+     * 添加一条订单
+    */
+    Integer add_Order(@Param("o") Orders o);
+
+    /*
+     * @Author xieyukun
+     * @Description s_Address
+     * @Date 14:12 2020-12-24
+     * @param [cid]
+     * @return java.util.List<com.demo.pojo.Address>
+     根据用户id  查询地址
+    */
+    List<Customer> s_Address(Integer cid);
+
+    Integer add_dingdan(List<Integer> ship);
+    /*
+     * @Author xieyukun
+     * @Description d_Cart_ByID
+     * @Date 10:15 2020-12-24
+     * @param [ship]
+     * @return java.lang.Integer
+     * 根据购物车ID  删除一条购物记录
+    */
+    Integer d_Cart_ByID(List<Integer> ship);
+
     /*
      * @Author xieyukun
      * @Description s_Carts

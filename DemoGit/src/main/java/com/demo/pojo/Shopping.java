@@ -17,6 +17,17 @@ public class Shopping {
     private Customer customer;
     private Integer number;
 
+    @Override
+    public String toString() {
+        return "Shopping{" +
+                "shid=" + shid +
+                ", stype=" + stype +
+                ", com=" + com +
+                ", customer=" + customer +
+                ", number=" + number +
+                '}';
+    }
+
     public Integer getNumber() {
         return number;
     }

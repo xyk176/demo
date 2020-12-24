@@ -37,6 +37,13 @@ public class SpCommodity {
     private List<Shopping> shopings;
     private List<OrderInfo> dorinfos;
 
+    @Override
+    public String toString() {
+        return "SpCommodity{" +
+                "comid=" + comid +
+                '}';
+    }
+
     @Id
     @Column(name = "comid", nullable = false)
     public Integer getComid() {
@@ -185,25 +192,6 @@ public class SpCommodity {
                 Objects.equals(comsalesvolume, that.comsalesvolume) &&
                 Objects.equals(comsalesstatus, that.comsalesstatus) &&
                 Objects.equals(comdata, that.comdata);
-    }
-
-    @Override
-    public String toString() {
-        return "SpCommodity{" +
-                "comid=" + comid +
-                ", comiszu=" + comiszu +
-                ", combarcode='" + combarcode + '\'' +
-                ", comname='" + comname + '\'' +
-                ", comsameprice=" + comsameprice +
-                ", compricemin=" + compricemin +
-                ", compricemax=" + compricemax +
-                ", commarketprice=" + commarketprice +
-                ", comweight=" + comweight +
-                ", comvolume=" + comvolume +
-                ", comsalesvolume=" + comsalesvolume +
-                ", comsalesstatus=" + comsalesstatus +
-                ", comdata=" + comdata +
-                '}';
     }
 
     @Override
