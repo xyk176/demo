@@ -75,6 +75,7 @@
             <el-table-column
               label="操作">
               <template slot-scope="scope">
+                <el-button icon="el-icon-search" circle size="mini" @click="xq(scope.row)"></el-button>
                 <el-button circle size="mini" @click="xg(scope.row)">发货</el-button>
               </template>
             </el-table-column>
@@ -121,6 +122,38 @@
       </el-dialog>
     </div>
 
+    <el-dialog title="详情" :visible.sync="infos">
+      <el-table
+        :data="info"
+        stripe
+        style="width: 100%">
+        <el-table-column
+          prop="comname"
+          label="商品">
+        </el-table-column>
+        <el-table-column>
+          <template slot-scope="scope">
+            <img :src="scope.row.picpath" style="width: 50px;height: 50px">
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="cprname"
+          label="商品参数">
+        </el-table-column>
+        <el-table-column
+          prop="cpyname"
+          label="商品属性">
+        </el-table-column>
+        <el-table-column
+          prop="coms"
+          label="购买数量">
+        </el-table-column>
+        <el-table-column
+          prop="comprice"
+          label="购买总价">
+        </el-table-column>
+      </el-table>
+    </el-dialog>
   </div>
 </template>
 
@@ -129,6 +162,8 @@ export default {
   name: "Alldelivergoods",
   data() {
     return {
+      info: [],
+      infos: false,
       totals: 0,
       page: 1,
       size: 3,
@@ -233,6 +268,15 @@ export default {
         console.log(res.data)
         this.gg=res.data;
         this.gg.oDate=this.$Dateformat(this.gg.oDate,"yyyy-mm-dd HH:MM:ss")
+      })
+    },
+    xq(r) {
+      this.oid=r.oId;
+      console.log("当前行", this.oid)
+      this.infos = true;
+      this.$axios.post("order/selectcompic", {oId:this.oid}).then((res) => {
+        console.log(res.data);
+        this.info=res.data;
       })
     },
     ty(){

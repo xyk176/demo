@@ -218,7 +218,13 @@
         <result column="ldanwei" property="ldanwei"/>
         <result column="ltiaoma" property="ltiaoma"/>
         <result column="lchengben" property="lchengben"/>
-        <collection property="commoditytopro" ofType="com.demo.pojo.SpCommoditytopro" resultMap="comMap"/>
+        <collection property="commoditytopro" ofType="com.demo.pojo.SpCommoditytopro">
+            <id column="ctpid" jdbcType="INTEGER" property="ctpid" />
+            <result column="ctpnum" jdbcType="INTEGER" property="ctpnum" />
+        </collection>
+        <collection property="inventorys" ofType="com.demo.pojo.Inventory">
+            <id column="inid" property="inid"/>
+        </collection>
     </resultMap>
     <resultMap id="comMap" type="com.demo.pojo.SpCommodity">
         <id column="comid" property="comid"/>
@@ -234,12 +240,18 @@
         <result column="comsalesvolume" property="comsalesvolume"/>
         <result column="comsalesstatus" property="comsalesstatus"/>
         <result column="comdata" property="comdata"/>
+        <collection property="coprs" ofType="com.demo.pojo.SpCommoditytopro">
+            <id column="ctpid" jdbcType="INTEGER" property="ctpid" />
+            <result column="ctpnum" jdbcType="INTEGER" property="ctpnum" />
+        </collection>
     </resultMap>
+
     <select id="selectproduct" resultMap="spproductMap">
-        SELECT * from sp_product spp
-INNER JOIN sp_commoditytopro pro ON spp.lid=pro.lid
-INNER JOIN sp_commodity spc ON pro.comid=spc.comid
-where spc.comid=#{comid}
+        SELECT spp.*,pro.*,i.* from sp_product spp
+        left JOIN sp_commoditytopro pro ON spp.lid=pro.lid
+        left JOIN sp_commodity spc ON pro.comid=spc.comid
+        left join inventory i on i.lid=spp.lid
+        where spc.comid=#{comid}
     </select>
 
     <!--查询所有未发货订单-->
@@ -269,18 +281,14 @@ where spc.comid=#{comid}
         </collection>
     </resultMap>
     <select id="orderstwo" resultMap="orderstwoMap">
-        select * from orders o inner join customer c on o.cid3=c.cid3
-        inner  join address a on o.adid=a.adid
-        <where>
-            <if test="orsip!='' and orsip!=null">
-                and o.orsip like concat('%',#{orsip},'%')
-            </if>
-            <if test="pay!='' and pay!=null">
-                and o.pay like concat('%',#{pay},'%')
-            </if>
-            <if test="1==1">
-                and o.ortype='未发货'
-            </if>
-        </where>
+        select * from orders o left join customer c on o.cid3=c.cid3
+        left  join address a on o.adid=a.adid
+        where  o.ortype='未发货'
+        <if test="orsip!='' and orsip!=null">
+            and o.orsip like concat('%',#{orsip,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pay!='' and pay!=null">
+            and o.pay like concat('%',#{pay,jdbcType=VARCHAR},'%')
+        </if>
     </select>
 </mapper>
