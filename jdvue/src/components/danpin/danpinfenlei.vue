@@ -17,7 +17,7 @@
                 :props="defaultPropss"
                 @change="changea"
                 clearable></el-cascader>
-            <el-input v-model="input" placeholder="请输入分类" @change="changea2" style="width: 300px;"></el-input>
+            <el-input v-model="input" placeholder="请输入分类" style="width: 300px;"></el-input>
             <el-button plain @click="changea2()">新增分类</el-button>
 
           </el-dialog>

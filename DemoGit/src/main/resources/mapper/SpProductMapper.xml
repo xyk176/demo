@@ -66,9 +66,18 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated
-      根据主键删除
+      根据主键删除单品
     -->
     delete from sp_product
+    where lid = #{lid,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteByPrimaryKey2" parameterType="java.lang.Integer">
+    <!--
+      WARNING - @mbg.generated
+      根据主键删除库存
+    -->
+    delete from inventory
     where lid = #{lid,jdbcType=INTEGER}
   </delete>
 
@@ -82,6 +91,8 @@
     values (null, #{p.prs.cid2}, #{p.lname},#{p.lguige}, #{p.ldanwei}, #{p.ltiaoma},
       #{p.lchengben}, #{p.cid})
   </insert>
+
+
 
   <update id="updateByPrimaryKey" parameterType="com.demo.pojo.SpProduct">
     <!--
@@ -122,6 +133,7 @@
         and s.cid2=#{id}
       </if>
     </where>
+    order by p.lid desc
   </select>
 
   <select id="selectAllBuPic" resultMap="BaseResultMapAndPic">
@@ -151,11 +163,20 @@
   <!--修改单品-->
   <update id="updateproduct">
         update sp_product
-    set lname = #{lname},
-      lguige = #{lguige},
-      ldanwei = #{ldanwei},
-      ltiaoma = #{ltiaoma},
-      lchengben = #{lchengben}
-    where lid = #{lid}
+        set lname = #{lname},
+          lguige = #{lguige},
+          ldanwei = #{ldanwei},
+          ltiaoma = #{ltiaoma},
+          lchengben = #{lchengben}
+        where lid = #{lid}
   </update>
+
+  <!--修改单品分类-->
+  <update id="delectfenlei">
+    UPDATE sp_product SET cid2=#{cid2} where lid=#{lid}
+  </update>
+
+  <select id="selectMaxId" resultType="com.demo.pojo.SpProduct">
+    select * from sp_product where lid=(select max(lid) from sp_product)
+  </select>
 </mapper>

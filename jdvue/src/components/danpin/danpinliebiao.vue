@@ -21,15 +21,19 @@
             <el-button plain size="mini">导入单品</el-button>
             <el-button plain size="mini">导入修改</el-button>
             <el-button plain size="mini">导出单品</el-button>
-            <el-button plain size="mini">修改分类</el-button>
-            <el-button plain size="mini">删除</el-button>
+            <el-button plain size="mini" @click="xiugai()">修改分类</el-button>
+            <el-button plain size="mini" @click="delect()">删除</el-button>
           </div>
         </div>
+
+
+
         <div style="margin-top: 15px;width: 99%;margin-left: 7px">
           <el-table
             :data="tableData"
             stripe
-            style="width: 100%">
+            style="width: 100%"
+            @selection-change="handleSelectionChange">
              <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column label="单品图片">
               <template slot-scope="scope">
@@ -41,10 +45,7 @@
               label="单品名称"
               width="180">
             </el-table-column>
-            <el-table-column
-              prop="lid"
-              width="0">
-            </el-table-column>
+
             <el-table-column
               prop="ltiaoma"
               label="单品条码"
@@ -91,6 +92,25 @@
               layout="total, sizes, prev, pager, next, jumper"
               :total="total">
             </el-pagination>
+
+        <!-- 修改分类的弹出框-->
+        <el-dialog title="修改分类" :visible.sync="seen" style="height: 500px;">
+              <el-cascader
+                  :options="optionss"
+                  :props="defaultPropss"
+                  @change="changeas"
+                  clearable>
+              </el-cascader>
+              <p>
+                <div style="height: 220px;"></div>
+              <el-button plain @click="changea2()">确认选择</el-button>
+              <router-link to="/liebiao" tag="span">
+                <el-button plain @click="seen=false">取消</el-button>
+              </router-link>
+              </p>
+        </el-dialog>
+
+
       </div>
     </div>
 
@@ -107,6 +127,7 @@ name: "Allorders",
     pageSize:5,
     total:0,
     options: [],
+    optionss: [],
     defaultPropss: {
       children: 'sorts',
       label: 'cname',
@@ -114,7 +135,9 @@ name: "Allorders",
       checkStrictly: true
     },
     value: '',
-    cfid:null//分类主键
+    cfid:null,//分类主键
+    dels:[],
+    seen:false
     }
   },
   methods:{
@@ -136,6 +159,10 @@ name: "Allorders",
           console.log("报错了，错误信息：",e);
       });
     }
+    ,changeas(e){
+      this.cfid=e[e.length-1];
+      alert(this.cfid)
+    }
     ,load(){
       let param={
         id:this.cfid,
@@ -156,6 +183,7 @@ name: "Allorders",
       this.$axios.post("/sort/all")
       .then((res)=>{
         this.options=res.data;
+        this.optionss=res.data;
         console.log("所有分类",this.options)
       }).catch(function(e){
           console.log("报错了，错误信息：",e);
@@ -172,15 +200,64 @@ name: "Allorders",
       this.currentPage4=val;
       this.load();
     }
+    //修改
     ,getbianji(r){
       console.log(r);
       this.$router.push({path:'/danpinamend',query:{params:r}})
+    }
+
+    //选中表格的值
+    ,handleSelectionChange(r){
+      this.dels=r;
+      console.log("选中的值",this.dels)
+    }
+    ,dele(r){
+      this.$axios.post("/product/delete",r).then((res)=>{
+        // alert("单品删除成功")
+      })
+      this.$axios.post("/product/delete2",r).then((res)=>{
+        // alert("库存删除成功")
+      })
+    }
+    ,delect(){
+      this.dels.forEach(res=>{
+        this.dele(res);
+      })
+      this.load();
+    }
+    /* 批量修改分类*/
+    ,xiugai2(r){
+      // r.forEach(v=>{
+      //   v.prs.cid2=this.cfid;
+      // })
+      // console.log(")
+      let param={
+        cid2:this.cfid,
+        lid:r
+      }
+      this.$axios.post("/product/delectfenlei",param)
+    }
+    ,xiugai(){
+
+      if(this.dels==null){
+        alert("未选择单品")
+      }else{
+        this.seen=true
+        this.dels.forEach(r=>{
+          this.xiugai2(r)
+        })
+        this.load();
+      }
+    }
+    ,changea2(){
+      this.seen=false
     }
   },
 
   created() {
     this.load();
     this.loadData();
+    this.handleSelectionChange();
   }
 }
 </script>
@@ -208,7 +285,6 @@ name: "Allorders",
 }
 .right{
   width: 13%;
-  height: 500px;
   background: #FFFFFF;
   border-radius: 6px;
   border: 1px solid #E2E2E2;

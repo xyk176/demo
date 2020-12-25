@@ -45,7 +45,7 @@
               </el-col>
             </el-row>
           </el-form-item>
-          
+
           <el-form-item label="商品图片" prop="coprs">
             <div class="body_pic_box">
               <ul>

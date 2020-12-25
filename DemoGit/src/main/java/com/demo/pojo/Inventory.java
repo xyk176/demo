@@ -32,6 +32,7 @@ public class Inventory {
         this.inentity = inentity;
     }
 
+
     @Basic
     @Column(name = "inoccupy")
     public Integer getInoccupy() {
