@@ -52,8 +52,9 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    /* login*/
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: login
     },
@@ -89,8 +90,9 @@ export default new Router({
         }
       ]
     },
+    //navigtion
     {
-      path: '/',
+      path: '/Navigation',
       name: 'Navigation',
       component: Navigation,
       children:[

@@ -1,25 +1,21 @@
 <template>
   <div id="bigdiv">
     <div class="crm">
-      <!-- <img src="../img/crmimg.png" class="cc"/>CRM管理系统 -->
     </div>
 
     <el-form id="backstagelogin">
       <h2 class="logindl">智慧零售前台登录</h2>
-      <!-- <img src="../img/users.png" class="imguser"/> -->
 
       <el-form-item prop="account">
-        <el-input class="textuser" placeholder="请输入账号"  v-model="users" clearable style="width: 290px;">
+        <el-input class="textuser" placeholder="请输入账号"  v-model="name" clearable style="width: 290px;">
         </el-input>
       </el-form-item><br />
 
-      <!-- <img src="../img/upwds.png" class="imgupwd"/> -->
       <el-form-item prop="apwd">
         <el-input class="textpwd" placeholder="请输入密码"  v-model="pwd" show-password style="width: 290px;">
         </el-input>
       </el-form-item><br />
-
-      <el-button class="denglu" type="primary" @click="selectBylogin">登录</el-button>
+        <el-button class="denglu" type="primary" @click="selectBylogin" style="width: 290px;margin-left: 35px;">登录</el-button>
     </el-form >
   </div>
 </template>
@@ -28,22 +24,22 @@
 export default {
   data() {
     return {
-      pwd: '',
-      users:''
+      name: '',
+      pwd:''
     }
   },
   methods:{
     selectBylogin(){
       let param={
-        cname:this.pwd,
-        password:this.users
+        cname:this.name,
+        password:this.pwd
       };
       this.$axios.post("customer/denglu",param)
         .then(r=>{
           if(r.data.code){
-            sessionStorage.setItem('cid3',r.data.objs.cid3);
+            sessionStorage.setItem('cid3',r.data.vo.cid3);
             this.$router.push({
-              name:'/personalCenter'
+              name:'user'
             })
           }
         })
@@ -84,14 +80,6 @@ export default {
     left: 20px;
     color: white;
   }
-  .denglu{
-    margin-top: 0px;
-    color: white;
-    margin-left: 35px;
-    width: 290px;
-    height: 40px;
-    font-size: 20px;
-  }
   .el-input {
     position: relative;
     font-size: 14px;
@@ -105,25 +93,12 @@ export default {
     margin: 0px auto;
     text-align: center;
     margin-top: 65px;
+    /* width: 330px; */
   }
   .textuser{
     margin-bottom: -10px;
     margin-top: 80px;
   }
-  /* .textpwd{
-      margin-bottom: 10px;
-    } */
-  /* .imguser{
-    position: relative;
-    top: 120px;
-    right: 150px;
-  } */
-  /* .imgupwd{
-    position: relative;
-    top: 40px;
-    right: 150px;
-
-  } */
   .el-form-item__error {
     color: #F56C6C;
     font-size: 14px;

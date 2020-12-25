@@ -2,7 +2,9 @@
   <div style="overflow: hidden;position: relative;">
     <el-container>
       <el-header>
-        <el-avatar @click="tiaozhuan" style="float: right;position: relative;top:10px " src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+        <span @click="tiaozhuan">
+        <el-avatar  style="float: right;position: relative;top:10px " src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+        </span>
         <el-tag @click="s_carts" style="float: right;position: relative;top:15px;left: -15px;">查看购物车</el-tag>
       </el-header>
       <el-main>
@@ -73,7 +75,7 @@
                             <fieldset style="border-radius: 10px;">
                               <legend style="margin-left: 25px;">商品属性</legend>
                               <el-tag type="success" v-for="(i,index) in goods_property" :key="index" style="margin: 10px;">
-                                {{i.cpr.cpyname}}
+                                {{i.cpy.cpyname}}
                               </el-tag>
                             </fieldset>
                           </div>
@@ -210,8 +212,9 @@
     },
     methods: {
       tiaozhuan() { //跳转到个人中心
+      console.log("aaaaaa");
         this.$router.push({
-          name: "user"
+          name:'user'
         })
       },
       tijiao() { //提交订单 --付钱

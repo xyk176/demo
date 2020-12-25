@@ -17,6 +17,7 @@ public class SpCommodityparameter {
     private Integer cprtopid;
     private String cprname;
     private List<Cprandcom> coms;
+
     private List<SpCommodityparameter> cprss;
 
     @Transient

@@ -203,10 +203,10 @@
   <!--属性ResultMap-->
   <resultMap id="cpyResult" type="com.demo.pojo.Cpyandcom">
     <id column="cpcoid" property="cpcoid"/>
-    <association property="cpr" javaType="com.demo.pojo.SpCommodityproperty" >
+    <association property="cpy" javaType="com.demo.pojo.SpCommodityproperty" >
       <id column="cpyid" property="cpyid"/>
       <result column="cpyname" property="cpyname"/>
-      <result column="cprtopid" property="cprtopid"/>
+      <result column="cpytopid" property="cpytopid"/>
     </association>
   </resultMap>
 

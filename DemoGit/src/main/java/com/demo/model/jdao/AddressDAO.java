@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  * @Classname AddressDAO
  * @Date 2020/12/23 10:06
  */
-@Repository
+//@Repository
 public interface AddressDAO extends CrudRepository<Address,Integer> {
 }

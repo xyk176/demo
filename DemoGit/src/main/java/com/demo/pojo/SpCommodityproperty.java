@@ -73,7 +73,7 @@ public class SpCommodityproperty {
         return Objects.hash(cpyid, cpytopid, cpyname);
     }
 
-    @OneToMany(mappedBy = "cpr")
+    @OneToMany(mappedBy = "cpy")
     public List<Cpyandcom> getComs() {
         return coms;
     }

@@ -8,8 +8,7 @@
         <el-menu
               default-active="2"
               class="el-menu-vertical-demo"
-              @open="handleOpen"
-              @close="handleClose">
+              >
               <router-link to="/user" tag="span">
                 <el-menu-item index="1">
                   <i class="el-icon-user"></i>
