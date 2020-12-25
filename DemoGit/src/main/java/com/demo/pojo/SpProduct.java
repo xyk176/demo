@@ -28,6 +28,7 @@ public class SpProduct {
         return "SpProduct{" +
                 "lid=" + lid +
                 ", lname='" + lname + '\'' +
+                ", commoditytopro=" + commoditytopro +
                 '}';
     }
 

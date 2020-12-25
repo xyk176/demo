@@ -16,6 +16,16 @@ public class Outputxq {
     private Output output;
     private SpProduct sproduct;
 
+    @Override
+    public String toString() {
+        return "Outputxq{" +
+                "outxqid=" + outxqid +
+                ", outxqcount=" + outxqcount +
+                ", output=" + output +
+                ", sproduct=" + sproduct +
+                '}';
+    }
+
     @Id
     @Column(name = "outxqid", nullable = false)
     public int getOutxqid() {

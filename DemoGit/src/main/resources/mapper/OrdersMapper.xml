@@ -165,6 +165,94 @@
     <update id="uporder" parameterType="com.demo.pojo.Orders">
         update orders o set o.ortype=#{or.ortype}, o.orsip=#{or.orsip} where o_id=#{or.oId}
     </update>
+    <!--新增出库单-->
+    <insert id="insertoutput" parameterType="com.demo.pojo.Output" useGeneratedKeys="true" keyProperty="outid">
+        insert into output(o_id,outclass,outdate,outremark) values (#{op.oId},#{op.outclass},#{op.outdate},#{op.outremark})
+    </insert>
+    <!--新增出库详情-->
+    <insert id="insertoutputxq" parameterType="com.demo.pojo.Outputxq" keyProperty="outxqid">
+        insert into outputxq(outxqcount,lid,outid) values (#{opxq.outxqcount},#{opxq.lid},#{opxq.outid})
+    </insert>
+    <!--修改库存-->
+    <update id="updateinventory" parameterType="com.demo.pojo.Inventory">
+        update inventory i set i.inoccupy=#{in.inoccupy},i.inusable=#{in.inusable} where i.lid=#{in.lid}
+    </update>
+    <!--根据订单编号查询订单详情-->
+    <resultMap id="seorderinfoMap" type="com.demo.pojo.OrderInfo">
+        <id column="oi_id" property="oiId"/>
+        <result column="coms" property="coms"/>
+        <result column="comprice" property="comprice"/>
+    </resultMap>
+    <select id="selectorderinfo" resultMap="seorderinfoMap">
+        select * from order_info where o_id=#{oId}
+    </select>
+    <!--根据订单详情编号查询商品-->
+    <resultMap id="spcomMap" type="com.demo.pojo.SpCommodity">
+        <id column="comid" property="comid"/>
+        <result column="comiszu" property="comiszu"/>
+        <result column="combarcode" property="combarcode"/>
+        <result column="comname" property="comname"/>
+        <result column="comsameprice" property="comsameprice"/>
+        <result column="compricemin" property="compricemin"/>
+        <result column="compricemax" property="compricemax"/>
+        <result column="commarketprice" property="commarketprice"/>
+        <result column="comweight" property="comweight"/>
+        <result column="comvolume" property="comvolume"/>
+        <result column="comsalesvolume" property="comsalesvolume"/>
+        <result column="comsalesstatus" property="comsalesstatus"/>
+        <result column="comdata" property="comdata"/>
+        <collection property="dorinfos" ofType="com.demo.pojo.OrderInfo">
+            <id column="oi_id" property="oiId"/>
+            <result column="coms" property="coms"/>
+            <result column="comprice" property="comprice"/>
+        </collection>
+    </resultMap>
+    <select id="selectspcom" resultMap="spcomMap">
+        select * from sp_commodity sp inner join order_info oi on oi.comid=sp.comid where oi.oi_id=#{oiId}
+    </select>
+    <!--根据商品编号查询单品-->
+    <resultMap id="spproductMap" type="com.demo.pojo.SpProduct">
+        <id column="lid" property="lid"/>
+        <result column="lname" property="lname"/>
+        <result column="lguige" property="lguige"/>
+        <result column="ldanwei" property="ldanwei"/>
+        <result column="ltiaoma" property="ltiaoma"/>
+        <result column="lchengben" property="lchengben"/>
+        <collection property="commoditytopro" ofType="com.demo.pojo.SpCommoditytopro">
+            <id column="ctpid" jdbcType="INTEGER" property="ctpid" />
+            <result column="ctpnum" jdbcType="INTEGER" property="ctpnum" />
+        </collection>
+        <collection property="inventorys" ofType="com.demo.pojo.Inventory">
+            <id column="inid" property="inid"/>
+        </collection>
+    </resultMap>
+    <resultMap id="comMap" type="com.demo.pojo.SpCommodity">
+        <id column="comid" property="comid"/>
+        <result column="comiszu" property="comiszu"/>
+        <result column="combarcode" property="combarcode"/>
+        <result column="comname" property="comname"/>
+        <result column="comsameprice" property="comsameprice"/>
+        <result column="compricemin" property="compricemin"/>
+        <result column="compricemax" property="compricemax"/>
+        <result column="commarketprice" property="commarketprice"/>
+        <result column="comweight" property="comweight"/>
+        <result column="comvolume" property="comvolume"/>
+        <result column="comsalesvolume" property="comsalesvolume"/>
+        <result column="comsalesstatus" property="comsalesstatus"/>
+        <result column="comdata" property="comdata"/>
+        <collection property="coprs" ofType="com.demo.pojo.SpCommoditytopro">
+            <id column="ctpid" jdbcType="INTEGER" property="ctpid" />
+            <result column="ctpnum" jdbcType="INTEGER" property="ctpnum" />
+        </collection>
+    </resultMap>
+
+    <select id="selectproduct" resultMap="spproductMap">
+        SELECT spp.*,pro.*,i.* from sp_product spp
+        left JOIN sp_commoditytopro pro ON spp.lid=pro.lid
+        left JOIN sp_commodity spc ON pro.comid=spc.comid
+        left join inventory i on i.lid=spp.lid
+        where spc.comid=#{comid}
+    </select>
 
     <!--查询所有未发货订单-->
     <resultMap id="orderstwoMap" type="com.demo.pojo.Orders">
@@ -193,18 +281,14 @@
         </collection>
     </resultMap>
     <select id="orderstwo" resultMap="orderstwoMap">
-        select * from orders o inner join customer c on o.cid3=c.cid3
-        inner  join address a on o.adid=a.adid
-        <where>
-            <if test="orsip!='' and orsip!=null">
-                and o.orsip like concat('%',#{orsip},'%')
-            </if>
-            <if test="pay!='' and pay!=null">
-                and o.pay like concat('%',#{pay},'%')
-            </if>
-            <if test="1==1">
-                and o.ortype='未发货'
-            </if>
-        </where>
+        select * from orders o left join customer c on o.cid3=c.cid3
+        left  join address a on o.adid=a.adid
+        where  o.ortype='未发货'
+        <if test="orsip!='' and orsip!=null">
+            and o.orsip like concat('%',#{orsip,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pay!='' and pay!=null">
+            and o.pay like concat('%',#{pay,jdbcType=VARCHAR},'%')
+        </if>
     </select>
 </mapper>

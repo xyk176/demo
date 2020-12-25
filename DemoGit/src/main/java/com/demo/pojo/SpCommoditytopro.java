@@ -11,6 +11,14 @@ public class SpCommoditytopro {
     private SpProduct products;
     private SpCommodity com;
 
+    @Override
+    public String toString() {
+        return "SpCommoditytopro{" +
+                "ctpid=" + ctpid +
+                ", ctpnum=" + ctpnum +
+                '}';
+    }
+
     @Id
     @Column(name = "ctpid")
     public Integer getCtpid() {

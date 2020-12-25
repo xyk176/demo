@@ -87,7 +87,7 @@
             label="操作">
             <template slot-scope="scope">
               <el-button icon="el-icon-search" circle size="mini" @click="xq(scope.row)"></el-button>
-              <el-button circle size="mini" @click="xg(scope.row)">发货</el-button>
+<!--              <el-button circle size="mini" @click="xg(scope.row)">发货</el-button>-->
             </template>
           </el-table-column>
         </el-table>
@@ -139,7 +139,7 @@
             </el-table>
     </el-dialog>
 
-    <el-dialog title="商品发货" :visible.sync="xx">
+<!--    <el-dialog title="商品发货" :visible.sync="xx">
       <el-form :model="gg">
         <el-form-item label="下单时间">
           <span>{{gg.oDate}}</span>
@@ -164,7 +164,7 @@
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="ty">确 定</el-button>
       </div>
-    </el-dialog>
+    </el-dialog>-->
   </div>
 </template>
 
@@ -291,9 +291,9 @@ export default {
         console.log(res.data);
         this.info=res.data;
       })
-    },
+    }/*,
     xg(r) {
-      console.log(r.oId);
+      console.log(r);
       this.xx = true;
       this.oid2=r.oId;
       this.$axios.post("order/seorder",{oId:this.oid2}).then((res)=>{
@@ -315,7 +315,7 @@ export default {
         this.loadata();
         this.xx=false;
       })
-    }
+    }*/
   },
   created() {
     this.loadata()
