@@ -96,16 +96,16 @@
         <!-- 修改分类的弹出框-->
         <el-dialog title="修改分类" :visible.sync="seen" style="height: 500px;">
               <el-cascader
-                  :options="options"
+                  :options="optionss"
                   :props="defaultPropss"
-                  @change="changea"
+                  @change="changeas"
                   clearable>
               </el-cascader>
               <p>
                 <div style="height: 220px;"></div>
               <el-button plain @click="changea2()">确认选择</el-button>
               <router-link to="/liebiao" tag="span">
-                <el-button plain>取消</el-button>
+                <el-button plain @click="seen=false">取消</el-button>
               </router-link>
               </p>
         </el-dialog>
@@ -127,6 +127,7 @@ name: "Allorders",
     pageSize:5,
     total:0,
     options: [],
+    optionss: [],
     defaultPropss: {
       children: 'sorts',
       label: 'cname',
@@ -158,6 +159,10 @@ name: "Allorders",
           console.log("报错了，错误信息：",e);
       });
     }
+    ,changeas(e){
+      this.cfid=e[e.length-1];
+      alert(this.cfid)
+    }
     ,load(){
       let param={
         id:this.cfid,
@@ -178,6 +183,7 @@ name: "Allorders",
       this.$axios.post("/sort/all")
       .then((res)=>{
         this.options=res.data;
+        this.optionss=res.data;
         console.log("所有分类",this.options)
       }).catch(function(e){
           console.log("报错了，错误信息：",e);
@@ -199,6 +205,7 @@ name: "Allorders",
       console.log(r);
       this.$router.push({path:'/danpinamend',query:{params:r}})
     }
+
     //选中表格的值
     ,handleSelectionChange(r){
       this.dels=r;
@@ -218,18 +225,33 @@ name: "Allorders",
       })
       this.load();
     }
-
+    /* 批量修改分类*/
     ,xiugai2(r){
-      this.$axios.post("/product/delectfenlei",r)
+      // r.forEach(v=>{
+      //   v.prs.cid2=this.cfid;
+      // })
+      // console.log(")
+      let param={
+        cid2:this.cfid,
+        lid:r
+      }
+      this.$axios.post("/product/delectfenlei",param)
     }
     ,xiugai(){
-      // this.dels.forEach(r=>{
-      //   this.xiugai2(r)
-      // })
-      // this.load();
-      this.seen=true
-    }
 
+      if(this.dels==null){
+        alert("未选择单品")
+      }else{
+        this.seen=true
+        this.dels.forEach(r=>{
+          this.xiugai2(r)
+        })
+        this.load();
+      }
+    }
+    ,changea2(){
+      this.seen=false
+    }
   },
 
   created() {

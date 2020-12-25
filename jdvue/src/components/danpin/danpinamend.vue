@@ -62,9 +62,7 @@
           </el-form-item>
       </div>
       <div class="buttom_baocun" style="text-align: center;padding-top: 15px;">
-        <router-link to="/liebiao" tag="span">
           <el-button size="small" style="width: 120px;">取消</el-button>
-        </router-link>
         <el-button size="small" style="width: 120px;" type="primary" @click="updatedanpin()">保存</el-button>
       </div>
     </el-form>

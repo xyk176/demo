@@ -85,7 +85,7 @@ public class SpProductServicts {
     }
 
     /*修改单品分类*/
-    public void delectfenlei(Integer lid){
-        mapper.delectfenlei(lid);
+    public void delectfenlei(Integer cid2, Integer lid){
+        mapper.delectfenlei(cid2,lid);
     }
 }

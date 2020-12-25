@@ -185,9 +185,7 @@
         cid2:0,//单品分类id
         lchengben:null,//单品成本
         pics:[],
-        picturetopro:[
-
-        ]
+        picturetopro:[]
       },
       kucun:{},
      }
@@ -211,12 +209,10 @@
       savedanpin(){
        this.comentity.ldanwei=this.ldanwei;//单品单位
        this.comentity.prs = {cid2:this.comentity.cid2};
-
-
         this.comentity.pics.forEach(i=>{
           this.comentity.picturetopro.push({
             ptpiszhu:i.ptciszhu,
-            picture:i
+            picture:i.pic
           })
         });
 

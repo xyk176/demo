@@ -165,7 +165,7 @@
 
   <!--修改单品分类-->
   <update id="delectfenlei">
-    UPDATE sp_product SET cid2=18 where lid=#{lid}
+    UPDATE sp_product SET cid2=#{cid2} where lid=#{lid}
   </update>
 
   <select id="selectMaxId" resultType="com.demo.pojo.SpProduct">

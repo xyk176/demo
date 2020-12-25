@@ -15,6 +15,19 @@ public class SpPicture {
     private List<SpPicturetocom> coms;
     private List<SpPicturetopro> picturetopros;
 
+    @Override
+    public String toString() {
+        return "SpPicture{" +
+                "picid=" + picid +
+                ", picsort=" + picsort +
+                ", picpath='" + picpath + '\'' +
+                ", products=" + products +
+                ", pis=" + pis +
+                ", coms=" + coms +
+                ", picturetopros=" + picturetopros +
+                '}';
+    }
+
     @Id
     @Column(name = "picid")
     public Integer getPicid() {

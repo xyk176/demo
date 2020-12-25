@@ -86,7 +86,7 @@ public interface SpProductMapper {
                        @Param("lid") Integer lid);
 
     /*修改单品分类*/
-    void delectfenlei(@Param("lid") Integer lid);
+    void delectfenlei(@Param("cid2") Integer cid2, @Param("lid") Integer lid);
 
     /**/
     SpProduct selectMaxId();

@@ -28,8 +28,8 @@
             <router-link to="/Sangpinadd">
               <el-button size="small">新增商品</el-button>
             </router-link>
-            <el-button size="small">批量可售</el-button>
-            <el-button size="small">批量禁售</el-button>
+            <el-button size="small" @click="updata_comstusmaney(1)">批量可售</el-button>
+            <el-button size="small" @click="updata_comstusmaney(0)">批量禁售</el-button>
           </el-col>
         </el-row>
       </div>
@@ -60,12 +60,7 @@
           </el-table-column>
           <el-table-column label="可售状态" width="120" align="center">
             <template slot-scope="scope">
-              <el-switch v-model="scope.row.comsalesstatus" active-color="#ff4949" inactive-color="#13ce66" active-value="1" inactive-value="0"></el-switch>
-            </template>
-          </el-table-column>
-          <el-table-column label="操作" width="120" align="center">
-            <template slot-scope="scope">
-              <el-button type="text" size="small">编辑</el-button>
+              <el-switch v-model="scope.row.comsalesstatus" active-color="#ff4949" inactive-color="#13ce66" :active-value="1" :inactive-value="0" @change="updata_comstus(scope.row)"></el-switch>
             </template>
           </el-table-column>
         </el-table>
@@ -103,6 +98,7 @@
      }
    },
    methods:{
+     /* 查询所有商品*/
     selectall(){
       let pream={
         tiaojian:this.jiansuo.ptjiansuo.tiaojian,
@@ -119,6 +115,7 @@
           console.log("报错了，错误信息：",e);
       });
     },
+    /* 商品数据切页 */
     pageChange(v){
       this.page.current=v;
       this.selectall();
@@ -129,7 +126,44 @@
     pt_jiansuo(){
       this.page.current=0;
       this.selectall();
-    }
+    },
+    /* 单个修改商品可售状态 */
+    updata_comstus(v){
+      this.$axios.put('commoditycomtroller/cpr_updateByPrimaryKeyByStus',v)
+      .then(r=>{
+          if(r.data){
+            this.$message({
+              message: '修改成功！',
+              type: 'success'
+            });
+           this.selectall();
+          }else{
+            this.$message.error('修改失败！');
+          }
+      }).catch(function(e){
+          console.log("报错了，错误信息：",e);
+      });
+    },
+    /* 多个修改商品销售状态 */
+    updata_comstusmaney(num){
+      this.multipleSelection.forEach(v=>{
+        v.comsalesstatus=num;
+      })
+      this.$axios.put('commoditycomtroller/cpr_updatecomstus',this.multipleSelection)
+      .then(r=>{
+          if(r.data){
+            this.$message({
+              message: '修改成功！',
+              type: 'success'
+            });
+           this.selectall();
+          }else{
+            this.$message.error('修改失败！');
+          }
+      }).catch(function(e){
+          console.log("报错了，错误信息：",e);
+      });
+    },
    },
    mounted(){
     this.selectall();
