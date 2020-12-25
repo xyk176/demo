@@ -60,7 +60,7 @@
           </el-table-column>
           <el-table-column label="可售状态" width="120" align="center">
             <template slot-scope="scope">
-              <el-switch v-model="scope.row.comsalesstatus" active-color="#ff4949" inactive-color="#13ce66" :active-value="1" :inactive-value="0" @change="updata_comstus(scope.row)"></el-switch>
+              <el-switch v-model="scope.row.comsalesstatus" active-color="#ff4949" inactive-color="#13ce66" :active-value="0" :inactive-value="1" @change="updata_comstus(scope.row)"></el-switch>
             </template>
           </el-table-column>
         </el-table>

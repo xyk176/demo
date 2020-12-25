@@ -5,6 +5,7 @@ import com.demo.model.mdao.AddressMapper;
 import com.demo.model.mdao.CustomerMapper;
 import com.demo.pojo.Address;
 import com.demo.pojo.Customer;
+import com.demo.pojo.OrderInfo;
 import com.demo.pojo.Orders;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -36,7 +37,7 @@ public class AddressService {
      * @Date  2020/12/21
      * @param [no, size, cid]
      * @return com.github.pagehelper.PageInfo<com.demo.pojo.Address>
-    */
+     */
     public PageInfo<Address> selectByCidAll(Integer no,Integer size,Integer cid){
         PageHelper.startPage(no,size);
         List<Address> list=addressMapper.selectByCidAll(cid);
@@ -51,7 +52,7 @@ public class AddressService {
      * @param [adid]
      * @return java.lang.Integer
      * 设置默认地址
-    */
+     */
     public Integer updateAdisdefault(Integer adid){
         return addressMapper.updateAdisdefault(adid);
     }
@@ -67,7 +68,7 @@ public class AddressService {
      * @param [adid]
      * @return java.lang.Integer
      * 修改收货地址信息
-    */
+     */
     public Integer updateAddress(String adprovince,String adcity,String adarea,String addetailed,Integer adid){
         return addressMapper.updateAddress(adprovince,adcity,adarea,addetailed,adid);
     }
@@ -79,7 +80,7 @@ public class AddressService {
      * @param [adid]
      * @return java.lang.Integer
      * 删除收货地址（逻辑删除）
-    */
+     */
     public Integer updateAdisdelete(Integer adid){
         return addressMapper.updateAdisdelete(adid);
     }
@@ -91,7 +92,7 @@ public class AddressService {
      * @param [address]
      * @return java.lang.Integer
      * 新增收货地址
-    */
+     */
     public Integer insertAddress(Address address,Integer cid){
         try {
             Customer customer = customerMapper.selectByCid(cid);
@@ -112,7 +113,7 @@ public class AddressService {
      * @Date  2020/12/23
      * @param [no, size, cid]
      * @return com.github.pagehelper.PageInfo<com.demo.pojo.Address>
-    */
+     */
     public PageInfo<Address> selectByCidAll1(Integer no,Integer size,Integer cid){
         PageHelper.startPage(no,size);
         List<Address> list = addressMapper.selectByCidAll1(cid);
@@ -127,7 +128,7 @@ public class AddressService {
      * @param [adid]
      * @return java.lang.Integer
      * 恢复收货地址
-    */
+     */
     public Integer updateAdisdelete1(Integer adid){
         return addressMapper.updateAdisdelete1(adid);
     }
@@ -139,7 +140,7 @@ public class AddressService {
      * @param [adid]
      * @return java.lang.Integer
      * 删除收货地址（物理删除）
-    */
+     */
     public Integer deleteAddress(Integer adid){
         return addressMapper.deleteAddress(adid);
     }
@@ -148,14 +149,40 @@ public class AddressService {
      * @Author 周子豪
      * @Description 19:24
      * @Date  2020/12/23
-     * @param [ortype, cid, no, size]
+     * @param [ortype, orsip, cid, no, size]
      * @return com.github.pagehelper.PageInfo<com.demo.pojo.Orders>
      * 根据客户id查询订单
-    */
-    public PageInfo<Orders> selectOrders(String ortype,Integer cid,Integer no,Integer size){
+     */
+    public PageInfo<Orders> selectOrders(String ortype,String orsip,Integer cid,Integer no,Integer size){
         PageHelper.startPage(no,size);
-        List<Orders> list = addressMapper.selectOrders(ortype,cid);
+        List<Orders> list = addressMapper.selectOrders(ortype,orsip,cid);
         PageInfo<Orders> pageInfo = new PageInfo<>(list);
         return pageInfo;
+    }
+
+    /*
+     * @Author 周子豪
+     * @Description 14:41
+     * @Date  2020/12/24
+     * @param [oId]
+     * @return java.util.List<com.demo.pojo.OrderInfo>
+     * 查看订单详情
+     */
+    public List<OrderInfo> selectComxq(Integer oId){
+        List<OrderInfo> list = addressMapper.selectComxq(oId);
+        return list;
+    }
+
+    /*
+     * @Author 周子豪
+     * @Description 16:22
+     * @Date  2020/12/24
+     * @param [oid]
+     * @return com.demo.pojo.Orders
+     * 查看订单详细信息
+     */
+    public Orders selectOrderxq(Integer oid){
+        Orders orders = addressMapper.selectOrderxq(oid);
+        return orders;
     }
 }

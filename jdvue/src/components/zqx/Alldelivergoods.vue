@@ -216,7 +216,7 @@ export default {
         console.log(res)
         this.tableData = res.data.list;
         for (const a of this.tableData) {
-          a.oDate = this.$Dateformat(a.oDate, "yyyy-mm-dd HH:MM:ss")
+          a.oDate = this.$moment(a.oDate).format("YYYY-MM-DD HH:mm:ss")
         }
         this.totals = res.data.total;
         this.value = '';
@@ -253,7 +253,7 @@ export default {
           this.size = res.data.pageSize;
           this.tableData = res.data.list;
           for (const a of this.tableData) {
-            a.oDate = this.$Dateformat(a.oDate, "yyyy-mm-dd HH:MM:ss");
+            a.oDate =this.$moment(a.oDate).format("YYYY-MM-DD HH:mm:ss")
           }
           this.totals = res.data.total;
           console.log(this.tableData);

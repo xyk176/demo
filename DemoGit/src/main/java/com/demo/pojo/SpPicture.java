@@ -101,12 +101,4 @@ public class SpPicture {
         this.picturetopros = picturetopros;
     }
 
-    @Override
-    public String toString() {
-        return "SpPicture{" +
-                "picid=" + picid +
-                ", picsort=" + picsort +
-                ", picpath='" + picpath + '\'' +
-                '}';
-    }
 }

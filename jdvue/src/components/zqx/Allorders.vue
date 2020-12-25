@@ -208,11 +208,11 @@ export default {
         label: '支付宝'
       }],
       optionsss: [{
-        value: '未付款',
-        label: '未付款'
+        value: '未发货',
+        label: '未发货'
       }, {
-        value: '已完成',
-        label: '已完成'
+        value: '已发货',
+        label: '已发货'
       }],
       value: '',
       value2: '',
@@ -236,7 +236,7 @@ export default {
       }).then((res) => {
         this.tableData = res.data.list;
         for (const a of this.tableData) {
-          a.oDate = this.$Dateformat(a.oDate, "yyyy-mm-dd HH:MM:ss")
+          a.oDate = this.$moment(a.oDate).format("YYYY-MM-DD HH:mm:ss")
         }
         this.totals = res.data.total;
         this.value = '';
@@ -255,10 +255,11 @@ export default {
         pay: this.value2
       })
         .then((res) => {
+          /* this.$Dateformat(a.oDate, "yyyy-mm-dd HH:MM:ss"); */
           this.size = res.data.pageSize;
           this.tableData = res.data.list;
           for (const a of this.tableData) {
-            a.oDate = this.$Dateformat(a.oDate, "yyyy-mm-dd HH:MM:ss");
+            a.oDate =this.$moment(a.oDate).format("YYYY-MM-DD HH:mm:ss")
           }
           this.totals = res.data.total;
           console.log(this.tableData);
@@ -276,7 +277,7 @@ export default {
           this.size = res.data.pageSize;
           this.tableData = res.data.list;
           for (const a of this.tableData) {
-            a.oDate = this.$Dateformat(a.oDate, "yyyy-mm-dd HH:MM:ss");
+            a.oDate = this.$moment(a.oDate).format("YYYY-MM-DD HH:mm:ss")
           }
           this.totals = res.data.total;
           console.log(this.tableData);

@@ -17,7 +17,6 @@
       <result column="pay" jdbcType="VARCHAR" property="pay" />
       <result column="price" jdbcType="DECIMAL" property="price" />
       <result column="orsip" jdbcType="VARCHAR" property="orsip" />
-      <result column="adid" jdbcType="INTEGER" property="adid" />
       <result column="remarks" jdbcType="VARCHAR" property="remarks" />
       <result column="ortype" jdbcType="VARCHAR" property="ortype" />
     </association>

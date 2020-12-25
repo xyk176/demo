@@ -132,7 +132,9 @@
       <if test="id!=null and id!=''">
         and s.cid2=#{id}
       </if>
+      and pp.ptpiszhu=1
     </where>
+
     order by p.lid desc
   </select>
 

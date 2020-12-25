@@ -75,6 +75,7 @@ public class SpProductController {
     /*修改单品分类*/
     @RequestMapping("/delectfenlei")
     public void delectfenlei(Integer cid2, Integer lid){
+        System.out.println("cid2"+cid2+"lid"+lid);
         ps.delectfenlei(cid2,lid);
     }
 }

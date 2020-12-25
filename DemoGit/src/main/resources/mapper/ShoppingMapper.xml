@@ -68,7 +68,6 @@
   <insert id="add_Order" useGeneratedKeys="true" keyProperty="oId">
     insert into orders(cid3,o_date,pay,price,orsip,adid,remarks,ortype)
     values (#{o.customer.cid3},#{o.oDate},#{o.pay},#{o.price},'顺丰',#{o.address.adid},#{o.remarks},'未发货')
-
   </insert>
 
   <!--根据购物车ID  删除一条购物记录
@@ -197,7 +196,6 @@
         <result column="cprtopid" property="cprtopid"/>
       </association>
     </collection>
-
   </resultMap>
 
   <!--属性ResultMap-->
@@ -236,6 +234,7 @@
     select cpr.*, r.* from cprandcom r inner join sp_commodityparameter cpr
     on r.cprid = cpr.cprid  where r.comid = #{comid}
   </select>
+
   <!--查询商品多种参数  子查询
   List<SpCommodityparameter> s_GoodsParam(Integer cprid)-->
   <!--<select id="s_GoodsParam" resultMap="cprResult">
@@ -257,10 +256,6 @@
     select p.*,c.* from sp_picturetocom p  inner join sp_picture c on p.picid=c.picid where p.comid = #{comid}
   </select>
 
-
-
-
-
   <!--根据商品ID  查看商品信息
   List<SpCommodity> s_GoodsXiangQing(Integer goodsID)-->
   <select id="s_GoodsXiangQing" resultMap="shoppResult">
@@ -268,13 +263,11 @@
     where go.comid = #{goodsID}
   </select>
 
-
   <!--根据商品分类id  查询该分类的所有商品
   List<SpCommodity> s_Goods(Integer goodsTypeID)-->
   <select id="s_Goods" resultMap="shoppResult">
     select g.* from sp_commodity g WHERE g.ccyid = #{goodsTypeID}
   </select>
-
 
   <resultMap id="goodstypeResult" type="com.demo.pojo.SpCommoditycategory">
     <id column="ccyid" property="ccyid"/>
@@ -286,10 +279,6 @@
   <select id="s_GoodsType" resultMap="goodstypeResult">
     select sc.* from sp_commoditycategory sc
   </select>
-
-
-
-
 
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

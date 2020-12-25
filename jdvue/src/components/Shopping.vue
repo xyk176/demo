@@ -460,7 +460,7 @@
       },
     },
     created() {
-      //this.cid = sessionStorage.getItem('cid3')
+      this.cid = sessionStorage.getItem('cid3')
       this.S_GoodsType();
       let id = 1;
       this.s_goods(id);

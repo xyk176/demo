@@ -31,6 +31,14 @@ public class ShoppingController {
     @Autowired
     ShoppingService ss;
 
+    /*
+     * @Author xieyukun
+     * @Description up_ships
+     * @Date 14:29 2020-12-25
+     * @param [ship_list]
+     * @return com.demo.config.MyResult
+     * 购物完成  修改状态
+    */
     @RequestMapping("/up_ships")
     public MyResult up_ships(@RequestBody List<Integer> ship_list){
         System.out.println("修改购物车状态--参数=="+ship_list);
@@ -90,7 +98,8 @@ public class ShoppingController {
     */
     @RequestMapping("/add_Orderinfo")
     public MyResult add_Orderinfo(@RequestBody List<OrderInfo> l){
-        return MyResult.returnObj(l);
+        System.out.println(l);
+        return MyResult.returnObj(ss.add_Orderinfo(l));
     }
 
     @RequestMapping("/add_Order")

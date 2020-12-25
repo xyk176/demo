@@ -39,7 +39,7 @@ export default {
           if(r.data.code){
             sessionStorage.setItem('cid3',r.data.vo.cid3);
             this.$router.push({
-              name:'user'
+              name:'Shopping'
             })
           }
         })
@@ -48,7 +48,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped="scoped">
   *{
     margin: 0px;
     padding:0px;

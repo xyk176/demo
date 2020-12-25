@@ -137,7 +137,7 @@ name: "Allorders",
     value: '',
     cfid:null,//分类主键
     dels:[],
-    seen:false
+    seen:false,
     }
   },
   methods:{
@@ -227,10 +227,6 @@ name: "Allorders",
     }
     /* 批量修改分类*/
     ,xiugai2(r){
-      // r.forEach(v=>{
-      //   v.prs.cid2=this.cfid;
-      // })
-      // console.log(")
       let param={
         cid2:this.cfid,
         lid:r
@@ -238,19 +234,22 @@ name: "Allorders",
       this.$axios.post("/product/delectfenlei",param)
     }
     ,xiugai(){
-
+      console.log("进入修改")
+      console.log(this.dels)
       if(this.dels==null){
         alert("未选择单品")
       }else{
+        console.log("进入弹框")
         this.seen=true
-        this.dels.forEach(r=>{
-          this.xiugai2(r)
-        })
-        this.load();
+        this.changea2();
       }
     }
     ,changea2(){
       this.seen=false
+      this.dels.forEach(res=>{
+        this.xiugai2(res)
+      })
+      this.load();
     }
   },
 

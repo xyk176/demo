@@ -46,6 +46,7 @@ import addressDelete from '@/components/zzh/addressDelete'
 import personalCenter from '@/components/zzh/personalCenter'
 import orders from '@/components/zzh/orders'
 import user from '@/components/zzh/user'
+import orderxq from '@/components/zzh/orderxq'
 
 import Shopping from '@/components/Shopping'
 Vue.use(Router)
@@ -87,6 +88,11 @@ export default new Router({
           path: '/user',
           name: 'user',
           component: user
+        },
+        {
+          path: '/orderxq',
+          name: 'orderxq',
+          component: orderxq
         }
       ]
     },

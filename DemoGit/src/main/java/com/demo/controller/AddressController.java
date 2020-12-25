@@ -1,8 +1,10 @@
 package com.demo.controller;
 
 import com.demo.config.MyResult;
+import com.demo.config.ResultVO;
 import com.demo.model.mdao.CustomerMapper;
 import com.demo.pojo.Address;
+import com.demo.pojo.OrderInfo;
 import com.demo.pojo.Orders;
 import com.demo.services.AddressService;
 import com.github.pagehelper.PageInfo;
@@ -34,7 +36,7 @@ public class AddressController {
      * @Date  2020/12/21
      * @param []
      * @return java.lang.String
-    */
+     */
     @RequestMapping("/demo")
     public String demo(){
         return "zzh";
@@ -46,7 +48,7 @@ public class AddressController {
      * @Date  2020/12/22
      * @param [no, size, cid]
      * @return com.github.pagehelper.PageInfo<com.demo.pojo.Address>
-    */
+     */
     @RequestMapping("/selectByCidAll")
     public PageInfo<Address> selectByCidAll(Integer no,Integer size,Integer cid){
         PageInfo<Address> info = addressService.selectByCidAll(no,size,cid);
@@ -60,15 +62,15 @@ public class AddressController {
      * @param [adid]
      * @return com.demo.config.MyResult
      * 设置默认地址
-    */
+     */
     @RequestMapping("/updateAdisdefault")
-    public MyResult updateAdisdefault(Integer adid,Integer cid){
+    public ResultVO updateAdisdefault(Integer adid, Integer cid){
         int a = addressService.updateAdisdefault1(cid);
         int i = addressService.updateAdisdefault(adid);
         if(i>0){
-            return MyResult.ERROR("已设置为默认地址！");
+            return ResultVO.ok("已设置为默认地址！");
         }else {
-            return MyResult.ERROR("设置失败！");
+            return ResultVO.error("设置失败！");
         }
     }
 
@@ -79,14 +81,14 @@ public class AddressController {
      * @param [adprovince, adcity, adarea, addetailed, adid]
      * @return com.demo.config.MyResult
      * 修改收货地址信息
-    */
+     */
     @RequestMapping("/updateAddress")
-    public MyResult updateAddress(String adprovince,String adcity,String adarea,String addetailed,Integer adid){
+    public ResultVO updateAddress(String adprovince,String adcity,String adarea,String addetailed,Integer adid){
         int i = addressService.updateAddress(adprovince,adcity,adarea,addetailed,adid);
         if(i>0){
-            return MyResult.ERROR("修改成功！");
+            return ResultVO.ok("修改成功！");
         }else {
-            return MyResult.ERROR("修改失败！");
+            return ResultVO.error("修改失败！");
         }
     }
 
@@ -97,14 +99,14 @@ public class AddressController {
      * @param [adid]
      * @return com.demo.config.MyResult
      * 删除收货地址（逻辑删除）
-    */
+     */
     @RequestMapping("/updateAdisdelete")
-    public MyResult updateAdisdelete(Integer adid){
+    public ResultVO updateAdisdelete(Integer adid){
         int i = addressService.updateAdisdelete(adid);
         if(i>0){
-            return MyResult.ERROR("删除成功，删除记录可恢复");
+            return ResultVO.ok("删除成功，删除记录可恢复");
         }else {
-            return MyResult.ERROR("删除失败！");
+            return ResultVO.error("删除失败！");
         }
     }
 
@@ -115,14 +117,14 @@ public class AddressController {
      * @param [address]
      * @return com.demo.config.MyResult
      * 新增收货地址
-    */
+     */
     @RequestMapping("/insertAddress")
-    public MyResult insertAddress(Address address,Integer cid){
+    public ResultVO insertAddress(Address address,Integer cid){
         int i = addressService.insertAddress(address,cid);
         if(i>0){
-            return MyResult.ERROR("收货地址新增成功！");
+            return ResultVO.ok("收货地址新增成功！");
         }else {
-            return MyResult.ERROR("收货地址新增失败！");
+            return ResultVO.error("收货地址新增失败！");
         }
     }
 
@@ -133,7 +135,7 @@ public class AddressController {
      * @param [cid]
      * @return com.demo.config.MyResult
      * 查询已删除的收货地址
-    */
+     */
     @RequestMapping("/selectByCidAll1")
     public MyResult selectByCidAll1(Integer no,Integer size,Integer cid){
         PageInfo<Address> list = addressService.selectByCidAll1(no,size,cid);
@@ -147,14 +149,14 @@ public class AddressController {
      * @param [adid]
      * @return com.demo.config.MyResult
      * 恢复收货地址
-    */
+     */
     @RequestMapping("/updateAdisdelete1")
-    public MyResult updateAdisdelete1(Integer adid){
+    public ResultVO updateAdisdelete1(Integer adid){
         int i = addressService.updateAdisdelete1(adid);
         if(i>0){
-            return MyResult.ERROR("恢复成功！");
+            return ResultVO.ok("恢复成功！");
         }else {
-            return MyResult.ERROR("恢复失败！");
+            return ResultVO.error("恢复失败！");
         }
     }
 
@@ -165,14 +167,14 @@ public class AddressController {
      * @param [adid]
      * @return com.demo.config.MyResult
      * 删除收货地址（物理删除）
-    */
+     */
     @RequestMapping("/deleteAddress")
-    public MyResult deleteAddress(Integer adid){
+    public ResultVO deleteAddress(Integer adid){
         int i = addressService.deleteAddress(adid);
         if(i>0){
-            return MyResult.ERROR("删除成功!");
+            return ResultVO.ok("删除成功!");
         }else {
-            return MyResult.ERROR("删除失败！");
+            return ResultVO.error("删除失败！");
         }
     }
 
@@ -183,10 +185,31 @@ public class AddressController {
      * @param [ortype, cid, no, size]
      * @return com.demo.config.MyResult
      * 根据客户id查询订单
-    */
+     */
     @RequestMapping("/selectOrders")
-    public MyResult selectOrders(String ortype,Integer cid,Integer no,Integer size){
-        PageInfo<Orders> list = addressService.selectOrders(ortype,cid,no,size);
+    public MyResult selectOrders(String ortype,String orsip,Integer cid,Integer no,Integer size){
+        PageInfo<Orders> list = addressService.selectOrders(ortype,orsip,cid,no,size);
         return MyResult.returnObj(list);
+    }
+
+    /*
+     * @Author 周子豪
+     * @Description 14:43
+     * @Date  2020/12/24
+     * @param [oId]
+     * @return com.demo.config.MyResult
+     * 查看订单详情
+     */
+    @RequestMapping("/selectComxq")
+    public MyResult selectComxq(Integer oId){
+        System.out.println(oId);
+        List<OrderInfo> list = addressService.selectComxq(oId);
+        return MyResult.returnObjs(list);
+    }
+
+    @RequestMapping("/selectOrderxq")
+    public MyResult selectOrderxq(Integer oid){
+        Orders orders = addressService.selectOrderxq(oid);
+        return MyResult.returnObj(orders);
     }
 }

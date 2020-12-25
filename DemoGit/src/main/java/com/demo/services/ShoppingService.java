@@ -107,7 +107,6 @@ public class ShoppingService {
      * 添加一条订单
     */
     public Orders add_Order(Orders o){
-
             smapper.add_Order(o);
             return o;
 
@@ -143,18 +142,40 @@ public class ShoppingService {
         return smapper.s_Carts(cid);
     }
 
-    //根据商品ID  查看商品详情
+    /*
+     * @Author xieyukun
+     * @Description s_GoodsXiangQing
+     * @Date 15:51 2020-12-25
+     * @param [goodsID]
+     * @return java.util.List<com.demo.pojo.SpCommodity>
+     根据商品ID  查看商品详情
+    */
     public List<SpCommodity> s_GoodsXiangQing(Integer goodsID){
         return smapper.s_GoodsXiangQing(goodsID);
     }
 
-    //查询所有商品分类
+
+    /*
+     * @Author xieyukun
+     * @Description s_GoodsType
+     * @Date 15:51 2020-12-25
+     * @param []
+     * @return java.util.List<com.demo.pojo.SpCommoditycategory>
+     查询所有商品分类
+    */
     public List<SpCommoditycategory> s_GoodsType(){
         return smapper.s_GoodsType();
     }
 
 
-    //根据商品分类id  查询该分类的所有商品
+    /*
+     * @Author xieyukun
+     * @Description s_Goods
+     * @Date 15:52 2020-12-25
+     * @param [goodsTypeID, pageNo, pageSize]
+     * @return com.github.pagehelper.PageInfo<com.demo.pojo.SpCommodity>
+     根据商品分类id  查询该分类的所有商品
+    */
     public PageInfo<SpCommodity> s_Goods(Integer goodsTypeID,Integer pageNo,Integer pageSize){
         //1.配置分页信息（开始分页）
         PageHelper.startPage(pageNo,pageSize);
